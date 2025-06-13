@@ -1,0 +1,13 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Eğer istek public klasöründeki gerçek bir dosya ya da dizin değilse
+    RewriteCond %{REQUEST_URI} !^/public/
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+
+    # Tüm istekleri public klasörüne yönlendir
+    RewriteRule ^(.*)$ /public/$1 [L,QSA]
+
+    # Eğer doğrudan public klasörüne istek varsa, onu olduğu gibi bırak
+</IfModule>
