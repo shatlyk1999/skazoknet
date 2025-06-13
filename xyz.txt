@@ -1,0 +1,3 @@
+database:u660529684_skazoknet
+user: u660529684_skazoknet
+passwor: !skazokneT@.com1235
