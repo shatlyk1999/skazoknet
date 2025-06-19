@@ -1,73 +1,65 @@
-@extends('layouts.app')
-
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
-
-                <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
-
-                        <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+{{-- @extends('auth.auth_app') --}}
+{{-- @section('content') --}}
+<x-auth.auth-layout>
+    <div class="my-0 md:my-12 xl:container px-8 xs:px-12 xl:px-4 mx-0 xl:mx-auto h-full md:h-[calc(100dvh-7.5rem)]">
+        <div class="flex items-center md:items-start justify-between h-full md:flex-row flex-col">
+            <div class="w-full sm:w-[80%] md:mx-0 mx-auto md:w-[45%] xl:w-[40%] my-auto xl:mt-[10%]">
+                <h1 class="text-text font-bold text-2xl tracking-wider">Вход</h1>
+                <div class="flex flex-col w-full gap-6 mt-6">
+                    <form class="flex flex-col gap-y-3 form" id="loginForm" novalidate>
+                        <div class="form-item">
+                            <label for="registerEmail"
+                                class="text-input-divider text-xs font-medium tracking-wide pl-2">Почта:</label>
+                            <div
+                                class="rounded-3xl border-auth-input-border-color border px-4 h-12.5 flex items-center mt-1 input-container">
+                                <i class="mdi mdi-email" data-input-id="registerEmailIcon"></i>
+                                <div class="h-6 w-px bg-input-divider mx-2 input-divider"></div>
+                                <input type="text"
+                                    class="h-12.5 text-input-divider text-xs font-normal tracking-wide w-full outline-none border-none"
+                                    placeholder="info@skazoknet.ru" id="registerEmail" name="email" />
                             </div>
                         </div>
-
-                        <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                        <div class="form-item">
+                            <label for="password"
+                                class="text-input-divider text-xs font-medium tracking-wide pl-2">Пароль:</label>
+                            <div
+                                class="rounded-3xl border-auth-input-border-color border px-4 h-12.5 flex items-center mt-1">
+                                <img src="{{ asset('icons/lock.svg') }}" alt="" />
+                                <div class="h-6 w-px bg-input-divider mx-2"></div>
+                                <input type="password"
+                                    class="h-12.5 text-input-divider text-xs font-normal tracking-wide w-full outline-none border-none"
+                                    placeholder="Password" id="password" name="password" />
+                                <i class="mdi mdi-eye pl-2 cursor-pointer password-toggle" data-input-id="password"
+                                    id="passwordIcon"></i>
                             </div>
                         </div>
+                        <button type="submit"
+                            class="text-center h-12.5 rounded-3xl border border-primary text-primary text-sm font-bold tracking-wide px-8 hover:bg-primary hover:text-white transition-colors cursor-pointer mt-4">
+                            Войти
+                        </button>
 
-                        <div class="row mb-3">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
-                                </button>
-
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif
-                            </div>
+                        <div class="mt-4 text-center text-xs tracking-wide">
+                            Забыли пароль?
+                            <a href="#" class="text-primary">Восстановление пароля</a>
                         </div>
                     </form>
+                    <!--  -->
+                </div>
+            </div>
+            <div class="w-full sm:w-[80%] md:mx-0 mx-auto md:w-[45%] xl:w-[40%] my-auto">
+                <img src="{{ asset('registerimage.png') }}"
+                    class="w-full h-auto md:max-h-max max-h-[20rem] object-contain" alt="" />
+                <div class="pt-8 flex items-center justify-center md:hidden">
+                    <img src="{{ asset('registerlogo.png') }}" class="h-10 w-37.5" alt="" />
                 </div>
             </div>
         </div>
     </div>
-</div>
-@endsection
+    <x-slot name="script">
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                new FormValidator("loginForm", loginEmailValidationRules);
+            });
+        </script>
+    </x-slot>
+</x-auth.auth-layout>

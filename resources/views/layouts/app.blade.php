@@ -4,12 +4,11 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Project</title>
-    <link href="../styles/output.css" rel="stylesheet" />
+    <title>Сказокнет отзывы без иллюзий</title>
+    <link href="{{ asset('styles/output.css') }}" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('styles/menu.css') }}" />
     <link rel="stylesheet" href="{{ asset('styles/sidebar.css') }}" />
     <link rel="stylesheet" href="{{ asset('swiper/swiper-bundle.css') }}" />
-    {{-- <link rel="stylesheet" href="{{ asset('styles/materialdesignicons.min.css') }}" /> --}}
     <link rel="stylesheet" href="{{ asset('@mdi/font/css/materialdesignicons.min.css') }}" />
 
     {{-- @vite(['resources/sass/app.scss', 'resources/js/app.js']) --}}
@@ -50,11 +49,11 @@
                         </div>
                     </div>
                     <div class="leading-10 pt-0 lg:pt-4 hidden lg:block">
-                        <button
-                            class="border-none bg-transparent outline-none hover:bg-black/5 transition-colors p-2 rounded-lg text-lg flex items-center gap-x-2">
+                        <a href="{{ route('registration') }}"
+                            class="cursor-pointer border-none bg-transparent outline-none hover:bg-black/5 transition-colors p-2 rounded-lg text-lg flex items-center gap-x-2">
                             <img src="{{ asset('icons/add 1.svg') }}" alt="" />
                             Войти
-                        </button>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -151,15 +150,15 @@
                 </div>
             </div>
         </section>
-        <section class="xl:container px-8 xs:px-12 xl:px-4 mx-0 xl:mx-auto w-full my-12 md:my-25">
-            <div class="flex items-center justify-between mb-8">
+        <section class="xl:container px-0 sm:px-12 xl:px-4 mx-0 xl:mx-auto w-full my-12 md:my-25">
+            <div class="px-8 xs:px-12 sm:px-0 flex items-center justify-between mb-8">
                 <h1 class="text-2xl lg:text-3xl xl:text-4xl font-bold tracking-wide">
                     Жилые комплексы в Краснодаре
                 </h1>
                 <a href="#" class="md:inline-block hidden">Все жилые комплексы</a>
             </div>
             <div class="hidden sm:flex gap-8 flex-wrap">
-                <div
+                <div onclick="handleCardClick(event, this)"
                     class="relative rounded-xl basis-[calc((100%-32px)/2)] lg:basis-[calc((100%-64px)/3)] group hover:shadow-md">
                     <div>
                         <img src="{{ asset('image.png') }}" class="w-full h-auto min-h-[10.625rem]"
@@ -185,8 +184,8 @@
                                 </div>
                             </div>
                             {{-- <div class="group-hover:hidden">
-                                <button
-                                    class="border-primary border text-sm xl:text-base rounded-3xl px-3 py-2 text-primary hover:text-white hover:border-white hover:bg-primary transition-colors cursor-pointer hidden md:flex items-center gap-x-2">
+                                    <button
+                                    class="border-primary border text-xs xl:text-sm rounded-3xl px-3 py-2 text-primary hover:text-white hover:border-white hover:bg-primary transition-colors cursor-pointer hidden md:flex items-center gap-x-2">
                                     <!-- <i class="mdi mdi-plus"></i> -->
                                     <img src="../public/icons/Vector.svg" alt="" />
                                     <span>Оставить отзыв</span>
@@ -199,11 +198,12 @@
                             115 Отзывов
                         </span>
                     </div>
-                    <div
-                        class="absolute top-0 left-0 z-11 size-full bg-primary/90 rounded-xl flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity">
+                    <div data-id="overlay" data-card-overlay-id="11"
+                        class="absolute top-0 left-0 z-11 size-full bg-primary/90 rounded-xl flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-all pointer-events-none group-hover:pointer-events-auto">
                         <div class="flex flex-col gap-2 items-center">
                             <span> Узнать подробнее</span>
                             {{-- <button
+                                onclick="handleOverlayButtonClick(event, '11')"
                                 class="border-white border text-sm xl:text-base rounded-3xl px-3 py-2 text-white transition-colors cursor-pointer flex items-center gap-x-2">
                                 <i class="mdi mdi-plus"></i>
                                 <span>Оставить отзыв</span>
@@ -217,7 +217,7 @@
                         <img src="{{ asset('image.png') }}" class="w-full h-auto min-h-[10.625rem]"
                             alt="" />
                     </div>
-                    <div
+                    <div onclick="handleCardClick(event, this)"
                         class="p-4 flex flex-col gap-2 group-hover:border-primary border-custom-gray border border-t-0 rounded-bl-xl rounded-br-xl">
                         <h2 class="font-semibold text-lg">ЖК “Губернский”</h2>
                         <p>г. Краснодар, ул.Западный обход,33</p>
@@ -238,7 +238,7 @@
                             </div>
                             {{-- <div class="group-hover:hidden">
                                 <button
-                                    class="border-primary border text-sm xl:text-base rounded-3xl px-3 py-2 text-primary hover:text-white hover:border-white hover:bg-primary transition-colors cursor-pointer hidden md:flex items-center gap-x-2">
+                                    class="border-primary border text-xs xl:text-sm rounded-3xl px-3 py-2 text-primary hover:text-white hover:border-white hover:bg-primary transition-colors cursor-pointer hidden md:flex items-center gap-x-2">
                                     <!-- <i class="mdi mdi-plus"></i> -->
                                     <img src="../public/icons/Vector.svg" alt="" />
                                     <span>Оставить отзыв</span>
@@ -251,11 +251,12 @@
                             115 Отзывов
                         </span>
                     </div>
-                    <div
-                        class="absolute top-0 left-0 z-11 size-full bg-primary/90 rounded-xl flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity">
+                    <div data-id="overlay" data-card-overlay-id="11"
+                        class="absolute top-0 left-0 z-11 size-full bg-primary/90 rounded-xl flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-all pointer-events-none group-hover:pointer-events-auto">
                         <div class="flex flex-col gap-2 items-center">
                             <span> Узнать подробнее</span>
                             {{-- <button
+                            onclick="handleOverlayButtonClick(event, '12')"
                                 class="border-white border text-sm xl:text-base rounded-3xl px-3 py-2 text-white transition-colors cursor-pointer flex items-center gap-x-2">
                                 <i class="mdi mdi-plus"></i>
                                 <span>Оставить отзыв</span>
@@ -263,7 +264,7 @@
                         </div>
                     </div>
                 </div>
-                <div
+                <div onclick="handleCardClick(event, this)"
                     class="relative rounded-xl basis-[calc((100%-32px)/2)] lg:basis-[calc((100%-64px)/3)] group hover:shadow-md">
                     <div>
                         <img src="{{ asset('image.png') }}" class="w-full h-auto min-h-[10.625rem]"
@@ -290,7 +291,7 @@
                             </div>
                             {{-- <div class="group-hover:hidden">
                                 <button
-                                    class="border-primary border text-sm xl:text-base rounded-3xl px-3 py-2 text-primary hover:text-white hover:border-white hover:bg-primary transition-colors cursor-pointer hidden md:flex items-center gap-x-2">
+                                    class="border-primary border text-xs xl:text-sm rounded-3xl px-3 py-2 text-primary hover:text-white hover:border-white hover:bg-primary transition-colors cursor-pointer hidden md:flex items-center gap-x-2">
                                     <!-- <i class="mdi mdi-plus"></i> -->
                                     <img src="../public/icons/Vector.svg" alt="" />
                                     <span>Оставить отзыв</span>
@@ -303,11 +304,12 @@
                             115 Отзывов
                         </span>
                     </div>
-                    <div
-                        class="absolute top-0 left-0 z-11 size-full bg-primary/90 rounded-xl flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity">
+                    <div data-id="overlay" data-card-overlay-id="11"
+                        class="absolute top-0 left-0 z-11 size-full bg-primary/90 rounded-xl flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-all pointer-events-none group-hover:pointer-events-auto">
                         <div class="flex flex-col gap-2 items-center">
                             <span> Узнать подробнее</span>
                             {{-- <button
+                                onclick="handleOverlayButtonClick(event, '13')"
                                 class="border-white border text-sm xl:text-base rounded-3xl px-3 py-2 text-white transition-colors cursor-pointer flex items-center gap-x-2">
                                 <i class="mdi mdi-plus"></i>
                                 <span>Оставить отзыв</span>
@@ -315,7 +317,7 @@
                         </div>
                     </div>
                 </div>
-                <div
+                <div onclick="handleCardClick(event, this)"
                     class="relative rounded-xl basis-[calc((100%-32px)/2)] lg:basis-[calc((100%-64px)/3)] group hover:shadow-md">
                     <div>
                         <img src="{{ asset('image.png') }}" class="w-full h-auto min-h-[10.625rem]"
@@ -342,7 +344,7 @@
                             </div>
                             {{-- <div class="group-hover:hidden">
                                 <button
-                                    class="border-primary border text-sm xl:text-base rounded-3xl px-3 py-2 text-primary hover:text-white hover:border-white hover:bg-primary transition-colors cursor-pointer hidden md:flex items-center gap-x-2">
+                                    class="border-primary border text-xs xl:text-sm rounded-3xl px-3 py-2 text-primary hover:text-white hover:border-white hover:bg-primary transition-colors cursor-pointer hidden md:flex items-center gap-x-2">
                                     <!-- <i class="mdi mdi-plus"></i> -->
                                     <img src="../public/icons/Vector.svg" alt="" />
                                     <span>Оставить отзыв</span>
@@ -355,8 +357,8 @@
                             115 Отзывов
                         </span>
                     </div>
-                    <div
-                        class="absolute top-0 left-0 z-11 size-full bg-primary/90 rounded-xl flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity">
+                    <div data-id="overlay" data-card-overlay-id="11"
+                        class="absolute top-0 left-0 z-11 size-full bg-primary/90 rounded-xl flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-all pointer-events-none group-hover:pointer-events-auto">
                         <div class="flex flex-col gap-2 items-center">
                             <span> Узнать подробнее</span>
                             {{-- <button
@@ -367,7 +369,7 @@
                         </div>
                     </div>
                 </div>
-                <div
+                <div onclick="handleCardClick(event, this)"
                     class="relative rounded-xl basis-[calc((100%-32px)/2)] lg:basis-[calc((100%-64px)/3)] group hover:shadow-md">
                     <div>
                         <img src="{{ asset('image.png') }}" class="w-full h-auto min-h-[10.625rem]"
@@ -394,7 +396,7 @@
                             </div>
                             {{-- <div class="group-hover:hidden">
                                 <button
-                                    class="border-primary border text-sm xl:text-base rounded-3xl px-3 py-2 text-primary hover:text-white hover:border-white hover:bg-primary transition-colors cursor-pointer hidden md:flex items-center gap-x-2">
+                                    class="border-primary border text-xs xl:text-sm rounded-3xl px-3 py-2 text-primary hover:text-white hover:border-white hover:bg-primary transition-colors cursor-pointer hidden md:flex items-center gap-x-2">
                                     <!-- <i class="mdi mdi-plus"></i> -->
                                     <img src="../public/icons/Vector.svg" alt="" />
                                     <span>Оставить отзыв</span>
@@ -407,11 +409,12 @@
                             115 Отзывов
                         </span>
                     </div>
-                    <div
-                        class="absolute top-0 left-0 z-11 size-full bg-primary/90 rounded-xl flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity">
+                    <div data-id="overlay" data-card-overlay-id="11"
+                        class="absolute top-0 left-0 z-11 size-full bg-primary/90 rounded-xl flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-all pointer-events-none group-hover:pointer-events-auto">
                         <div class="flex flex-col gap-2 items-center">
                             <span> Узнать подробнее</span>
                             {{-- <button
+                            onclick="handleOverlayButtonClick(event, '15')"
                                 class="border-white border text-sm xl:text-base rounded-3xl px-3 py-2 text-white transition-colors cursor-pointer flex items-center gap-x-2">
                                 <i class="mdi mdi-plus"></i>
                                 <span>Оставить отзыв</span>
@@ -419,7 +422,7 @@
                         </div>
                     </div>
                 </div>
-                <div
+                <div onclick="handleCardClick(event, this)"
                     class="relative rounded-xl basis-[calc((100%-32px)/2)] lg:basis-[calc((100%-64px)/3)] group hover:shadow-md">
                     <div>
                         <img src="{{ asset('image.png') }}" class="w-full h-auto min-h-[10.625rem]"
@@ -446,7 +449,7 @@
                             </div>
                             {{-- <div class="group-hover:hidden">
                                 <button
-                                    class="border-primary border text-sm xl:text-base rounded-3xl px-3 py-2 text-primary hover:text-white hover:border-white hover:bg-primary transition-colors cursor-pointer hidden md:flex items-center gap-x-2">
+                                    lass="border-primary border text-xs xl:text-sm rounded-3xl px-3 py-2 text-primary hover:text-white hover:border-white hover:bg-primary transition-colors cursor-pointer hidden md:flex items-center gap-x-2">
                                     <!-- <i class="mdi mdi-plus"></i> -->
                                     <img src="../public/icons/Vector.svg" alt="" />
                                     <span>Оставить отзыв</span>
@@ -459,11 +462,12 @@
                             115 Отзывов
                         </span>
                     </div>
-                    <div
-                        class="absolute top-0 left-0 z-11 size-full bg-primary/90 rounded-xl flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity">
+                    <div data-id="overlay" data-card-overlay-id="11"
+                        class="absolute top-0 left-0 z-11 size-full bg-primary/90 rounded-xl flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-all pointer-events-none group-hover:pointer-events-auto">
                         <div class="flex flex-col gap-2 items-center">
                             <span> Узнать подробнее</span>
                             {{-- <button
+                                onclick="handleOverlayButtonClick(event, '16')"
                                 class="border-white border text-sm xl:text-base rounded-3xl px-3 py-2 text-white transition-colors cursor-pointer flex items-center gap-x-2">
                                 <i class="mdi mdi-plus"></i>
                                 <span>Оставить отзыв</span>
@@ -473,9 +477,9 @@
                 </div>
             </div>
             <div class="mt-8 block sm:hidden">
-                <div class="swiper krasnodorSwiper relative">
+                <div class="swiper krasnodorSwiper relative !px-8 xs:!px-12 sm:!px-0">
                     <div class="swiper-wrapper">
-                        <div class="swiper-slide">
+                        <div class="swiper-slide" onclick="handleCardClick(event, this)">
                             <div
                                 class="relative rounded-xl basis-[calc((100%-32px)/2)] lg:basis-[calc((100%-64px)/3)] group hover:shadow-md">
                                 <div>
@@ -503,7 +507,7 @@
                                         </div>
                                         <div class="group-hover:hidden">
                                             <button
-                                                class="border-primary border text-sm xl:text-base rounded-3xl px-3 py-2 text-primary hover:text-white hover:border-white hover:bg-primary transition-colors cursor-pointer hidden md:flex items-center gap-x-2">
+                                                class="border-primary border text-xs xl:text-sm rounded-3xl px-3 py-2 text-primary hover:text-white hover:border-white hover:bg-primary transition-colors cursor-pointer hidden md:flex items-center gap-x-2">
                                                 {{-- <!-- <i class="mdi mdi-plus"></i> --> --}}
                                                 <img src="{{ asset('icons/Vector.svg') }}" alt="" />
                                                 <span>Оставить отзыв</span>
@@ -516,11 +520,12 @@
                                         115 Отзывов
                                     </span>
                                 </div>
-                                <div
-                                    class="absolute top-0 left-0 z-11 size-full bg-primary/90 rounded-xl flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity">
+                                <div class="absolute top-0 left-0 z-11 size-full bg-primary/90 rounded-xl flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-all pointer-events-none group-hover:pointer-events-auto"
+                                    data-id="overlay" data-card-overlay-id="1">
                                     <div class="flex flex-col gap-2 items-center">
                                         <span> Узнать подробнее</span>
                                         {{-- <button
+                                        onclick="handleOverlayButtonClick(event, '1')"
                                             class="border-white border text-sm xl:text-base rounded-3xl px-3 py-2 text-white transition-colors cursor-pointer flex items-center gap-x-2">
                                             <i class="mdi mdi-plus"></i>
                                             <span>Оставить отзыв</span>
@@ -529,7 +534,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="swiper-slide">
+                        <div class="swiper-slide" onclick="handleCardClick(event, this)">
                             <div
                                 class="relative rounded-xl basis-[calc((100%-32px)/2)] lg:basis-[calc((100%-64px)/3)] group hover:shadow-md">
                                 <div>
@@ -557,7 +562,7 @@
                                         </div>
                                         <div class="group-hover:hidden">
                                             <button
-                                                class="border-primary border text-sm xl:text-base rounded-3xl px-3 py-2 text-primary hover:text-white hover:border-white hover:bg-primary transition-colors cursor-pointer hidden md:flex items-center gap-x-2">
+                                                class="border-primary border text-xs xl:text-sm rounded-3xl px-3 py-2 text-primary hover:text-white hover:border-white hover:bg-primary transition-colors cursor-pointer hidden md:flex items-center gap-x-2">
                                                 {{-- <!-- <i class="mdi mdi-plus"></i> --> --}}
                                                 <img src="{{ asset('icons/Vector.svg') }}" alt="" />
                                                 <span>Оставить отзыв</span>
@@ -570,11 +575,12 @@
                                         115 Отзывов
                                     </span>
                                 </div>
-                                <div
-                                    class="absolute top-0 left-0 z-11 size-full bg-primary/90 rounded-xl flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity">
+                                <div data-id="overlay" data-card-overlay-id="11"
+                                    class="absolute top-0 left-0 z-11 size-full bg-primary/90 rounded-xl flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-all pointer-events-none group-hover:pointer-events-auto">
                                     <div class="flex flex-col gap-2 items-center">
                                         <span> Узнать подробнее</span>
                                         {{-- <button
+                                            onclick="handleOverlayButtonClick(event, '2')"
                                             class="border-white border text-sm xl:text-base rounded-3xl px-3 py-2 text-white transition-colors cursor-pointer flex items-center gap-x-2">
                                             <i class="mdi mdi-plus"></i>
                                             <span>Оставить отзыв</span>
@@ -583,7 +589,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="swiper-slide">
+                        <div class="swiper-slide" onclick="handleCardClick(event, this)">
                             <div
                                 class="relative rounded-xl basis-[calc((100%-32px)/2)] lg:basis-[calc((100%-64px)/3)] group hover:shadow-md">
                                 <div>
@@ -611,7 +617,7 @@
                                         </div>
                                         <div class="group-hover:hidden">
                                             <button
-                                                class="border-primary border text-sm xl:text-base rounded-3xl px-3 py-2 text-primary hover:text-white hover:border-white hover:bg-primary transition-colors cursor-pointer hidden md:flex items-center gap-x-2">
+                                                class="border-primary border text-xs xl:text-sm rounded-3xl px-3 py-2 text-primary hover:text-white hover:border-white hover:bg-primary transition-colors cursor-pointer hidden md:flex items-center gap-x-2">
                                                 {{-- <!-- <i class="mdi mdi-plus"></i> --> --}}
                                                 <img src="{{ asset('icons/Vector.svg') }}" alt="" />
                                                 <span>Оставить отзыв</span>
@@ -624,11 +630,12 @@
                                         115 Отзывов
                                     </span>
                                 </div>
-                                <div
-                                    class="absolute top-0 left-0 z-11 size-full bg-primary/90 rounded-xl flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity">
+                                <div data-id="overlay" data-card-overlay-id="3"
+                                    class="absolute top-0 left-0 z-11 size-full bg-primary/90 rounded-xl flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-all pointer-events-none group-hover:pointer-events-auto">
                                     <div class="flex flex-col gap-2 items-center">
                                         <span> Узнать подробнее</span>
                                         {{-- <button
+                                            onclick="handleOverlayButtonClick(event, '3')"
                                             class="border-white border text-sm xl:text-base rounded-3xl px-3 py-2 text-white transition-colors cursor-pointer flex items-center gap-x-2">
                                             <i class="mdi mdi-plus"></i>
                                             <span>Оставить отзыв</span>
@@ -637,7 +644,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="swiper-slide">
+                        <div class="swiper-slide" onclick="handleCardClick(event, this)">
                             <div
                                 class="relative rounded-xl basis-[calc((100%-32px)/2)] lg:basis-[calc((100%-64px)/3)] group hover:shadow-md">
                                 <div>
@@ -665,7 +672,7 @@
                                         </div>
                                         <div class="group-hover:hidden">
                                             <button
-                                                class="border-primary border text-sm xl:text-base rounded-3xl px-3 py-2 text-primary hover:text-white hover:border-white hover:bg-primary transition-colors cursor-pointer hidden md:flex items-center gap-x-2">
+                                                class="border-primary border text-xs xl:text-sm rounded-3xl px-3 py-2 text-primary hover:text-white hover:border-white hover:bg-primary transition-colors cursor-pointer hidden md:flex items-center gap-x-2">
                                                 {{-- <!-- <i class="mdi mdi-plus"></i> --> --}}
                                                 <img src="{{ asset('icons/Vector.svg') }}" alt="" />
                                                 <span>Оставить отзыв</span>
@@ -678,11 +685,12 @@
                                         115 Отзывов
                                     </span>
                                 </div>
-                                <div
-                                    class="absolute top-0 left-0 z-11 size-full bg-primary/90 rounded-xl flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity">
+                                <div data-id="overlay" data-card-overlay-id="4"
+                                    class="absolute top-0 left-0 z-11 size-full bg-primary/90 rounded-xl flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-all pointer-events-none group-hover:pointer-events-auto">
                                     <div class="flex flex-col gap-2 items-center">
                                         <span> Узнать подробнее</span>
                                         {{-- <button
+                                            onclick="handleOverlayButtonClick(event, '4')"
                                             class="border-white border text-sm xl:text-base rounded-3xl px-3 py-2 text-white transition-colors cursor-pointer flex items-center gap-x-2">
                                             <i class="mdi mdi-plus"></i>
                                             <span>Оставить отзыв</span>
@@ -691,7 +699,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="swiper-slide">
+                        <div class="swiper-slide" onclick="handleCardClick(event, this)">
                             <div
                                 class="relative rounded-xl basis-[calc((100%-32px)/2)] lg:basis-[calc((100%-64px)/3)] group hover:shadow-md">
                                 <div>
@@ -719,7 +727,7 @@
                                         </div>
                                         <div class="group-hover:hidden">
                                             <button
-                                                class="border-primary border text-sm xl:text-base rounded-3xl px-3 py-2 text-primary hover:text-white hover:border-white hover:bg-primary transition-colors cursor-pointer hidden md:flex items-center gap-x-2">
+                                                class="border-primary border text-xs xl:text-sm rounded-3xl px-3 py-2 text-primary hover:text-white hover:border-white hover:bg-primary transition-colors cursor-pointer hidden md:flex items-center gap-x-2">
                                                 {{-- <!-- <i class="mdi mdi-plus"></i> --> --}}
                                                 <img src="{{ asset('icons/Vector.svg') }}" alt="" />
                                                 <span>Оставить отзыв</span>
@@ -732,11 +740,12 @@
                                         115 Отзывов
                                     </span>
                                 </div>
-                                <div
-                                    class="absolute top-0 left-0 z-11 size-full bg-primary/90 rounded-xl flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity">
+                                <div data-id="overlay" data-card-overlay-id="5"
+                                    class="absolute top-0 left-0 z-11 size-full bg-primary/90 rounded-xl flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-all pointer-events-none group-hover:pointer-events-auto">
                                     <div class="flex flex-col gap-2 items-center">
                                         <span> Узнать подробнее</span>
                                         {{-- <button
+                                            onclick="handleOverlayButtonClick(event, '5')"
                                             class="border-white border text-sm xl:text-base rounded-3xl px-3 py-2 text-white transition-colors cursor-pointer flex items-center gap-x-2">
                                             <i class="mdi mdi-plus"></i>
                                             <span>Оставить отзыв</span>
@@ -802,22 +811,22 @@
                     </div>
                 </div>
             </div>
-            <div class="mt-8 block md:hidden">
+            <div class="mt-8 block md:hidden px-8 xs:px-12 sm:px-0">
                 <button
                     class="border-primary text-sm xl:text-base border rounded-3xl px-8 py-2 text-primary hover:text-white hover:border-white hover:bg-primary transition-colors cursor-pointer md:w-auto w-full">
                     Все застройщики
                 </button>
             </div>
         </section>
-        <section class="xl:container px-8 xs:px-12 xl:px-4 mx-0 xl:mx-auto w-full my-12 md:my-25">
-            <div class="flex items-center justify-between mb-8">
+        <section class="xl:container px-0 sm:px-12 xl:px-4 mx-0 xl:mx-auto w-full my-12 md:my-25">
+            <div class="flex items-center justify-between mb-8 px-8 xs:px-12 sm:px-0">
                 <h1 class="text-2xl lg:text-3xl xl:text-4xl font-bold tracking-wide">
                     Застройщики в Краснодаре
                 </h1>
                 <a href="#" class="md:inline-block hidden">Все жилые комплексы</a>
             </div>
             <div class="hidden sm:flex gap-8 flex-wrap">
-                <div
+                <div onclick="handleCardClick(event, this)"
                     class="relative rounded-xl basis-[calc((100%-32px)/2)] lg:basis-[calc((100%-64px)/3)] group hover:shadow-md border-custom-gray border hover:border-primary transition-all">
                     <div class="border-b border-custom-gray h-[13.75rem] flex items-center justify-center">
                         <img src="{{ asset('image 3.png') }}" class="w-[75%] mx-auto h-auto" alt="" />
@@ -856,7 +865,7 @@
                         </span>
                     </div>
                     <div
-                        class="absolute top-0 left-0 z-11 size-full bg-primary/90 rounded-xl flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity">
+                        class="absolute top-0 left-0 z-11 size-full bg-primary/90 rounded-xl flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-all pointer-events-none group-hover:pointer-events-auto">
                         <div class="flex flex-col gap-2 items-center">
                             <span> Узнать подробнее</span>
                             <button
@@ -867,7 +876,7 @@
                         </div>
                     </div>
                 </div>
-                <div
+                <div onclick="handleCardClick(event, this)"
                     class="relative rounded-xl basis-[calc((100%-32px)/2)] lg:basis-[calc((100%-64px)/3)] group hover:shadow-md border-custom-gray border hover:border-primary transition-all">
                     <div class="border-b border-custom-gray h-[13.75rem] flex items-center justify-center">
                         <img src="{{ asset('image 3.png') }}" class="w-[75%] mx-auto h-auto" alt="" />
@@ -906,7 +915,7 @@
                         </span>
                     </div>
                     <div
-                        class="absolute top-0 left-0 z-11 size-full bg-primary/90 rounded-xl flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity">
+                        class="absolute top-0 left-0 z-11 size-full bg-primary/90 rounded-xl flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-all pointer-events-none group-hover:pointer-events-auto">
                         <div class="flex flex-col gap-2 items-center">
                             <span> Узнать подробнее</span>
                             <button
@@ -917,7 +926,7 @@
                         </div>
                     </div>
                 </div>
-                <div
+                <div onclick="handleCardClick(event, this)"
                     class="relative rounded-xl basis-[calc((100%-32px)/2)] lg:basis-[calc((100%-64px)/3)] group hover:shadow-md border-custom-gray border hover:border-primary transition-all">
                     <div class="border-b border-custom-gray h-[13.75rem] flex items-center justify-center">
                         <img src="{{ asset('image 3.png') }}" class="w-[75%] mx-auto h-auto" alt="" />
@@ -956,7 +965,7 @@
                         </span>
                     </div>
                     <div
-                        class="absolute top-0 left-0 z-11 size-full bg-primary/90 rounded-xl flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity">
+                        class="absolute top-0 left-0 z-11 size-full bg-primary/90 rounded-xl flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-all pointer-events-none group-hover:pointer-events-auto">
                         <div class="flex flex-col gap-2 items-center">
                             <span> Узнать подробнее</span>
                             <button
@@ -967,7 +976,7 @@
                         </div>
                     </div>
                 </div>
-                <div
+                <div onclick="handleCardClick(event, this)"
                     class="relative rounded-xl basis-[calc((100%-32px)/2)] lg:basis-[calc((100%-64px)/3)] group hover:shadow-md border-custom-gray border hover:border-primary transition-all">
                     <div class="border-b border-custom-gray h-[13.75rem] flex items-center justify-center">
                         <img src="{{ asset('image 3.png') }}" class="w-[75%] mx-auto h-auto" alt="" />
@@ -1006,7 +1015,7 @@
                         </span>
                     </div>
                     <div
-                        class="absolute top-0 left-0 z-11 size-full bg-primary/90 rounded-xl flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity">
+                        class="absolute top-0 left-0 z-11 size-full bg-primary/90 rounded-xl flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-all pointer-events-none group-hover:pointer-events-auto">
                         <div class="flex flex-col gap-2 items-center">
                             <span> Узнать подробнее</span>
                             <button
@@ -1017,7 +1026,7 @@
                         </div>
                     </div>
                 </div>
-                <div
+                <div onclick="handleCardClick(event, this)"
                     class="relative rounded-xl basis-[calc((100%-32px)/2)] lg:basis-[calc((100%-64px)/3)] group hover:shadow-md border-custom-gray border hover:border-primary transition-all">
                     <div class="border-b border-custom-gray h-[13.75rem] flex items-center justify-center">
                         <img src="{{ asset('image 3.png') }}" class="w-[75%] mx-auto h-auto" alt="" />
@@ -1056,57 +1065,7 @@
                         </span>
                     </div>
                     <div
-                        class="absolute top-0 left-0 z-11 size-full bg-primary/90 rounded-xl flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity">
-                        <div class="flex flex-col gap-2 items-center">
-                            <span> Узнать подробнее</span>
-                            <button
-                                class="border-white border text-sm xl:text-base rounded-3xl px-3 py-2 text-white transition-colors cursor-pointer flex items-center gap-x-2">
-                                <i class="mdi mdi-plus"></i>
-                                <span>Оставить отзыв</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div
-                    class="relative rounded-xl basis-[calc((100%-32px)/2)] lg:basis-[calc((100%-64px)/3)] group hover:shadow-md border-custom-gray border hover:border-primary transition-all">
-                    <div class="border-b border-custom-gray h-[13.75rem] flex items-center justify-center">
-                        <img src="{{ asset('image 3.png') }}" class="w-[75%] mx-auto h-auto" alt="" />
-                    </div>
-                    <div class="p-4 flex flex-col gap-2">
-                        <h2 class="font-semibold text-lg">DOGMA</h2>
-                        <p>Год основания: 2013 г.</p>
-                        <p class="mt-8">Количество объектов: 11</p>
-                        <div class="flex items-center justify-between gap-x-2">
-                            <div class="flex md:flex-col flex-row gap-2 justify-between w-full">
-                                <div class="flex items-center space-x-px xs:space-x-1" aria-label="3 out of 5 stars"
-                                    role="img">
-                                    <!--<img src="../public/icons/Starmini.svg" alt="" /> -->
-                                    <img src="{{ asset('icons/Starmini.svg') }}" alt="" />
-                                    <img src="{{ asset('icons/Starmini.svg') }}" alt="" />
-                                    <img src="{{ asset('icons/Starmini.svg') }}" alt="" />
-                                    <img src="{{ asset('icons/Starmini.svg') }}" alt="" />
-                                    <img src="{{ asset('icons/Stargraymini.svg') }}" alt="" />
-                                </div>
-                                <div class="text-primary text-sm">
-                                    115/<span class="text-red-500">15</span>
-                                </div>
-                            </div>
-                            <div class="group-hover:hidden">
-                                <button
-                                    class="border-primary text-sm xl:text-base border rounded-3xl px-3 py-2 text-primary hover:text-white hover:border-white hover:bg-primary transition-colors cursor-pointer hidden md:flex items-center gap-x-2">
-                                    <img src="{{ asset('icons/Vector.svg') }}" alt="" />
-                                    <span>Оставить отзыв</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="absolute top-4 right-4 z-10">
-                        <span class="bg-primary text-white py-2 px-3 rounded-lg text-xs xs:text-sm">
-                            115 Отзывов
-                        </span>
-                    </div>
-                    <div
-                        class="absolute top-0 left-0 z-11 size-full bg-primary/90 rounded-xl flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity">
+                        class="absolute top-0 left-0 z-11 size-full bg-primary/90 rounded-xl flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-all pointer-events-none group-hover:pointer-events-auto">
                         <div class="flex flex-col gap-2 items-center">
                             <span> Узнать подробнее</span>
                             <button
@@ -1119,9 +1078,9 @@
                 </div>
             </div>
             <div class="mt-8 block sm:hidden">
-                <div class="swiper krasnodor2Swiper relative">
+                <div class="swiper krasnodor2Swiper relative !px-8 xs:!px-12 sm:!px-0">
                     <div class="swiper-wrapper">
-                        <div class="swiper-slide">
+                        <div class="swiper-slide" onclick="handleCardClick(event, this)">
                             <div
                                 class="relative rounded-xl basis-[calc((100%-32px)/2)] lg:basis-[calc((100%-64px)/3)] group hover:shadow-md border-custom-gray border hover:border-primary transition-all">
                                 <div class="border-b border-custom-gray h-[13.75rem] flex items-center justify-center">
@@ -1161,11 +1120,11 @@
                                         115 Отзывов
                                     </span>
                                 </div>
-                                <div
-                                    class="absolute top-0 left-0 z-11 size-full bg-primary/90 rounded-xl flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity">
+                                <div data-id="overlay" data-card-overlay-id="6"
+                                    class="absolute top-0 left-0 z-11 size-full bg-primary/90 rounded-xl flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-all pointer-events-none group-hover:pointer-events-auto">
                                     <div class="flex flex-col gap-2 items-center">
                                         <span> Узнать подробнее</span>
-                                        <button
+                                        <button onclick="handleOverlayButtonClick(event, '6')"
                                             class="border-white border text-sm xl:text-base rounded-3xl px-3 py-2 text-white transition-colors cursor-pointer flex items-center gap-x-2">
                                             <i class="mdi mdi-plus"></i>
                                             <span>Оставить отзыв</span>
@@ -1174,7 +1133,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="swiper-slide">
+                        <div class="swiper-slide" onclick="handleCardClick(event, this)">
                             <div
                                 class="relative rounded-xl basis-[calc((100%-32px)/2)] lg:basis-[calc((100%-64px)/3)] group hover:shadow-md border-custom-gray border hover:border-primary transition-all">
                                 <div class="border-b border-custom-gray h-[13.75rem] flex items-center justify-center">
@@ -1214,11 +1173,11 @@
                                         115 Отзывов
                                     </span>
                                 </div>
-                                <div
-                                    class="absolute top-0 left-0 z-11 size-full bg-primary/90 rounded-xl flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity">
+                                <div data-id="overlay" data-card-overlay-id="6"
+                                    class="absolute top-0 left-0 z-11 size-full bg-primary/90 rounded-xl flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-all pointer-events-none group-hover:pointer-events-auto">
                                     <div class="flex flex-col gap-2 items-center">
                                         <span> Узнать подробнее</span>
-                                        <button
+                                        <button onclick="handleOverlayButtonClick(event, '6')"
                                             class="border-white border text-sm xl:text-base rounded-3xl px-3 py-2 text-white transition-colors cursor-pointer flex items-center gap-x-2">
                                             <i class="mdi mdi-plus"></i>
                                             <span>Оставить отзыв</span>
@@ -1227,7 +1186,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="swiper-slide">
+                        <div class="swiper-slide" onclick="handleCardClick(event, this)">
                             <div
                                 class="relative rounded-xl basis-[calc((100%-32px)/2)] lg:basis-[calc((100%-64px)/3)] group hover:shadow-md border-custom-gray border hover:border-primary transition-all">
                                 <div class="border-b border-custom-gray h-[13.75rem] flex items-center justify-center">
@@ -1267,11 +1226,11 @@
                                         115 Отзывов
                                     </span>
                                 </div>
-                                <div
-                                    class="absolute top-0 left-0 z-11 size-full bg-primary/90 rounded-xl flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity">
+                                <div data-id="overlay" data-card-overlay-id="6"
+                                    class="absolute top-0 left-0 z-11 size-full bg-primary/90 rounded-xl flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-all pointer-events-none group-hover:pointer-events-auto">
                                     <div class="flex flex-col gap-2 items-center">
                                         <span> Узнать подробнее</span>
-                                        <button
+                                        <button onclick="handleOverlayButtonClick(event, '6')"
                                             class="border-white border text-sm xl:text-base rounded-3xl px-3 py-2 text-white transition-colors cursor-pointer flex items-center gap-x-2">
                                             <i class="mdi mdi-plus"></i>
                                             <span>Оставить отзыв</span>
@@ -1280,7 +1239,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="swiper-slide">
+                        <div class="swiper-slide" onclick="handleCardClick(event, this)">
                             <div
                                 class="relative rounded-xl basis-[calc((100%-32px)/2)] lg:basis-[calc((100%-64px)/3)] group hover:shadow-md border-custom-gray border hover:border-primary transition-all">
                                 <div class="border-b border-custom-gray h-[13.75rem] flex items-center justify-center">
@@ -1320,11 +1279,11 @@
                                         115 Отзывов
                                     </span>
                                 </div>
-                                <div
-                                    class="absolute top-0 left-0 z-11 size-full bg-primary/90 rounded-xl flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity">
+                                <div data-id="overlay" data-card-overlay-id="6"
+                                    class="absolute top-0 left-0 z-11 size-full bg-primary/90 rounded-xl flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-all pointer-events-none group-hover:pointer-events-auto">
                                     <div class="flex flex-col gap-2 items-center">
                                         <span> Узнать подробнее</span>
-                                        <button
+                                        <button onclick="handleOverlayButtonClick(event, '6')"
                                             class="border-white border text-sm xl:text-base rounded-3xl px-3 py-2 text-white transition-colors cursor-pointer flex items-center gap-x-2">
                                             <i class="mdi mdi-plus"></i>
                                             <span>Оставить отзыв</span>
@@ -1333,7 +1292,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="swiper-slide">
+                        <div class="swiper-slide" onclick="handleCardClick(event, this)">
                             <div
                                 class="relative rounded-xl basis-[calc((100%-32px)/2)] lg:basis-[calc((100%-64px)/3)] group hover:shadow-md border-custom-gray border hover:border-primary transition-all">
                                 <div class="border-b border-custom-gray h-[13.75rem] flex items-center justify-center">
@@ -1373,64 +1332,11 @@
                                         115 Отзывов
                                     </span>
                                 </div>
-                                <div
-                                    class="absolute top-0 left-0 z-11 size-full bg-primary/90 rounded-xl flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity">
+                                <div data-id="overlay" data-card-overlay-id="6"
+                                    class="absolute top-0 left-0 z-11 size-full bg-primary/90 rounded-xl flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-all pointer-events-none group-hover:pointer-events-auto">
                                     <div class="flex flex-col gap-2 items-center">
                                         <span> Узнать подробнее</span>
-                                        <button
-                                            class="border-white border text-sm xl:text-base rounded-3xl px-3 py-2 text-white transition-colors cursor-pointer flex items-center gap-x-2">
-                                            <i class="mdi mdi-plus"></i>
-                                            <span>Оставить отзыв</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div
-                                class="relative rounded-xl basis-[calc((100%-32px)/2)] lg:basis-[calc((100%-64px)/3)] group hover:shadow-md border-custom-gray border hover:border-primary transition-all">
-                                <div class="border-b border-custom-gray h-[13.75rem] flex items-center justify-center">
-                                    <img src="{{ asset('image 3.png') }}" class="w-[75%] mx-auto h-auto"
-                                        alt="" />
-                                </div>
-                                <div class="p-4 flex flex-col gap-2">
-                                    <h2 class="font-semibold text-lg">DOGMA</h2>
-                                    <p>Год основания: 2013 г.</p>
-                                    <p class="mt-8">Количество объектов: 11</p>
-                                    <div class="flex items-center justify-between gap-x-2">
-                                        <div class="flex md:flex-col flex-row gap-2 justify-between w-full">
-                                            <div class="flex items-center space-x-px xs:space-x-1"
-                                                aria-label="3 out of 5 stars" role="img">
-                                                <!--<img src="../public/icons/Starmini.svg" alt="" /> -->
-                                                <img src="{{ asset('icons/Starmini.svg') }}" alt="" />
-                                                <img src="{{ asset('icons/Starmini.svg') }}" alt="" />
-                                                <img src="{{ asset('icons/Starmini.svg') }}" alt="" />
-                                                <img src="{{ asset('icons/Starmini.svg') }}" alt="" />
-                                                <img src="{{ asset('icons/Stargraymini.svg') }}" alt="" />
-                                            </div>
-                                            <div class="text-primary text-sm">
-                                                115/<span class="text-red-500">15</span>
-                                            </div>
-                                        </div>
-                                        <div class="group-hover:hidden">
-                                            <button
-                                                class="border-primary text-sm xl:text-base border rounded-3xl px-3 py-2 text-primary hover:text-white hover:border-white hover:bg-primary transition-colors cursor-pointer hidden md:flex items-center gap-x-2">
-                                                <img src="{{ asset('icons/Vector.svg') }}" alt="" />
-                                                <span>Оставить отзыв</span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="absolute top-4 right-4 z-10">
-                                    <span class="bg-primary text-white py-2 px-3 rounded-lg text-xs xs:text-sm">
-                                        115 Отзывов
-                                    </span>
-                                </div>
-                                <div
-                                    class="absolute top-0 left-0 z-11 size-full bg-primary/90 rounded-xl flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity">
-                                    <div class="flex flex-col gap-2 items-center">
-                                        <span> Узнать подробнее</span>
-                                        <button
+                                        <button onclick="handleOverlayButtonClick(event, '6')"
                                             class="border-white border text-sm xl:text-base rounded-3xl px-3 py-2 text-white transition-colors cursor-pointer flex items-center gap-x-2">
                                             <i class="mdi mdi-plus"></i>
                                             <span>Оставить отзыв</span>
@@ -1449,8 +1355,8 @@
                 </button>
             </div>
         </section>
-        <section class="xl:container px-8 xs:px-12 xl:px-4 mx-0 xl:mx-auto w-full my-12 md:my-25">
-            <div class="flex items-center justify-between mb-8">
+        <section class="xl:container px-0 sm:px-12 xl:px-4 mx-0 xl:mx-auto w-full my-12 md:my-25">
+            <div class="flex items-center justify-between mb-8 px-8 xs:px-12 sm:px-0">
                 <h1 class="text-2xl lg:text-3xl xl:text-4xl font-bold tracking-wide">
                     Лучшие отзывы недели
                 </h1>
@@ -1849,7 +1755,7 @@
                 </div>
             </div>
             <div class="mt-8 block sm:hidden">
-                <div class="swiper krasnodor3Swiper relative">
+                <div class="swiper krasnodor3Swiper relative !px-8 xs:!px-12 sm:!px-0">
                     <div class="swiper-wrapper">
                         <div class="swiper-slide">
                             <div
@@ -2441,6 +2347,7 @@
     <script src="{{ asset('js/modal.js') }}" defer></script>
     <script src="{{ asset('swiper/swiper-bundle.min.js') }}" defer></script>
     <script src="{{ asset('js/swiper.js') }}" defer></script>
+    <script src="{{ asset('js/card.js') }}" defer></script>
 </body>
 
 </html>

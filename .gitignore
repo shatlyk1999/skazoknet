@@ -21,3 +21,9 @@ yarn-error.log
 /.nova
 /.vscode
 /.zed
+/vendorold
+/composer.jsonold
+/composer.lockold
+/vendornew
+/composer.jsonnew
+/composer.locknew
