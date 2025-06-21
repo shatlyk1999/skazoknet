@@ -5,6 +5,16 @@
         <div class="flex items-center md:items-start justify-between h-full md:flex-row flex-col">
             <div class="w-full sm:w-[80%] md:mx-0 mx-auto md:w-[45%] xl:w-[40%] my-auto xl:mt-[10%]">
                 <h1 class="text-text font-bold text-2xl tracking-wider">Вход</h1>
+                <div
+                    class="mt-6 login-error rounded-lg hidden bg-input-error/50 text-input-error-text w-full p-4 font-light text-xs tracking-wider">
+                    Неправильный email или пароль. Если Вы забыли свой логин или
+                    пароль, то воспользуйтесь
+                    <a href="{{ route('password.request') }}" class="text-primary">
+                        формой восстановление пароля.
+                    </a>
+                    Если Вы новый пользователь , то сначала
+                    <a href="{{ route('register') }}" class="text-primary">зарегистрируйтесь.</a>
+                </div>
                 <div class="flex flex-col w-full gap-6 mt-6">
                     <form class="flex flex-col gap-y-3 form" id="loginForm" novalidate>
                         <div class="form-item">
@@ -40,7 +50,7 @@
 
                         <div class="mt-4 text-center text-xs tracking-wide">
                             Забыли пароль?
-                            <a href="#" class="text-primary">Восстановление пароля</a>
+                            <a href="{{ route('password.request') }}" class="text-primary">Восстановление пароля</a>
                         </div>
                     </form>
                     <!--  -->
@@ -56,7 +66,11 @@
         </div>
     </div>
     <x-slot name="script">
-        <script>
+        <script type="module">
+            import FormValidator from "{{ asset('js/formValidation.js') }}";
+            import {
+                loginEmailValidationRules
+            } from "{{ asset('js/formRules.js') }}";
             document.addEventListener("DOMContentLoaded", () => {
                 new FormValidator("loginForm", loginEmailValidationRules);
             });

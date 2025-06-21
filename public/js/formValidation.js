@@ -95,7 +95,7 @@ class FormValidator {
     // Handle server errors
     showServerErrors(errorData) {
         const error = JSON.parse(errorData);
-        if (this.form.id === "loginForm") {
+        if (this.form.id === "loginForm" && error) {
             const loginErrorDiv = this.form
                 .closest(".bg-white")
                 .querySelector(".login-error");

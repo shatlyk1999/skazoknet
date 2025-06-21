@@ -58,25 +58,25 @@
                     </a>
                 </li>
 
-                {{-- <li class="sidebar-item has-sub @if (Request::segment('2') == 'key') active @endif">
+                <li class="sidebar-item has-sub @if (Request::segment('3') == 'settings') active @endif">
                     <a href="#" class="sidebar-link">
-                        <i class="bi bi-key-fill"></i>
-                        <span>Keys</span>
+                        <i class="bi bi-gear-fill"></i>
+                        <span>Настройки</span>
                     </a>
 
                     <ul class="submenu">
-                        <li class="submenu-item">
-                            <a href="{{ route('key.index', ['type' => 'free']) }}" class="submenu-link">
-                                Free
+                        <li class="submenu-item  @if (Request::segment('4') == 'about-us') active @endif">
+                            <a href="{{ route('settings.about_us') }}" class="submenu-link">
+                                О проекте
                             </a>
                         </li>
-                        <li class="submenu-item">
+                        {{-- <li class="submenu-item">
                             <a href="{{ route('key.index', ['type' => 'premium']) }}" class="submenu-link">
                                 Premium
                             </a>
-                        </li>
+                        </li> --}}
                     </ul>
-                </li> --}}
+                </li>
 
                 <li class="sidebar-item">
                     <form action="{{ route('logout') }}" class="sidebar-link" method="post">
