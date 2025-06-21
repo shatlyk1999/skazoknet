@@ -11,16 +11,16 @@ const formEndpoints = {
         method: "POST",
         redirectPath: "/",
     },
-    recoveryPasswordForm: {
-        endpoint: "https://api.example.com/recover-password",
-        method: "POST",
-        redirectPath: "/login",
-    },
-    editUserForm: {
-        endpoint: "https://api.example.com/edit-user",
-        method: "PUT",
-        redirectPath: "/profile",
-    },
+    // recoveryPasswordForm: {
+    //     endpoint: "https://api.example.com/recover-password",
+    //     method: "POST",
+    //     redirectPath: "/login",
+    // },
+    // editUserForm: {
+    //     endpoint: "https://api.example.com/edit-user",
+    //     method: "PUT",
+    //     redirectPath: "/profile",
+    // },
 };
 
 export default formEndpoints;

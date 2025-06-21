@@ -60,7 +60,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    <form class="flex flex-col gap-y-3 form" id="recoveryPasswordForm" novalidate method="POST"
+                    <form class="flex flex-col gap-y-3 form" novalidate method="POST" {{-- id="recoveryPasswordForm" --}}
                         action="{{ route('password.email') }}">
                         @csrf
                         <div class="form-item">
