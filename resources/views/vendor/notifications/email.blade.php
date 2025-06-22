@@ -12,10 +12,13 @@
 
     Для завершения регистрации нажмите кнопку ниже:
 
-    <x-mail::button :url="$url" color="primary">
+    {{-- <x-mail::button :url="$url" color="primary">
         Подтвердить email
-    </x-mail::button>
+    </x-mail::button> --}}
 
+    <a href="{{ $url }}" class="btn btn-primary">
+        Подтвердить email
+    </a>
     Если кнопка не работает, скопируйте эту ссылку и вставьте её в браузер:
     {{ $url }}
 

@@ -4,9 +4,10 @@
     На Ваш email поступил запрос восстановления пароля с IP адреса: {{ $ip }}.
     Чтобы восстановить пароль на сайте Skazoknet.com перейдите по следующей ссылке:
 
-    @component('mail::button', ['url' => $url])
+    <a href="{{ $url }}"
+        style="display:inline-block;padding:10px 20px;background:#3490dc;color:#fff;text-decoration:none;">
         Восстановить пароль
-    @endcomponent
+    </a>
 
     Если кнопка не нажимается, попробуйте скопировать ссылку и вставить её в адресную строку браузера вручную:
     [{{ $url }}]({{ $url }})
