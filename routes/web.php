@@ -40,6 +40,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return view('mail.confirmed_mail');
     });
 });
+Route::get('recovery-confirmed', function () {
+    return view('mail.confirmed_mail');
+});
 
 
 

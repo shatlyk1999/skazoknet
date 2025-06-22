@@ -128,8 +128,7 @@
                             </div>
                         </div>
                         <button type="submit" id="registerButton"
-                            class="text-center h-12.5 rounded-3xl border border-primary text-primary text-sm font-bold tracking-wide px-8 hover:bg-primary hover:text-white transition-colors cursor-pointer mt-4"
-                            style="opacity: 0.5; cursor: not-allowed;">
+                            class="text-center h-12.5 rounded-3xl border border-primary text-primary text-sm font-bold tracking-wide px-8 hover:bg-primary hover:text-white transition-colors cursor-pointer mt-4">
                             Отправить
                         </button>
                     </form>
@@ -147,13 +146,17 @@
         </div>
     </div>
     <x-slot name="script">
-        <script type="module">
+        <<script type="module">
             import FormValidator from "{{ asset('js/formValidation.js') }}";
             import {
-                registerFormValidationRules
+                recoveryPasswordFormValidationRules
             } from "{{ asset('js/formRules.js') }}";
+
             document.addEventListener("DOMContentLoaded", () => {
-                new FormValidator("registerForm", registerFormValidationRules);
+                new FormValidator(
+                    "recoveryPasswordForm",
+                    recoveryPasswordFormValidationRules
+                );
             });
         </script>
     </x-slot>

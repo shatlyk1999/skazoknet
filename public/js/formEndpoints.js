@@ -11,11 +11,11 @@ const formEndpoints = {
         method: "POST",
         redirectPath: "/",
     },
-    // recoveryPasswordForm: {
-    //     endpoint: "https://api.example.com/recover-password",
-    //     method: "POST",
-    //     redirectPath: "/login",
-    // },
+    recoveryPasswordForm: {
+        endpoint: "/password/reset",
+        method: "POST",
+        redirectPath: "/recovery-confirmed",
+    },
     // editUserForm: {
     //     endpoint: "https://api.example.com/edit-user",
     //     method: "PUT",
