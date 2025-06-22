@@ -100,7 +100,7 @@
         </div>
     </div>
     <x-slot name="script">
-        <script type="module">
+        {{-- <script type="module">
             import FormValidator from "{{ asset('js/formValidation.js') }}";
             import {
                 recoveryPasswordFormValidationRules
@@ -112,6 +112,6 @@
                     recoveryPasswordFormValidationRules
                 );
             });
-        </script>
+        </script> --}}
     </x-slot>
 </x-auth.auth-layout>
