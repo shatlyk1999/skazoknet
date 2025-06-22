@@ -53,11 +53,11 @@ Route::get('send-email-register-verify', function () {
 Route::get('about-us', [HomeController::class, 'about_us'])->name('about_us');
 
 //auth
-Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard', function () {
-        return 'this verified';
-    });
-});
+// Route::middleware(['auth'])->group(function () {
+//     Route::get('/dashboard', function () {
+//         return 'this verified';
+//     });
+// });
 
 
 

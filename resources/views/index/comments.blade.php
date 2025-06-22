@@ -31,7 +31,7 @@
                     <span class="text-sm">2020/01/16</span>
                 </div>
                 <div class="flex md:hidden items-center gap-1">
-                    <img src=".{{ asset('user 7.png') }}" class="size-8" alt="" />
+                    <img src="{{ asset('user 7.png') }}" class="size-8" alt="" />
                     <span>User001</span>
                 </div>
                 <h2 class="font-semibold text-lg">ЖК “Губернский”</h2>
@@ -150,7 +150,7 @@
                     <span class="text-sm">2020/01/16</span>
                 </div>
                 <div class="flex md:hidden items-center gap-1">
-                    <img src=".{{ asset('user 7.png') }}" class="size-8" alt="" />
+                    <img src="{{ asset('user 7.png') }}" class="size-8" alt="" />
                     <span>User001</span>
                 </div>
                 <h2 class="font-semibold text-lg">ЖК “Губернский”</h2>
@@ -210,7 +210,7 @@
                     <span class="text-sm">2020/01/16</span>
                 </div>
                 <div class="flex md:hidden items-center gap-1">
-                    <img src=".{{ asset('user 7.png') }}" class="size-8" alt="" />
+                    <img src="{{ asset('user 7.png') }}" class="size-8" alt="" />
                     <span>User001</span>
                 </div>
                 <h2 class="font-semibold text-lg">ЖК “Губернский”</h2>
@@ -270,7 +270,7 @@
                     <span class="text-sm">2020/01/16</span>
                 </div>
                 <div class="flex md:hidden items-center gap-1">
-                    <img src=".{{ asset('user 7.png') }}" class="size-8" alt="" />
+                    <img src="{{ asset('user 7.png') }}" class="size-8" alt="" />
                     <span>User001</span>
                 </div>
                 <h2 class="font-semibold text-lg">ЖК “Губернский”</h2>
@@ -330,7 +330,7 @@
                     <span class="text-sm">2020/01/16</span>
                 </div>
                 <div class="flex md:hidden items-center gap-1">
-                    <img src=".{{ asset('user 7.png') }}" class="size-8" alt="" />
+                    <img src="{{ asset('user 7.png') }}" class="size-8" alt="" />
                     <span>User001</span>
                 </div>
                 <h2 class="font-semibold text-lg">ЖК “Губернский”</h2>
