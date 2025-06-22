@@ -22,7 +22,7 @@ class CustomVerifyEmail extends BaseVerifyEmail
 
         return (new MailMessage)
             ->subject('Skazoknet.com - Регистрация на сайте! ВНИМАНИЕ! НЕ ОТВЕЧАЙТЕ НА ЭТО ПИСЬМО!')
-            ->view('notifications.email', [
+            ->view('vendor.notifications.email', [
                 'user' => $notifiable,
                 'url' => $this->verificationUrl($notifiable),
             ]);

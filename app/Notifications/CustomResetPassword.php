@@ -27,7 +27,7 @@ class CustomResetPassword extends ResetPassword
         //     ->salutation("С уважением,\nсервис СказокНет \nЭто письмо отправлено роботом и любой ответ на его email не будет получен.
         //     Для связи с техподдержкой СказокНет используйте форму обратной связи.");
         return (new MailMessage)
-            ->view('notifications.password_reset', [
+            ->view('vendor.notifications.password_reset', [
                 'user' => $notifiable,
                 'url' => $url,
                 'ip' => $ip,
