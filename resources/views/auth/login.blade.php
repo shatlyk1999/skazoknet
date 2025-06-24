@@ -24,7 +24,7 @@
                                 class="rounded-3xl border-auth-input-border-color border px-4 h-12.5 flex items-center mt-1 input-container">
                                 <i class="mdi mdi-email" data-input-id="registerEmailIcon"></i>
                                 <div class="h-6 w-px bg-input-divider mx-2 input-divider"></div>
-                                <input type="text"
+                                <input type="email"
                                     class="h-12.5 text-input-divider text-xs font-normal tracking-wide w-full outline-none border-none"
                                     placeholder="info@skazoknet.ru" id="registerEmail" name="email" />
                             </div>

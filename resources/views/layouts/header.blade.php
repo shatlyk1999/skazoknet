@@ -63,8 +63,8 @@
                                 <div id="myDropdown" class="dropdown-content">
                                     <form action="{{ route('logout') }}" class="" method="post">
                                         @csrf
-                                        {{-- <i class="bi bi-arrow-right-circle-fill"></i> --}}
                                         <button type="submit" class="cursor-pointer text-text">
+                                            {{-- <img src="{{ asset('icons/logout.svg') }}" alt="" /> --}}
                                             Выйти
                                         </button>
                                     </form>

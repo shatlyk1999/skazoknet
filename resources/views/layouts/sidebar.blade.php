@@ -60,5 +60,22 @@
                     связь</a>
             </div>
         </div>
+        <div class="flex justify-center items-center">
+            @if (auth()->user())
+                <form action="{{ route('logout') }}" class="" method="post">
+                    @csrf
+                    <button type="submit" class="cursor-pointer flex justify-center items-center gap-2">
+                        <img src="{{ asset('icons/logout.svg') }}" alt="" />
+                        Выйти
+                    </button>
+                </form>
+            @else
+                <a href="{{ route('registration') }}"
+                    class="cursor-pointer border-none bg-transparent outline-none hover:bg-black/5 transition-colors p-2 rounded-lg text-lg flex items-center gap-x-2">
+                    <img src="{{ asset('icons/add 1.svg') }}" alt="" />
+                    Войти
+                </a>
+            @endif
+        </div>
     </nav>
 </div>
