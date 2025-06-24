@@ -71,17 +71,17 @@
                 <h1 class="text-text font-bold text-2xl tracking-wider">Восстановления пароля</h1>
                 <div class="flex flex-col w-full gap-6 mt-6">
                     <form class="flex flex-col gap-y-3 form" action="{{ route('password.update') }}" method="post"
-                        id="registerForm" novalidate>
+                        id="recoveryPasswordForm" novalidate>
                         @csrf
                         <input type="hidden" name="token" value="{{ $token }}">
-                        <div class="form-item">
+                        {{-- <div class="form-item">
                             <label for="registerEmail"
                                 class="text-input-divider text-xs font-medium tracking-wide pl-2">Почта:</label>
                             <div
                                 class="rounded-3xl border-auth-input-border-color border px-4 h-12.5 flex items-center mt-1 input-container">
                                 <i class="mdi mdi-email" data-input-id="registerEmailIcon"></i>
                                 <div class="h-6 w-px bg-input-divider mx-2 input-divider"></div>
-                                <input type="text"
+                                <input type="hidden" value="{{ $email }}"
                                     class="h-12.5 text-input-divider text-xs font-normal tracking-wide w-full outline-none border-none"
                                     placeholder="info@skazoknet.ru" id="registerEmail" name="email" />
                             </div>
@@ -89,7 +89,8 @@
                                 class="server-message hidden mt-2 rounded-lg bg-input-error text-input-error-text w-full p-4 font-light text-xs tracking-wider">
                                 <span class="inline-block w-[90%]"></span>
                             </div>
-                        </div>
+                        </div> --}}
+                        <input type="hidden" name="email" value="{{ $email }}">
                         <div class="form-item">
                             <label for="password"
                                 class="text-input-divider text-xs font-medium tracking-wide pl-2">Пароль:</label>
@@ -146,7 +147,7 @@
         </div>
     </div>
     <x-slot name="script">
-        <<script type="module">
+        <script type="module">
             import FormValidator from "{{ asset('js/formValidation.js') }}";
             import {
                 recoveryPasswordFormValidationRules

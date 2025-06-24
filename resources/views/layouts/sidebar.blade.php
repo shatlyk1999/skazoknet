@@ -1,7 +1,7 @@
 <div id="sidebar-overlay"
     class="fixed inset-0 bg-black opacity-0 pointer-events-none transition-opacity duration-300 ease-in-out z-20">
 </div>
-{{-- <div id="sidebar"
+<div id="sidebar"
     class="fixed top-0 h-full w-full sm:w-[50%] bg-primary text-white transition-all duration-300 ease-in-out z-30 rounded-r-lg shadow-lg block lg:hidden"
     role="navigation">
     <div class="flex justify-end p-4 relative">
@@ -11,7 +11,7 @@
             <i class="mdi mdi-close"></i>
         </button>
         <div class="absolute z-[-1] top-0 left-1/2 -translate-x-1/2 h-full w-full flex items-center justify-center">
-            <img src="{{ asset('logo.png"') }} alt="" />
+            <img src="{{ asset('logo.png') }}" alt="logo" />
         </div>
     </div>
     <nav class="flex flex-col gap-2 p-4 mt-12">
@@ -61,4 +61,4 @@
             </div>
         </div>
     </nav>
-</div> --}}
+</div>
