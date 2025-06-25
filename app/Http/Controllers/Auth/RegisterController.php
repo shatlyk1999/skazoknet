@@ -64,6 +64,11 @@ class RegisterController extends Controller
         return '/home';
     }
 
+    protected function guard()
+    {
+        return Auth::guard();
+    }
+
     protected function registered(Request $request, $user)
     {
         //
