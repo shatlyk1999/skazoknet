@@ -56,39 +56,49 @@
 
                 <div class="flex flex-col w-full gap-6 mt-6">
                     @if (session('status'))
-                        <div class="alert alert-success" role="alert">
+                        {{-- <div class="alert alert-success" role="alert">
                             {{ session('status') }}
+                        </div> --}}
+                        <h1 class="text-text font-bold text-2xl tracking-wider">
+                            Восстановления пароля
+                        </h1>
+                        <div class="flex items-center md:flex-row flex-col gap-4 mt-6">
+                            <img src="{{ asset('icons/check.svg') }}" alt="" />
+                            <p class="font-semibold text-base md:text-left text-center tracking-wider">
+                                На вашу почту отправлена ссылка для активации аккаунта!
+                            </p>
                         </div>
+                    @else
+                        <form class="flex flex-col gap-y-3 form" novalidate method="POST" {{-- id="recoveryPasswordForm" --}}
+                            action="{{ route('password.email') }}">
+                            @csrf
+                            <div class="form-item">
+                                <label for="recoveryPasswordEmailIcon"
+                                    class="text-input-divider text-xs font-medium tracking-wide pl-2">Почта:</label>
+                                <div
+                                    class="rounded-3xl border-auth-input-border-color border px-4 h-12.5 flex items-center mt-1 input-container">
+                                    <i class="mdi mdi-email" data-input-id="recoveryPasswordEmailIcon"></i>
+                                    <div class="h-6 w-px bg-input-divider mx-2 input-divider"></div>
+                                    <input type="text"
+                                        class="h-12.5 text-input-divider text-xs font-normal tracking-wide w-full outline-none border-none"
+                                        placeholder="info@skazoknet.ru" id="recoveryPasswordEmailIcon" name="email" />
+                                </div>
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                                <div
+                                    class="server-message hidden mt-2 rounded-lg bg-input-error text-input-error-text w-full p-4 font-light text-xs tracking-wider">
+                                    <span class="inline-block w-[90%]"></span>
+                                </div>
+                            </div>
+                            <button type="submit"
+                                class="text-center h-12.5 rounded-3xl border border-primary text-primary text-sm font-bold tracking-wide px-8 hover:bg-primary hover:text-white transition-colors cursor-pointer mt-4">
+                                Отправить
+                            </button>
+                        </form>
                     @endif
-                    <form class="flex flex-col gap-y-3 form" novalidate method="POST" {{-- id="recoveryPasswordForm" --}}
-                        action="{{ route('password.email') }}">
-                        @csrf
-                        <div class="form-item">
-                            <label for="recoveryPasswordEmailIcon"
-                                class="text-input-divider text-xs font-medium tracking-wide pl-2">Почта:</label>
-                            <div
-                                class="rounded-3xl border-auth-input-border-color border px-4 h-12.5 flex items-center mt-1 input-container">
-                                <i class="mdi mdi-email" data-input-id="recoveryPasswordEmailIcon"></i>
-                                <div class="h-6 w-px bg-input-divider mx-2 input-divider"></div>
-                                <input type="text"
-                                    class="h-12.5 text-input-divider text-xs font-normal tracking-wide w-full outline-none border-none"
-                                    placeholder="info@skazoknet.ru" id="recoveryPasswordEmailIcon" name="email" />
-                            </div>
-                            @error('email')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                            <div
-                                class="server-message hidden mt-2 rounded-lg bg-input-error text-input-error-text w-full p-4 font-light text-xs tracking-wider">
-                                <span class="inline-block w-[90%]"></span>
-                            </div>
-                        </div>
-                        <button type="submit"
-                            class="text-center h-12.5 rounded-3xl border border-primary text-primary text-sm font-bold tracking-wide px-8 hover:bg-primary hover:text-white transition-colors cursor-pointer mt-4">
-                            Отправить
-                        </button>
-                    </form>
                 </div>
             </div>
             <div class="w-full sm:w-[80%] md:mx-0 mx-auto md:w-[45%] xl:w-[40%] my-auto">
