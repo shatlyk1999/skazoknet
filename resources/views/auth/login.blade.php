@@ -57,10 +57,10 @@
                 </div>
             </div>
             <div class="w-full sm:w-[80%] md:mx-0 mx-auto md:w-[45%] xl:w-[40%] my-auto">
-                <img src="{{ asset('registerimage.png') }}"
+                <img src="{{ asset('images/registerimage.png') }}"
                     class="w-full h-auto md:max-h-max max-h-[20rem] object-contain" alt="" />
                 <div class="pt-8 flex items-center justify-center md:hidden">
-                    <img src="{{ asset('registerlogo.png') }}" class="h-10 w-37.5" alt="" />
+                    <img src="{{ asset('images/registerlogo.png') }}" class="h-10 w-37.5" alt="" />
                 </div>
             </div>
         </div>
