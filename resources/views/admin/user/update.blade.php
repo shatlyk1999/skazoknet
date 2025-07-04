@@ -1,5 +1,5 @@
 @extends('admin.layouts.main')
-@section('title', 'Admin | User Crate')
+@section('title', 'Admin | Редактировать Пользователь')
 @section('css')
     {{-- <link rel="stylesheet" href="{{ asset('assets/extensions/flatpickr/flatpickr.min.css') }}"> --}}
 @endsection

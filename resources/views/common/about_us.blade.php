@@ -31,8 +31,8 @@
                 @endif
             </div>
             <div class="md:w-[40%] hidden md:flex items-center justify-center">
-                <img class="w-full h-auto max-w-[26.25rem] max-h-[25rem] min-h-[21.875rem]" src="../public/Group 456.png"
-                    alt="" />
+                <img class="w-full h-auto max-w-[26.25rem] max-h-[25rem] min-h-[21.875rem]"
+                    src="{{ asset('images/Group 456.png') }}" alt="" />
             </div>
         </div>
         <div class="mt-6">
@@ -89,7 +89,7 @@
             <i class="mdi mdi-chevron-left"></i>
         </button>
         <div class="md:hidden absolute left-0 top-0 z-[-1] size-full flex justify-center">
-            <img src="../public/Group 2344.png" class="w-full max-w-[25rem] h-auto max-h-[31rem] min-h-[31rem]"
+            <img src="{{ asset('images/Group 2344.png') }}" class="w-full max-w-[25rem] h-auto max-h-[31rem] min-h-[31rem]"
                 alt="" />
         </div>
     </div>

@@ -1,10 +1,8 @@
 @extends('admin.layouts.main')
 
-@section('title', 'Admin | Users')
+@section('title', 'Admin | Города')
 @section('css')
-    {{-- <link rel="stylesheet" href="{{ asset('admin/extensions/simple-datatables/style.css') }}" />
-
-    <link rel="stylesheet" href="{{ asset('admin/compiled/css/table-datatable.css') }}" /> --}}
+    {{--  --}}
 @endsection
 @section('content')
     <div class="page-heading">
@@ -12,7 +10,7 @@
             <div class="row">
                 <div class="col-12 col-md-6 order-md-1 order-last">
                     <h3>
-                        <span style="text-transform: capitalize">Пользователи</span>
+                        <span style="text-transform: capitalize">Города</span>
                     </h3>
                     <p class="text-subtitle text-muted">
                         {{--  --}}
@@ -26,7 +24,7 @@
                                 </a>
                             </li>
                             <li class="breadcrumb-item active" aria-current="page">
-                                Пользователи
+                                Города
                             </li>
                         </ol>
                     </nav>
@@ -39,8 +37,8 @@
                     <div class="card">
                         <div class="card-header">
                             <h4 class="card-title">
-                                <a href="{{ route('users.create') }}">
-                                    + <span style="text-transform: capitalize">Создать Пользователь</span>
+                                <a href="{{ route('city.create') }}">
+                                    + <span style="text-transform: capitalize">Создать Город</span>
                                 </a>
                             </h4>
                         </div>
@@ -58,52 +56,35 @@
                                     <thead>
                                         <tr>
                                             <th>№</th>
-                                            <th>Имя</th>
-                                            <th>Электронная почта</th>
-                                            <th>Дата создания</th>
-                                            <th>Разрешение на комментарий</th>
-                                            <th>Статус</th>
-                                            <th>Actions</th>
+                                            <th>Фото</th>
+                                            <th>Город</th>
+                                            <th>Область</th>
+                                            <th>Действия</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($users as $key => $user)
+                                        @foreach ($cities as $key => $city)
                                             <tr>
                                                 <td class="text-bold-500">
                                                     {{ $key + 1 }}
                                                 </td>
                                                 <td>
-                                                    {{ $user->name }}
+                                                    <img src="{{ asset('cities/' . $city->image) }}" alt=""
+                                                        style="width: 50px;height:50px;border-radius:10px;">
                                                 </td>
                                                 <td class="text-bold-500">
-                                                    {{ $user->email }}
+                                                    {{ $city->name }}
                                                 </td>
                                                 <td>
-                                                    {{ $user->created_at->format('d.m.Y') }}
-                                                </td>
-                                                <td>
-                                                    <div class="form-check form-switch">
-                                                        <input class="form-check-input form-check-success"
-                                                            name="permission_comment" type="checkbox"
-                                                            id="{{ $user->id }}" data-id="{{ $user->id }}"
-                                                            @if ($user->permission_comment == '1') checked @endif>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="form-check form-switch">
-                                                        <input class="form-check-input form-check-success" name="status"
-                                                            type="checkbox" id="{{ $user->id }}"
-                                                            data-id={{ $user->id }}
-                                                            @if ($user->status == '1') checked @endif>
-                                                    </div>
+                                                    {{ $city->label }}
                                                 </td>
                                                 <td>
                                                     <div class="d-flex gap-1">
-                                                        <a href="{{ route('users.edit', $user->id) }}"
+                                                        <a href="{{ route('city.edit', $city->id) }}"
                                                             class="btn btn-outline-warning">
                                                             <i class="bi bi-pencil"></i>
                                                         </a>
-                                                        <form action="{{ route('users.destroy', $user->id) }}"
+                                                        <form action="{{ route('city.destroy', $city->id) }}"
                                                             method="post">
                                                             @csrf
                                                             @method('delete')
@@ -118,8 +99,8 @@
                                     </tbody>
                                 </table>
                             </div>
-                            {{ $users->onEachSide(1) }}
-                            {{-- {{ $users->links('vendor.pagination.tailwind') }} --}}
+                            {{ $cities->onEachSide(1) }}
+                            {{-- {{ $citys->links('vendor.pagination.tailwind') }} --}}
                         </div>
                     </div>
                 </div>
@@ -140,7 +121,7 @@
             const status = checkbox.checked;
             checkbox.disabled = true;
 
-            fetch('/backend/adm/user-status', {
+            fetch('/backend/adm/city-status', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -189,7 +170,7 @@
             const permission_comment = checkbox.checked;
             checkbox.disabled = true;
 
-            fetch('/backend/adm/user-permission-comment', {
+            fetch('/backend/adm/city-permission-comment', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

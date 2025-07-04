@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\Admin\CityController;
+use App\Http\Controllers\Admin\ComplexController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\DeveloperController;
 use App\Http\Controllers\Admin\SettingsControlller;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\EmailController;
@@ -54,6 +57,8 @@ Route::get('send-email-register-verify', function () {
     return view('mail.register_mail');
 });
 Route::get('about-us', [HomeController::class, 'about_us'])->name('about_us');
+Route::get('index-cities', [HomeController::class, 'cities']);
+Route::post('update-city', [HomeController::class, 'update_city']);
 
 //auth
 // Route::middleware(['auth'])->group(function () {
@@ -76,8 +81,14 @@ Route::group([
 ], function () {
     Route::get('', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('users', UserController::class);
+    Route::resource('city', CityController::class);
+    Route::resource('developer', DeveloperController::class);
+    Route::resource('complex', ComplexController::class);
     Route::post('user-status', [UserController::class, 'updateStatus']);
     Route::post('user-permission-comment', [UserController::class, 'updatePermissionComment']);
+    Route::post('developer-status', [DeveloperController::class, 'updateStatus']);
+    Route::post('complex-status', [ComplexController::class, 'updateStatus']);
+    Route::get('complex-image/{image_id}', [ComplexController::class, 'destroyComplexImage'])->name('complex-image');
     Route::get('settings/about-us', [SettingsControlller::class, 'about_us'])->name('settings.about_us');
     Route::post('settings/about-us', [SettingsControlller::class, 'about_us_store'])->name('settings.about_us.store');
 });

@@ -4,9 +4,10 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title')</title>
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('favicon.png') }}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon.svg') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('images/favicon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('images/favicon.svg') }}">
     <link href="{{ asset('styles/output.css') }}" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('styles/menu.css') }}" />
     <link rel="stylesheet" href="{{ asset('styles/sidebar.css') }}" />
@@ -30,8 +31,8 @@
                                 <img src="{{ asset('icons/menu.svg') }}" alt="" />
                             </div>
                         </div>
-                        <a href="#">
-                            <img class="w-[8.125rem]" src="{{ asset('logo.png') }}" alt="" />
+                        <a href="{{ route('home') }}">
+                            <img class="w-[8.125rem]" src="{{ asset('images/logo.png') }}" alt="skazoknet.com" />
                         </a>
                     </div>
                     <div class="hidden items-center gap-x-8 lg:flex">
@@ -40,24 +41,28 @@
                     </div>
                 </div>
                 <div class="flex items-center gap-x-6 lg:gap-x-12 text-white h-10">
-                    <div class="flex gap-x-1 lg:gap-x-2 items-center leading-10 pt-4">
-                        <span class="hidden lg:inline-block text-lg">Ваш город:</span>
+                    @if (isset($city))
+                        <div class="flex gap-x-1 lg:gap-x-2 items-center leading-10 pt-4">
+                            <span class="hidden lg:inline-block text-lg">Ваш город:</span>
 
-                        <div onclick="openModal('reusableModal')"
-                            class="flex items-center justify-between gap-x-2 cursor-pointer leading-10 pt-1">
-                            <div class="relative">
-                                <span id="selectedCityDisplay">Краснодар</span>
-                                <div class="absolute bottom-2 left-0 w-full h-[1px] bg-white/50"></div>
+                            <div onclick="openModal('reusableModal')"
+                                class="flex items-center justify-between gap-x-2 cursor-pointer leading-10 pt-1">
+                                <div class="relative">
+                                    <span id="selectedCityDisplay">
+                                        {{ $city->name }}
+                                    </span>
+                                    <div class="absolute bottom-2 left-0 w-full h-[1px] bg-white/50"></div>
+                                </div>
+                                <img src="{{ asset('icons/down-arrow 1.svg') }}" alt="" />
                             </div>
-                            <img src="{{ asset('icons/down-arrow 1.svg') }}" alt="" />
                         </div>
-                    </div>
+                    @endif
                     <div class="leading-10 pt-0 lg:pt-4 hidden lg:block">
                         @if (auth()->user())
                             <div class="dropdown">
                                 <button onclick="myFunction()"
                                     class="dropbtn cursor-pointer border-none bg-transparent outline-none hover:bg-black/5 transition-colors p-2 rounded-lg text-lg flex items-center gap-x-2">
-                                    <img src="{{ asset('user 7.png') }}" class="size-7" alt="" />
+                                    <img src="{{ asset('images/user 7.png') }}" class="size-7" alt="" />
                                     {{ auth()->user()->name }}
                                 </button>
                                 <div id="myDropdown" class="dropdown-content">

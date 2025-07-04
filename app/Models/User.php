@@ -60,4 +60,11 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $query->where('is_admin', '0');
     }
+
+    //relatinons
+
+    public function city()
+    {
+        return $this->belongsTo(City::class, 'city_id');
+    }
 }

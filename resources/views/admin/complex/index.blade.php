@@ -1,10 +1,31 @@
 @extends('admin.layouts.main')
 
-@section('title', 'Admin | Users')
+@section('title', 'Admin | Комплекс')
 @section('css')
-    {{-- <link rel="stylesheet" href="{{ asset('admin/extensions/simple-datatables/style.css') }}" />
+    <link rel="stylesheet" href="{{ asset('styles/tom-select-2.4.3.css') }}" />
+    <style>
+        .ts-wrapper .option .name {
+            display: block;
+        }
 
-    <link rel="stylesheet" href="{{ asset('admin/compiled/css/table-datatable.css') }}" /> --}}
+        .ts-wrapper .option .label {
+            font-size: 12px;
+            display: block;
+            color: #a0a0a0;
+        }
+
+        button.close,
+        button[data-bs-dismiss="modal"] {
+            all: unset;
+            /* color: #fef08a !important; */
+            font-size: 1.25rem;
+            cursor: pointer;
+        }
+    </style>
+    <link rel="stylesheet" href="{{ asset('admin/extensions/summernote/summernote-lite.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('admin/compiled/css/form-editor-summernote.css') }}">
+
 @endsection
 @section('content')
     <div class="page-heading">
@@ -12,7 +33,7 @@
             <div class="row">
                 <div class="col-12 col-md-6 order-md-1 order-last">
                     <h3>
-                        <span style="text-transform: capitalize">Пользователи</span>
+                        <span style="text-transform: capitalize">Жилые комплексы</span>
                     </h3>
                     <p class="text-subtitle text-muted">
                         {{--  --}}
@@ -26,7 +47,7 @@
                                 </a>
                             </li>
                             <li class="breadcrumb-item active" aria-current="page">
-                                Пользователи
+                                Жилые комплексы
                             </li>
                         </ol>
                     </nav>
@@ -39,9 +60,10 @@
                     <div class="card">
                         <div class="card-header">
                             <h4 class="card-title">
-                                <a href="{{ route('users.create') }}">
-                                    + <span style="text-transform: capitalize">Создать Пользователь</span>
-                                </a>
+                                <button type="button" class="btn btn-outline-success" data-bs-toggle="modal"
+                                    data-bs-target="#createComplex">
+                                    + Создать комплекс
+                                </button>
                             </h4>
                         </div>
                         <div class="card-content">
@@ -58,53 +80,57 @@
                                     <thead>
                                         <tr>
                                             <th>№</th>
-                                            <th>Имя</th>
-                                            <th>Электронная почта</th>
-                                            <th>Дата создания</th>
-                                            <th>Разрешение на комментарий</th>
+                                            <th>Фото</th>
+                                            <th>Название</th>
+                                            <th>Застройщик</th>
+                                            <th>Сортировать</th>
                                             <th>Статус</th>
-                                            <th>Actions</th>
+                                            <th>Действия</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($users as $key => $user)
+                                        @foreach ($complexes as $key => $complex)
                                             <tr>
-                                                <td class="text-bold-500">
+                                                <td>
                                                     {{ $key + 1 }}
                                                 </td>
                                                 <td>
-                                                    {{ $user->name }}
+                                                    <img src="{{ asset('complex/' . $complex->image) }}"
+                                                        style="width:50px;height:50px;border-radius:10px;" alt="">
+                                                </td>
+                                                <td>
+                                                    {{ $complex->name }}
                                                 </td>
                                                 <td class="text-bold-500">
-                                                    {{ $user->email }}
+                                                    {{ $complex->developer->name ?? ' ' }}
+                                                </td>
+                                                <td class="text-bold-500">
+                                                    {{ $complex->sort ?? '' }}
                                                 </td>
                                                 <td>
-                                                    {{ $user->created_at->format('d.m.Y') }}
-                                                </td>
-                                                <td>
-                                                    <div class="form-check form-switch">
-                                                        <input class="form-check-input form-check-success"
-                                                            name="permission_comment" type="checkbox"
-                                                            id="{{ $user->id }}" data-id="{{ $user->id }}"
-                                                            @if ($user->permission_comment == '1') checked @endif>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="form-check form-switch">
-                                                        <input class="form-check-input form-check-success" name="status"
-                                                            type="checkbox" id="{{ $user->id }}"
-                                                            data-id={{ $user->id }}
-                                                            @if ($user->status == '1') checked @endif>
+                                                    <div class="form-check form-switch cursor-pointer">
+                                                        <input class="form-check-input form-check-success cursor-pointer"
+                                                            style="cursor: pointer" name="status" type="checkbox"
+                                                            id="{{ $complex->id }}" data-id={{ $complex->id }}
+                                                            @if ($complex->status == '1') checked @endif>
                                                     </div>
                                                 </td>
                                                 <td>
                                                     <div class="d-flex gap-1">
-                                                        <a href="{{ route('users.edit', $user->id) }}"
-                                                            class="btn btn-outline-warning">
+                                                        <button class="btn btn-outline-secondary" data-bs-toggle="modal"
+                                                            data-bs-target="#info_{{ $complex->id }}">
+                                                            <i class="bi bi-info-circle"></i>
+                                                        </button>
+                                                        {{-- info modal --}}
+                                                        @include('admin.inc.modal_complex_info')
+                                                        <button class="btn btn-outline-warning" data-bs-toggle="modal"
+                                                            data-bs-target="#edit_{{ $complex->id }}">
                                                             <i class="bi bi-pencil"></i>
-                                                        </a>
-                                                        <form action="{{ route('users.destroy', $user->id) }}"
-                                                            method="post">
+                                                        </button>
+                                                        {{-- info modal --}}
+                                                        @include('admin.inc.modal_complex_edit')
+                                                        <form action="{{ route('complex.destroy', $complex->id) }}"
+                                                            method="post" style="margin-bottom: 0px;">
                                                             @csrf
                                                             @method('delete')
                                                             <button class="btn btn-outline-danger">
@@ -118,19 +144,32 @@
                                     </tbody>
                                 </table>
                             </div>
-                            {{ $users->onEachSide(1) }}
-                            {{-- {{ $users->links('vendor.pagination.tailwind') }} --}}
+                            {{ $complexes->onEachSide(1) }}
                         </div>
                     </div>
                 </div>
             </div>
         </section>
     </div>
+
+    {{-- add vpn modal --}}
+    @include('admin.inc.modal_complex_create')
+
 @endsection
 
 @section('script')
-    {{-- <script src="{{ asset('admin/extensions/simple-datatables/umd/simple-datatables.js') }}"></script>
-    <script src="{{ asset('admin/static/js/pages/simple-datatables.js') }}"></script> --}}
+    <script src="{{ asset('admin/extensions/summernote/summernote-lite.min.js') }}"></script>
+    <script src="{{ asset('admin/static/js/pages/summernote.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $('.summernote_edit').each(function() {
+                $(this).summernote({
+                    height: 150,
+                });
+            });
+        });
+    </script>
+
     <script>
         document.addEventListener('change', function(event) {
             const checkbox = event.target;
@@ -140,7 +179,7 @@
             const status = checkbox.checked;
             checkbox.disabled = true;
 
-            fetch('/backend/adm/user-status', {
+            fetch('/backend/adm/complex-status', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -150,55 +189,6 @@
                     body: JSON.stringify({
                         id: id,
                         status: status,
-                    })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        toastr.success(data.message, 'Успешно', {
-                            closeButton: true,
-                            positionClass: 'toast-top-right'
-                        });
-                    } else {
-                        toastr.error(data.message || 'Статус не удалось обновить', 'Ошибка', {
-                            closeButton: true,
-                            positionClass: 'toast-top-right'
-                        });
-                        checkbox.checked = !status;
-                    }
-                })
-                .catch(error => {
-                    console.error('Ошибка:', error);
-                    toastr.error('Произошла ошибка!', 'Ошибка', {
-                        closeButton: true,
-                        positionClass: 'toast-top-right'
-                    });
-                    checkbox.checked = !status;
-                })
-                .finally(() => {
-                    checkbox.disabled = false;
-                });
-        });
-
-        document.addEventListener('change', function(event) {
-            const checkbox = event.target;
-            if (!checkbox.matches('.form-check-input[name="permission_comment"]'))
-                return;
-
-            const id = checkbox.dataset.id;
-            const permission_comment = checkbox.checked;
-            checkbox.disabled = true;
-
-            fetch('/backend/adm/user-permission-comment', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
-                        'Accept': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        id: id,
-                        permission_comment: permission_comment,
                     })
                 })
                 .then(response => response.json())

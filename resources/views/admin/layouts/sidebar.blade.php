@@ -1,10 +1,17 @@
+<?php
+$user_count = \App\Models\User::where('is_admin', '0')->count() ?? 0;
+$city_count = \App\Models\City::get()->count() ?? 0;
+$developer_count = \App\Models\Developer::get()->count() ?? 0;
+$complex_count = \App\Models\Complex::get()->count() ?? 0;
+?>
 <div id="sidebar">
     <div class="sidebar-wrapper active">
         <div class="sidebar-header position-relative">
-            <div class="d-flex justify-content-between align-items-center">
+            <div class="d-flex justify-content-between align-items-end">
                 <div class="logo">
                     <a href="{{ route('dashboard') }}">
-                        <img src="{{ asset('registerlogo.png') }}" class="h-10 w-37.5" alt="" />
+                        <img src="{{ asset('images/registerlogo.png') }}" style="height: 35px; width: 135px;"
+                            alt="" />
                     </a>
                 </div>
                 <div class="theme-toggle d-flex gap-2 align-items-center mt-2">
@@ -52,9 +59,42 @@
                 </li>
 
                 <li class="sidebar-item @if (Request::segment('3') == 'users') active @endif">
-                    <a href="{{ route('users.index') }}" class="sidebar-link">
-                        <i class="bi bi-file-earmark-person-fill"></i>
-                        <span>Пользователи</span>
+                    <a href="{{ route('users.index') }}" class="sidebar-link d-flex justify-content-between">
+                        <span class="m-0">
+                            <i class="bi bi-file-earmark-person-fill"></i>
+                            <span>Пользователи</span>
+                        </span>
+                        <span class="badge bg-secondary">{{ $user_count }}</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item @if (Request::segment('3') == 'city') active @endif">
+                    <a href="{{ route('city.index') }}" class="sidebar-link d-flex justify-content-between">
+                        <span class="m-0">
+                            <i class="bi bi-buildings"></i>
+                            <span>Города</span>
+                        </span>
+                        <span class="badge bg-secondary">{{ $city_count }}</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item @if (Request::segment('3') == 'developer') active @endif">
+                    <a href="{{ route('developer.index') }}" class="sidebar-link d-flex justify-content-between">
+                        <span class="m-0">
+                            <i class="bi bi-diagram-3-fill"></i>
+                            <span>Застройщики</span>
+                        </span>
+                        <span class="badge bg-secondary">{{ $developer_count }}</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item @if (Request::segment('3') == 'complex') active @endif">
+                    <a href="{{ route('complex.index') }}" class="sidebar-link d-flex justify-content-between">
+                        <span class="m-0">
+                            <i class="bi bi-building"></i>
+                            <span style="font-size: 14px;">Жилые комплексы</span>
+                        </span>
+                        <span class="badge bg-secondary">{{ $complex_count }}</span>
                     </a>
                 </li>
 

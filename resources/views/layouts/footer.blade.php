@@ -2,7 +2,7 @@
     <div class="xl:container px-12 xl:px-4 mx-0 xl:mx-auto w-full">
         <div class="flex items-center flex-col lg:flex-row justify-between gap-16 xl:gap-24 text-white">
             <a href="#" class="w-full max-w-[15rem] xl:max-w-[18.125rem]">
-                <img src="{{ asset('footer_logo.png') }}" class="w-full h-auto" alt="" />
+                <img src="{{ asset('images/footer_logo.png') }}" class="w-full h-auto" alt="" />
             </a>
             <div
                 class="basis-full lg:w-[calc(100%-19rem)] xl:w-[calc(100%-24.125rem)] hidden sm:flex flex-wrap gap-x-18">
@@ -85,7 +85,7 @@
 </div>
 
 <script src="{{ asset('js/component.js') }}" defer></script>
-<script src="{{ asset('js/modal.js') }}" defer></script>
+<script src="{{ asset('js/modal.js') }}"></script>
 <script src="{{ asset('swiper/swiper-bundle.min.js') }}" defer></script>
 <script src="{{ asset('js/swiper.js') }}" defer></script>
 <script src="{{ asset('js/card.js') }}" defer></script>

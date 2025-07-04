@@ -59,9 +59,6 @@
                         {{-- <div class="alert alert-success" role="alert">
                             {{ session('status') }}
                         </div> --}}
-                        <h1 class="text-text font-bold text-2xl tracking-wider">
-                            Восстановления пароля
-                        </h1>
                         <div class="flex items-center md:flex-row flex-col gap-4 mt-6">
                             <img src="{{ asset('icons/check.svg') }}" alt="" />
                             <p class="font-semibold text-base md:text-left text-center tracking-wider">

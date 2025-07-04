@@ -1,8 +1,11 @@
 <section class="flex flex-row relative w-full">
     <div class="w-full md:w-[55%] bg-primary relative h-dvh md:h-auto"></div>
     <div class="w-0 hidden md:block md:w-[45%] relative">
-        <img src="{{ asset('Rectangle 3.png') }}" class="w-full h-[48rem]" alt="" />
-        <!--  -->
+        @if (isset($city))
+            <img src="{{ asset('cities/' . $city->image) }}" class="w-full h-[48rem]" alt="{{ $city->name }}" />
+        @else
+            <img src="{{ asset('images/Rectangle 3.png') }}" class="w-full h-[48rem]" alt="" />
+        @endif
     </div>
     <div class="absolute top-[20%] md:top-[40%] left-0 leading-0 w-full z-10">
         <div class="xl:container px-8 xs:px-12 xl:px-4 mx-0 xl:mx-auto flex justify-between relative">
@@ -18,7 +21,7 @@
                 <div class="w-full text-text flex flex-wrap md:flex-nowrap gap-4 xl:gap-8 items-center">
                     <div class="bg-white w-full p-4 rounded-lg flex flex-row md:flex-col gap-4">
                         <img class="w-[5.625rem] md:w-[5rem] xl:w-[6rem] h-[4.375rem] md:h-[3rem] xl:h-[3.75rem]"
-                            src="{{ asset('1.png') }}" alt="" />
+                            src="{{ asset('images/1.png') }}" alt="" />
                         <h2 class="text-base md:block hidden h-12 xl:h-auto xl:text-lg font-bold">
                             Жилые комплексы
                         </h2>
@@ -36,7 +39,7 @@
                     </div>
                     <div class="bg-white w-full p-4 rounded-lg flex flex-row md:flex-col gap-4">
                         <img class="w-[5.625rem] md:w-[5rem] xl:w-[6rem] h-[4.375rem] md:h-[3rem] xl:h-[3.75rem]"
-                            src="{{ asset('2.png') }}" alt="" />
+                            src="{{ asset('images/2.png') }}" alt="" />
 
                         <h2 class="text-base md:block hidden h-12 xl:h-auto xl:text-lg font-bold">
                             Застройщики
@@ -55,7 +58,7 @@
                     </div>
                     <div class="bg-white w-full p-4 rounded-lg flex flex-row md:flex-col gap-4">
                         <img class="w-[5.625rem] md:w-[5rem] xl:w-[6rem] h-[4.375rem] md:h-[3rem] xl:h-[3.75rem]"
-                            src="{{ asset('1.png') }}" alt="" />
+                            src="{{ asset('images/1.png') }}" alt="" />
                         <h2 class="text-base md:block hidden h-12 xl:h-auto xl:text-lg font-bold">
                             Застройщики
                         </h2>
@@ -82,9 +85,9 @@
             </div>
             <div
                 class="w-full md:w-[35%] absolute right-0 z-[-1] -top-[4.25rem] md:top-auto -bottom-[2rem] md:-bottom-[3.5rem] lg:-bottom-[6.7rem] xl:-bottom-[6.2rem]">
-                <img src="{{ asset('project.png') }}" alt=""
+                <img src="{{ asset('images/project.png') }}" alt=""
                     class="w-[90%] md:w-full max-[90.625]:w-[80%] mx-auto h-full sm:min-h-[22.5rem] lg:min-h-[25rem] xl:min-h-[27.75rem] hidden md:block" />
-                <img src="{{ asset('Group 269.png') }}" alt=""
+                <img src="{{ asset('images/Group 269.png') }}" alt=""
                     class="w-full max-h-[35rem] xs:max-h-max md:w-full max-[90.625]:w-[80%] mx-auto h-full sm:min-h-[22.5rem] lg:min-h-[25rem] xl:min-h-[27.75rem] md:hidden block" />
             </div>
         </div>
