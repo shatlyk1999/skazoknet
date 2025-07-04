@@ -41,6 +41,12 @@ class AppServiceProvider extends ServiceProvider
             } else {
                 if ($user->city_id == null) {
                     $city = City::where('name', 'Краснодар')->first();
+                    if (!$city) {
+                        City::create([
+                            'name' => 'Краснодар',
+                            'label' => 'Краснодарский край',
+                        ]);
+                    }
                     $user->city_id = $city->id;
                     $user->save();
                 } else {
