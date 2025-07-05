@@ -23,7 +23,7 @@
 
 <body>
     <script src="{{ asset('admin/static/js/initTheme.js') }}"></script>
-    <div id="app">
+    <div id="app" style="font-family: sans-serif">
         @include('admin.layouts.sidebar')
         <div id="main">
             <header class="mb-3">

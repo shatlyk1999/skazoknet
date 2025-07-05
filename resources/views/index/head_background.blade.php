@@ -59,7 +59,7 @@
                     <div class="bg-white w-full p-4 rounded-lg flex flex-row md:flex-col gap-4">
                         <img class="w-[5.625rem] md:w-[5rem] xl:w-[6rem] h-[4.375rem] md:h-[3rem] xl:h-[3.75rem]"
                             src="{{ asset('images/1.png') }}" alt="" />
-                        <h2 class="text-base md:block hidden h-12 xl:h-auto xl:text-lg font-bold">
+                        <h2 class="text-base md:block hidden h-12 xl:h-auto xl:text-lg font-bold whitespace-nowrap">
                             Гостиничные комплексы
                         </h2>
                         <p class="text-sm xl:text-base text-custom-gray hidden md:block">

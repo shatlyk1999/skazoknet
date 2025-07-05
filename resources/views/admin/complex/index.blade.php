@@ -103,7 +103,12 @@
                                                     {{ $complex->name }}
                                                 </td>
                                                 <td>
-                                                    {{ $complex->type }}
+                                                    @if ($complex->type == 'residential')
+                                                        Жилые комплексы
+                                                    @endif
+                                                    @if ($complex->type == 'hotel')
+                                                        Гостиничные комплексы
+                                                    @endif
                                                 </td>
                                                 <td class="text-bold-500">
                                                     {{ $complex->developer->name ?? ' ' }}
