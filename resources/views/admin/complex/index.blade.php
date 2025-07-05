@@ -82,6 +82,7 @@
                                             <th>№</th>
                                             <th>Фото</th>
                                             <th>Название</th>
+                                            <th>Тип</th>
                                             <th>Застройщик</th>
                                             <th>Сортировать</th>
                                             <th>Статус</th>
@@ -100,6 +101,9 @@
                                                 </td>
                                                 <td>
                                                     {{ $complex->name }}
+                                                </td>
+                                                <td>
+                                                    {{ $complex->type }}
                                                 </td>
                                                 <td class="text-bold-500">
                                                     {{ $complex->developer->name ?? ' ' }}

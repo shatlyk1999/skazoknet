@@ -26,8 +26,9 @@
                 <div class="flex items-center gap-x-12 h-10">
                     <div class="flex items-center gap-2">
                         <div class="lg:hidden flex">
-                            <div class="cursor-pointer flex items-center justify-center pt-4 leading-10"
-                                id="menu-toggle" aria-label="Toggle menu">
+                            <div class="cursor-pointer flex items-center justify-center pt-4 leading-10" id="menuToggle"
+                                aria-label="Toggle menu"
+                                onclick="toggleSidebar('menuToggle', 'sidebar', 'sidebarOverlay', 'closeSidebar')">
                                 <img src="{{ asset('icons/menu.svg') }}" alt="" />
                             </div>
                         </div>

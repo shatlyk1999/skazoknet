@@ -1,9 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
     // sidebar
-    const menuToggle = document.getElementById("menu-toggle");
+    const menuToggle = document.getElementById("menuToggle");
     const sidebar = document.getElementById("sidebar");
-    const sidebarOverlay = document.getElementById("sidebar-overlay");
-    const closeSidebar = document.getElementById("close-sidebar");
+    const sidebarOverlay = document.getElementById("sidebarOverlay");
+    const closeSidebar = document.getElementById("closeSidebar");
 
     if (menuToggle) {
         menuToggle.addEventListener("click", () => {

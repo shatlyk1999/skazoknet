@@ -19,6 +19,13 @@
                                 <p>{{ $complex->name }}</p>
                             </div>
                             <div>
+                                <b>Тип</b>
+                                <p>
+                                    {{ $complex->type == 'residential' ? 'Жилой комплекс' : '' }}
+                                    {{ $complex->type == 'hotel' ? 'Гостиничный комплекс' : '' }}
+                                </p>
+                            </div>
+                            <div>
                                 <b>Города</b>
                                 <p>{{ $complex->city->name }} ({{ $complex->city->label }})</p>
                             </div>
@@ -33,7 +40,9 @@
                             <div>
                                 <b>Фото</b>
                                 <br>
-                                <img src="{{ asset('complex/' . $complex->image) }}" alt="">
+                                @if ($complex->image != null)
+                                    <img src="{{ asset('complex/' . $complex->image) }}" alt="">
+                                @endif
                             </div>
                             <div>
                                 <b>Контент</b>
@@ -50,6 +59,15 @@
                                         style="cursor: pointer" type="checkbox"
                                         @if ($complex->status == '1') checked @endif disabled>
                                 </div>
+                            </div>
+                            <div>
+                                <br>
+                                <b>Фотографии (картинки)</b>
+                                <br>
+                                @foreach ($complex->images as $key => $image)
+                                    <img src="{{ asset('complex-images/' . $image->image) }}" alt=""
+                                        style="width: 100px;height:100px;border-radius:10px;">
+                                @endforeach
                             </div>
                         </div>
                     @endif

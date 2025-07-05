@@ -7,7 +7,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="edit_{{ $complex->id }}Title">
-                        Создать комплекс
+                        Редактировать комплекс
                     </h5>
                     <button type="button" class="close text-amber-50" data-bs-dismiss="modal" aria-label="Close">
                         <i data-feather="x"></i>
@@ -21,6 +21,18 @@
                                 <input id="name" type="text" name="name"
                                     value="{{ old('name', $complex->name) }}" placeholder="Название"
                                     class="form-control">
+                            </div>
+
+                            <label for="type">Тип</label>
+                            <div class="form-group">
+                                <select name="type" class="form-control" id="type">
+                                    <option value="residential" {{ $complex->type == 'residential' ? 'selected' : '' }}>
+                                        Жилой комплекс
+                                    </option>
+                                    <option value="hotel" {{ $complex->type == 'hotel' ? 'selected' : '' }}>
+                                        Гостиничный комплекс
+                                    </option>
+                                </select>
                             </div>
 
                             <label for="city_id">Город</label>
@@ -55,8 +67,10 @@
 
                             <label for="image">Фото</label>
                             <br>
-                            <img src="{{ asset('complex/' . $complex->image) }}" alt=""
-                                style="width: 100px;height:100px;border-radius:10px;">
+                            @if ($complex->image != null)
+                                <img src="{{ asset('complex/' . $complex->image) }}" alt=""
+                                    style="width: 100px;height:100px;border-radius:10px;">
+                            @endif
                             <div class="form-group">
                                 <input id="image" type="file" name="image" placeholder="Фото"
                                     class="form-control">

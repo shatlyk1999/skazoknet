@@ -1,3 +1,8 @@
 database:u660529684_skazoknet
 user: u660529684_skazoknet
 passwor: !skazokneT@.com1235
+
+rm -rf /home/u660529684/domains/skazoknet.com/public_html/public/xyz
+
+ln -s /home/u660529684/domains/skazoknet.com/public_html/storage/app/cities \
+      /home/u660529684/domains/skazoknet.com/public_html/public/cities

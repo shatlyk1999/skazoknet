@@ -42,10 +42,7 @@ class AppServiceProvider extends ServiceProvider
                 if ($user->city_id == null) {
                     $city = City::where('name', 'Краснодар')->first();
                     if (!$city) {
-                        City::create([
-                            'name' => 'Краснодар',
-                            'label' => 'Краснодарский край',
-                        ]);
+                        return;
                     }
                     $user->city_id = $city->id;
                     $user->save();

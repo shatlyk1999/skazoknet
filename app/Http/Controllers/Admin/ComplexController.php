@@ -61,6 +61,7 @@ class ComplexController extends Controller
                 'status' => $status,
                 'city_id' => $request->city_id,
                 'developer_id' => $request->developer_id,
+                'type' => $request->type,
             ]);
 
             if ($request->has('image')) {
@@ -226,6 +227,7 @@ class ComplexController extends Controller
                 'status' => $status,
                 'city_id' => $request->city_id,
                 'developer_id' => $request->developer_id,
+                'type' => $request->type,
             ]);
 
             if ($request->has('images')) {

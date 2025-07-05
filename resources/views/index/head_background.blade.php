@@ -60,14 +60,14 @@
                         <img class="w-[5.625rem] md:w-[5rem] xl:w-[6rem] h-[4.375rem] md:h-[3rem] xl:h-[3.75rem]"
                             src="{{ asset('images/1.png') }}" alt="" />
                         <h2 class="text-base md:block hidden h-12 xl:h-auto xl:text-lg font-bold">
-                            Застройщики
+                            Гостиничные комплексы
                         </h2>
                         <p class="text-sm xl:text-base text-custom-gray hidden md:block">
                             250
                         </p>
                         <div class="w-full flex-col gap-2 md:hidden flex">
                             <h2 class="text-base md:h-12 xl:h-auto xl:text-lg font-bold">
-                                Застройщики
+                                Гостиничные комплексы
                             </h2>
                             <p class="text-sm xl:text-base text-custom-gray inline-block">
                                 250

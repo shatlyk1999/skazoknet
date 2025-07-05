@@ -20,6 +20,14 @@
                                 class="form-control">
                         </div>
 
+                        <label for="type">Тип</label>
+                        <div class="form-group">
+                            <select name="type" class="form-control" id="type">
+                                <option value="residential">Жилые комплекс</option>
+                                <option value="hotel">Гостиничные комплекс</option>
+                            </select>
+                        </div>
+
                         @if ($cities->count() > 0)
                             <label for="city_id">Город</label>
                             <div class="form-group">

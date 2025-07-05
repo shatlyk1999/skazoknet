@@ -1,11 +1,11 @@
-<div id="sidebar-overlay"
+<div id="sidebarOverlay"
     class="fixed inset-0 bg-black opacity-0 pointer-events-none transition-opacity duration-300 ease-in-out z-20">
 </div>
 <div id="sidebar"
     class="fixed top-0 h-full w-full sm:w-[50%] bg-primary text-white transition-all duration-300 ease-in-out z-30 rounded-r-lg shadow-lg block lg:hidden"
     role="navigation">
     <div class="flex justify-end p-4 relative">
-        <button id="close-sidebar"
+        <button id="closeSidebar" onclick="toggleSidebar('menuToggle', 'sidebar', 'sidebarOverlay', 'closeSidebar')"
             class="text-white text-2xl hover:rotate-90 hover:bg-white/10 px-1 rounded-full transition-all duration-200 border border-white"
             aria-label="Close menu">
             <i class="mdi mdi-close"></i>
