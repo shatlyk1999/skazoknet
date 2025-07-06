@@ -3,6 +3,10 @@
 /public/build
 /public/hot
 /public/storage
+/public/cities
+/public/complex
+/public/developer
+/public/complex-images
 /storage/*.key
 /storage/pail
 /vendor
