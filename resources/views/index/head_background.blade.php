@@ -26,14 +26,14 @@
                             Жилые комплексы
                         </h2>
                         <p class="text-sm xl:text-base text-custom-gray hidden md:block">
-                            300
+                            {{ $residential_count }}
                         </p>
                         <div class="w-full md:hidden flex flex-col gap-2">
                             <h2 class="text-base md:h-12 xl:h-auto xl:text-lg font-bold">
                                 Жилые комплексы
                             </h2>
                             <p class="text-sm xl:text-base text-custom-gray inline-block">
-                                300
+                                {{ $residential_count }}
                             </p>
                         </div>
                     </div>
@@ -45,14 +45,14 @@
                             Застройщики
                         </h2>
                         <p class="text-sm xl:text-base text-custom-gray hidden md:block">
-                            250
+                            {{ count($developers) }}
                         </p>
                         <div class="w-full md:hidden flex flex-col gap-2">
                             <h2 class="text-base md:h-12 xl:h-auto xl:text-lg font-bold">
                                 Застройщики
                             </h2>
                             <p class="text-sm xl:text-base text-custom-gray inline-block">
-                                250
+                                {{ count($developers) }}
                             </p>
                         </div>
                     </div>
@@ -63,14 +63,14 @@
                             Гостиничные комплексы
                         </h2>
                         <p class="text-sm xl:text-base text-custom-gray hidden md:block">
-                            250
+                            {{ $hotel_count }}
                         </p>
                         <div class="w-full flex-col gap-2 md:hidden flex">
                             <h2 class="text-base md:h-12 xl:h-auto xl:text-lg font-bold">
                                 Гостиничные комплексы
                             </h2>
                             <p class="text-sm xl:text-base text-custom-gray inline-block">
-                                250
+                                {{ $hotel_count }}
                             </p>
                         </div>
                     </div>

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\AboutUs;
 use App\Models\City;
+use App\Models\Complex;
+use App\Models\Developer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -28,34 +30,27 @@ class HomeController extends Controller
     {
         $index_page = true;
 
-        // $user = Auth::user();
-        // if (!$user) {
-        //     $selected_city_id = session('selected_city_id');
-        //     if (!$selected_city_id) {
-        //         $city = City::where('name', 'Краснодар')->first();
-        //         if ($city) {
-        //             $selected_city_id = $city->id;
-        //             session(['selected_city_id' => $selected_city_id]);
-        //         }
-        //     } else {
-        //         $city = City::find($selected_city_id);
-        //     }
-        // } else {
-        //     if ($user->city_id == null) {
-        //         $city = City::where('name', 'Краснодар')->first();
-        //         $user->city_id = $city->id;
-        //         $user->save();
-        //     } else {
-        //         $city = $user->city;
-        //         $city = City::find($city->id);
-        //         if (!$city) {
-        //             $city = City::where('name', 'Краснодар')->first();
-        //             $user->city_id = $city->id;
-        //             $user->save();
-        //         }
-        //     }
-        // }
-        return view('home', compact('index_page'));
+        $user = Auth::user();
+        if (!$user) {
+            $selected_city_id = session('selected_city_id');
+            $city = City::find($selected_city_id);
+        } else {
+            $city = $user->city;
+        }
+
+        $complexes = Complex::status()->where('city_id', $city->id)->orderBy('sort', 'desc')->limit(6)->get();
+        $residential_count = Complex::status()->where('city_id', $city->id)->where('type', 'residential')->count();
+        $hotel_count = Complex::status()->where('city_id', $city->id)->where('type', 'hotel')->count();
+        $developers = $city->developers()->status()->orderBy('sort', 'desc')->limit(6)->get();
+
+        return view('home', compact(
+            'index_page',
+            'city',
+            'complexes',
+            'residential_count',
+            'hotel_count',
+            'developers',
+        ));
     }
 
     public function about_us()

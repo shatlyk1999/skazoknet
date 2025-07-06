@@ -59,7 +59,7 @@ class CityController extends Controller
         }
 
         if ($img->width() > 1000) {
-            $img->resize(667, 600, function ($constraint) {
+            $img->resize(667, 601, function ($constraint) {
                 $constraint->aspectRatio();
                 $constraint->upsize();
             });
@@ -161,7 +161,7 @@ class CityController extends Controller
                 }
 
                 if ($img->width() > 1000) {
-                    $img->resize(667, 600, function ($constraint) {
+                    $img->resize(667, 601, function ($constraint) {
                         $constraint->aspectRatio();
                         $constraint->upsize();
                     });

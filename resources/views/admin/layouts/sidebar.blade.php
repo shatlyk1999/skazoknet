@@ -64,7 +64,7 @@ $complex_count = \App\Models\Complex::get()->count() ?? 0;
                             <i class="bi bi-file-earmark-person-fill"></i>
                             <span>Пользователи</span>
                         </span>
-                        <span class="badge bg-secondary">{{ $user_count }}</span>
+                        <span class="badge bg-secondary" style="margin-left: 0;">{{ $user_count }}</span>
                     </a>
                 </li>
 
@@ -74,7 +74,7 @@ $complex_count = \App\Models\Complex::get()->count() ?? 0;
                             <i class="bi bi-buildings"></i>
                             <span>Города</span>
                         </span>
-                        <span class="badge bg-secondary">{{ $city_count }}</span>
+                        <span class="badge bg-secondary" style="margin-left: 0;">{{ $city_count }}</span>
                     </a>
                 </li>
 
@@ -84,7 +84,7 @@ $complex_count = \App\Models\Complex::get()->count() ?? 0;
                             <i class="bi bi-diagram-3-fill"></i>
                             <span>Застройщики</span>
                         </span>
-                        <span class="badge bg-secondary">{{ $developer_count }}</span>
+                        <span class="badge bg-secondary" style="margin-left: 0;">{{ $developer_count }}</span>
                     </a>
                 </li>
 
@@ -94,7 +94,7 @@ $complex_count = \App\Models\Complex::get()->count() ?? 0;
                             <i class="bi bi-building"></i>
                             <span style="font-size: 14px;">Жилые комплексы</span>
                         </span>
-                        <span class="badge bg-secondary">{{ $complex_count }}</span>
+                        <span class="badge bg-secondary" style="margin-left: 0;">{{ $complex_count }}</span>
                     </a>
                 </li>
 

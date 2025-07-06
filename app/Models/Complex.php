@@ -25,4 +25,9 @@ class Complex extends Model
     {
         return $this->hasMany(ComplexImage::class, 'complex_id');
     }
+
+    public function scopeStatus()
+    {
+        return $this->where('status', '1');
+    }
 }

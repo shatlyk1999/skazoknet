@@ -76,15 +76,15 @@ class ComplexController extends Controller
                 $manager = new ImageManager(new Driver());
                 $img = $manager->read($image);
 
-                if ($img->width() <= 350 || $img->height() <= 450) {
+                if ($img->width() <= 500 || $img->height() <= 300) {
                     return redirect()->back()->with([
                         'type' => 'warning',
-                        'message' => 'Изображение слишком маленькое (менее 350x450)'
+                        'message' => 'Изображение слишком маленькое (менее 500x300)'
                     ]);
                 }
 
 
-                $img->resize(415, 218, function ($constraint) {
+                $img->resize(500, 300, function ($constraint) {
                     $constraint->aspectRatio();
                     $constraint->upsize();
                 });
@@ -195,10 +195,10 @@ class ComplexController extends Controller
                 $manager = new ImageManager(new Driver());
                 $img = $manager->read($image);
 
-                if ($img->width() <= 350 || $img->height() <= 450) {
+                if ($img->width() <= 500 || $img->height() <= 300) {
                     return redirect()->back()->with([
                         'type' => 'warning',
-                        'message' => 'Изображение слишком маленькое (менее 350x450)'
+                        'message' => 'Изображение слишком маленькое (менее 500x300)'
                     ]);
                 }
 
