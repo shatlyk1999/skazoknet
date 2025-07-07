@@ -37,7 +37,6 @@ class HomeController extends Controller
         } else {
             $city = $user->city;
         }
-
         $complexes = Complex::status()->where('city_id', $city->id)->orderBy('sort', 'desc')->limit(6)->get();
         $residential_count = Complex::status()->where('city_id', $city->id)->where('type', 'residential')->count();
         $hotel_count = Complex::status()->where('city_id', $city->id)->where('type', 'hotel')->count();
