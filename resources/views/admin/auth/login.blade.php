@@ -23,13 +23,13 @@
 
         <div class="row h-100">
             <div class="col-lg-5 col-12">
-                <div id="auth-left">
+                <div id="auth-left" class="d-flex flex-column justify-content-center h-100">
                     <div class="auth-logo">
                         <a href="#" style="font-size:2rem;">
                             <img src="{{ asset('images/registerlogo.png') }}" class="h-10 w-37.5" alt="" />
                         </a>
                     </div>
-                    <h1 class="auth-title">Log in.</h1>
+                    <h1 class="auth-title">Log in for admin.</h1>
 
                     <form method="POST" action="{{ url('/login') }}">
                         @csrf
@@ -59,20 +59,20 @@
                                 </span>
                             @enderror
                         </div>
-                        <div class="form-check form-check-lg d-flex align-items-end">
+                        {{-- <div class="form-check form-check-lg d-flex align-items-end">
                             <input class="form-check-input me-2" type="checkbox" name="remember" id="remember"
                                 {{ old('remember') ? 'checked' : '' }} value="" id="flexCheckDefault">
                             <label class="form-check-label text-gray-600" for="flexCheckDefault">
                                 Keep me logged in
                             </label>
-                        </div>
+                        </div> --}}
                         <button type="submit" class="btn btn-primary btn-block btn-lg shadow-lg mt-5">Log in</button>
                     </form>
                 </div>
             </div>
             <div class="col-lg-7 d-none d-lg-block">
-                <div id="auth-right">
-
+                <div id="auth-right" class="d-flex justify-content-center align-items-center">
+                    <img src="{{ asset('images/project.png') }}" alt="">
                 </div>
             </div>
         </div>

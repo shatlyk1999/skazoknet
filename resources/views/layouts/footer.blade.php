@@ -12,8 +12,9 @@
                     </h2>
                     <div class="flex flex-col gap-y-4 xl:gap-y-6 pl-2">
                         <a href="{{ route('about_us') }}" class="text-sm">О проекте</a>
-                        <a href="#" class="text-sm">Застройщики</a>
-                        <a href="#" class="text-sm">Жилые комплексы</a>
+                        <a href="{{ route('developers') }}" class="text-sm">Застройщики</a>
+                        <a href="{{ route('complexes', 'residential') }}" class="text-sm">Жилые комплексы</a>
+                        {{-- <a href="{{ route('complexes', 'hotel') }}" class="text-sm">Гостиничные комплексы</a> --}}
                     </div>
                 </div>
                 <div class="w-[calc((100%/3)-3rem)] gap-y-4 xl:gap-y-6">
@@ -90,6 +91,7 @@
 <script src="{{ asset('js/swiper.js') }}" defer></script>
 <script src="{{ asset('js/card.js') }}" defer></script>
 <script src="{{ asset('js/custom.js') }}" defer></script>
+@yield('script')
 </body>
 
 </html>

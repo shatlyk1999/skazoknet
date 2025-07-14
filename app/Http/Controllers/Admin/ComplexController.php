@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Intervention\Image\Drivers\Gd\Driver;
 use Intervention\Image\Encoders\WebpEncoder;
 use Intervention\Image\ImageManager;
+use Illuminate\Support\Str;
 
 
 class ComplexController extends Controller
@@ -19,13 +20,15 @@ class ComplexController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $complexes = Complex::orderBy('sort', 'desc')->orderBy('created_at', 'desc')->paginate(10);
+        $filter = $request->all() ?? '';
+        // dd($filter);
+        $complexes = Complex::filter($filter)->orderBy('sort', 'desc')->orderBy('created_at', 'desc')->paginate(10);
         $cities = City::get();
         $developers = Developer::status()->get();
 
-        return view('admin.complex.index', compact('complexes', 'cities', 'developers'));
+        return view('admin.complex.index', compact('complexes', 'cities', 'developers', 'filter'));
     }
 
     /**
@@ -53,15 +56,22 @@ class ComplexController extends Controller
                 $status = true;
             }
 
+            $popular = false;
+            if ($request->has('popular')) {
+                $popular = true;
+            }
+
             $complex = Complex::create([
                 'name' => $request->name,
                 'content' => $request->content,
                 'address' => $request->address,
                 'sort' => $request->sort,
                 'status' => $status,
+                'popular' => $popular,
                 'city_id' => $request->city_id,
                 'developer_id' => $request->developer_id,
                 'type' => $request->type,
+                'slug' => Str::slug($request->name),
             ]);
 
             if ($request->has('image')) {
@@ -71,8 +81,12 @@ class ComplexController extends Controller
                 if (!is_dir(storage_path('app/complex'))) {
                     mkdir(storage_path('app/complex'), 0777, true);
                 }
+                if (!is_dir(storage_path('app/complex-small'))) {
+                    mkdir(storage_path('app/complex-small'), 0777, true);
+                }
 
                 $destinationPath = storage_path('app/complex');
+                $destinationPath2 = storage_path('app/complex-small');
                 $manager = new ImageManager(new Driver());
                 $img = $manager->read($image);
 
@@ -83,13 +97,21 @@ class ComplexController extends Controller
                     ]);
                 }
 
-
                 $img->resize(500, 300, function ($constraint) {
                     $constraint->aspectRatio();
                     $constraint->upsize();
                 });
 
                 file_put_contents(($destinationPath . '/' . $input['imageName']),
+                    (string) $img->encode(new WebpEncoder(quality: 100))
+                );
+
+                $img->resize(146, 134, function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                });
+
+                file_put_contents(($destinationPath2 . '/' . $input['imageName']),
                     (string) $img->encode(new WebpEncoder(quality: 100))
                 );
 
@@ -180,9 +202,13 @@ class ComplexController extends Controller
 
             if ($request->has('image')) {
                 $filePath = storage_path('app/complex/' . $complex->image);
+                $filePath2 = storage_path('app/complex-small/' . $complex->image);
 
                 if (($complex->image != null) && file_exists($filePath)) {
                     unlink($filePath);
+                }
+                if (($complex->image != null) && file_exists($filePath2)) {
+                    unlink($filePath2);
                 }
                 $image = $request->file('image');
                 $input['imageName'] = time() . '.webp';
@@ -191,7 +217,13 @@ class ComplexController extends Controller
                     mkdir(storage_path('app/complex'), 0777, true);
                 }
 
+                if (!is_dir(storage_path('app/complex-small'))) {
+                    mkdir(storage_path('app/complex-small'), 0777, true);
+                }
+
                 $destinationPath = storage_path('app/complex');
+                $destinationPath2 = storage_path('app/complex-small');
+
                 $manager = new ImageManager(new Driver());
                 $img = $manager->read($image);
 
@@ -211,6 +243,15 @@ class ComplexController extends Controller
                     (string) $img->encode(new WebpEncoder(quality: 100))
                 );
 
+                $img->resize(146, 134, function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                });
+
+                file_put_contents(($destinationPath2 . '/' . $input['imageName']),
+                    (string) $img->encode(new WebpEncoder(quality: 100))
+                );
+
                 $complex->image = $input['imageName'];
                 $complex->save();
             }
@@ -219,15 +260,21 @@ class ComplexController extends Controller
             if ($request->has('status_update')) {
                 $status = true;
             }
+            $popular = false;
+            if ($request->has('popular')) {
+                $popular = true;
+            }
             $complex->update([
                 'name' => $request->name,
                 'sort' => $request->sort,
                 'address' => $request->address,
                 'content' => $request->content,
                 'status' => $status,
+                'popular' => $popular,
                 'city_id' => $request->city_id,
                 'developer_id' => $request->developer_id,
                 'type' => $request->type,
+                'slug' => Str::slug($request->name),
             ]);
 
             if ($request->has('images')) {

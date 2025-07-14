@@ -16,9 +16,9 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::isUser()->paginate('10');
+        $users = User::filter($request->query())->isUser()->orderBy('created_at', 'desc')->paginate('10');
 
         return view('admin.user.index', compact('users'));
     }
@@ -59,6 +59,7 @@ class UserController extends Controller
             'password' => Hash::make($request->password),
             'permission_comment' => $permission_comment,
             'status' => $status,
+            'role' => $request->role,
         ]);
 
         return to_route('users.index')->with([
@@ -125,6 +126,7 @@ class UserController extends Controller
             'email' => $request->email,
             'permission_comment' => $permission_comment,
             'status' => $status,
+            'role' => $request->role,
         ]);
         if ($request->has('password') && $request->password != null) {
             $user->password = Hash::make($request->password);

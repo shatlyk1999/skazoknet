@@ -8,9 +8,11 @@ use App\Models\Complex;
 use App\Models\Developer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\View;
 
 class HomeController extends Controller
 {
+    // protected $city;
     /**
      * Create a new controller instance.
      *
@@ -18,7 +20,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        // $this->middleware('auth');
+        //
     }
 
     /**
@@ -28,8 +30,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $index_page = true;
-
         $user = Auth::user();
         if (!$user) {
             $selected_city_id = session('selected_city_id');
@@ -37,15 +37,18 @@ class HomeController extends Controller
         } else {
             $city = $user->city;
         }
-        $complexes = Complex::status()->where('city_id', $city->id)->orderBy('sort', 'desc')->limit(6)->get();
+
+        $index_page = true;
+        $complexes_residential = Complex::status()->where('city_id', $city->id)->where('type', 'residential')->orderBy('sort', 'desc')->limit(6)->get();
+        $complexes_hotel = Complex::status()->where('city_id', $city->id)->where('type', 'hotel')->orderBy('sort', 'desc')->limit(6)->get();
         $residential_count = Complex::status()->where('city_id', $city->id)->where('type', 'residential')->count();
         $hotel_count = Complex::status()->where('city_id', $city->id)->where('type', 'hotel')->count();
-        $developers = $city->developers()->status()->orderBy('sort', 'desc')->limit(6)->get();
-
+        $developers = $city->developers()->where('status', '1')->orderBy('sort', 'desc')->limit(6)->get();
         return view('home', compact(
             'index_page',
             'city',
-            'complexes',
+            'complexes_residential',
+            'complexes_hotel',
             'residential_count',
             'hotel_count',
             'developers',
@@ -71,7 +74,7 @@ class HomeController extends Controller
             if ($city) {
                 $user = Auth::user();
                 if (!$user) {
-                    session(['selected_city_id' => $city->id]);
+                    session()->put('selected_city_id', $city->id);
                 } else {
                     $user->city_id = $city->id;
                     $user->save();

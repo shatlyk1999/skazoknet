@@ -58,7 +58,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function scopeIsUser($query)
     {
-        return $query->where('is_admin', '0');
+        return $query->where('role', '!=', 'superadmin');
     }
 
     //relatinons
@@ -66,5 +66,12 @@ class User extends Authenticatable implements MustVerifyEmail
     public function city()
     {
         return $this->belongsTo(City::class, 'city_id');
+    }
+
+    public function scopeFilter($query, $data)
+    {
+        if (isset($data['role'])) {
+            $query->where('role', $data['role']);
+        }
     }
 }

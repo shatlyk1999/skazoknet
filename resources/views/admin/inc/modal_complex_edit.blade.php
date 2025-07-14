@@ -65,31 +65,42 @@
                             </textarea>
                             </div>
 
-                            <label for="image">Фото</label>
+                            <label for="image">Логотип</label>
                             <br>
                             @if ($complex->image != null)
                                 <img src="{{ asset('complex/' . $complex->image) }}" alt=""
                                     style="width: 100px;height:100px;border-radius:10px;">
                             @endif
                             <div class="form-group">
-                                <input id="image" type="file" name="image" placeholder="Фото"
+                                <input id="image" type="file" name="image" placeholder="Логотип"
                                     class="form-control">
                             </div>
 
                             <div class="row align-items-center">
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         <input id="address" type="text" name="address" placeholder="Адрес"
                                             class="form-control" value="{{ old('name', $complex->address) }}">
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         <input id="sort" type="integer" name="sort" placeholder="Сортировать"
                                             class="form-control" value="{{ old('name', $complex->sort) }}">
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
+                                    <div class="form-group  d-flex justify-content-end gap-3">
+                                        <label class="form-check-label" for="popular">Популярный
+                                        </label>
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input form-check-success" name="popular"
+                                                type="checkbox" id="pupular"
+                                                @if ($complex->popular == '1') checked @endif>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
                                     <div class="form-group  d-flex justify-content-end gap-3">
                                         <label class="form-check-label" for="status_update">Статус
                                         </label>
@@ -117,7 +128,8 @@
                                 @endforeach
                             </div>
                             <div class="form-group">
-                                <input type="file" name="images[]" multiple accept="image/*" class="form-control">
+                                <input type="file" name="images[]" multiple accept="image/*"
+                                    class="form-control">
                             </div>
                         @endif
                     </div>

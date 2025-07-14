@@ -11,7 +11,7 @@
             <i class="mdi mdi-close"></i>
         </button>
         <div class="absolute z-[-1] top-0 left-1/2 -translate-x-1/2 h-full w-full flex items-center justify-center">
-            <img src="{{ asset('logo.png') }}" alt="logo" />
+            <img src="{{ asset('images/logo.png') }}" alt="logo" />
         </div>
     </div>
     <nav class="flex flex-col gap-2 p-4 mt-12">

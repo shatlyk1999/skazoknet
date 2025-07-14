@@ -28,7 +28,7 @@ class RegisterController extends Controller
 
         $user = $this->create($request->all());
 
-        $user->sendEmailVerificationNotification(); // ← sadece bir kere gider
+        $user->sendEmailVerificationNotification();
 
         $this->guard()->login($user);
 
@@ -56,8 +56,10 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'role' => $data['role'],
         ]);
     }
+
 
     public function redirectPath()
     {

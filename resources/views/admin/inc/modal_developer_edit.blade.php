@@ -35,37 +35,48 @@
                             </textarea>
                             </div>
 
-                            <label for="image">Фото</label>
+                            <label for="image">Логотип</label>
                             <br>
                             <img src="{{ asset('developer/' . $developer->image) }}" alt=""
                                 style="width: 100px;height:100px;border-radius:10px;">
                             <div class="form-group">
-                                <input id="image" type="file" name="image" placeholder="Фото"
+                                <input id="image" type="file" name="image" placeholder="Логотип"
                                     class="form-control">
                             </div>
 
                             <div class="row align-items-center">
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         <input id="year_establishment" type="integer" name="year_establishment"
                                             placeholder="Год основания" class="form-control"
                                             value="{{ old('name', $developer->year_establishment) }}">
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         <input id="sort" type="integer" name="sort" placeholder="Сортировать"
                                             class="form-control" value="{{ old('name', $developer->sort) }}">
                                     </div>
                                 </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
+                                <div class="col-md-3">
+                                    <div class="form-group  d-flex justify-content-end gap-3">
+                                        <label class="form-check-label" for="popular">Популярный
+                                        </label>
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input form-check-success" name="popular"
+                                                type="checkbox" id="pupular"
+                                                @if ($developer->popular == '1') checked @endif>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group d-flex justify-content-end gap-3">
+                                        <label class="form-check-label" for="status">Статус
+                                        </label>
                                         <div class="form-check form-switch">
                                             <input class="form-check-input form-check-success" name="status_update"
                                                 type="checkbox" id="status"
                                                 @if ($developer->status == '1') checked @endif>
-                                            <label class="form-check-label" for="status">Статус
-                                            </label>
                                         </div>
                                     </div>
                                 </div>

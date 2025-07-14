@@ -100,7 +100,7 @@
                                 </table>
                             </div>
                             {{ $cities->onEachSide(1) }}
-                            {{-- {{ $citys->links('vendor.pagination.tailwind') }} --}}
+                            {{-- {{ $citess->links('vendor.pagination.tailwind') }} --}}
                         </div>
                     </div>
                 </div>

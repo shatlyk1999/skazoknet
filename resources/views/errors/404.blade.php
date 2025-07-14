@@ -21,11 +21,11 @@
             <div class="col-md-8 col-12 offset-md-2">
                 <div class="text-center">
                     <img class="img-error" src="{{ asset('admin/compiled/svg/error-404.svg') }}" alt="Not Found" />
-                    <h1 class="error-title">NOT FOUND</h1>
+                    <h1 class="error-title">Не найдено</h1>
                     <p class="fs-5 text-gray-600">
-                        The page you are looking not found.
+                        Страница, которую вы ищете, не найдена.
                     </p>
-                    <a href="{{ route('home') }}" class="btn btn-lg btn-outline-primary mt-3">Go Home</a>
+                    <a href="{{ route('home') }}" class="btn btn-lg btn-outline-primary mt-3">Иди домой</a>
                 </div>
             </div>
         </div>

@@ -3,7 +3,7 @@
 <x-auth.auth-layout>
     <div class="my-0 md:my-12 xl:container px-8 xs:px-12 xl:px-4 mx-0 xl:mx-auto h-full md:h-[calc(100dvh-7.5rem)]">
         <div class="flex items-center md:items-start justify-between h-full md:flex-row flex-col">
-            <div class="w-full sm:w-[80%] md:mx-0 mx-auto md:w-[45%] xl:w-[40%] my-auto xl:mt-[10%]">
+            <div class="w-full sm:w-[80%] md:mx-0 mx-auto md:w-[45%] xl:w-[40%] my-auto">
                 <h1 class="text-text font-bold text-2xl tracking-wider">Вход</h1>
                 <div
                     class="mt-6 login-error rounded-lg hidden bg-input-error/50 text-input-error-text w-full p-4 font-light text-xs tracking-wider">

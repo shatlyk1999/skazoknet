@@ -3,7 +3,8 @@
 
 @section('content')
     @include('index.head_background')
-    @include('index.complexes')
+    @include('index.complexes_residential')
+    @include('index.complexes_hotel')
     @include('index.property_developers')
     @include('index.comments')
 

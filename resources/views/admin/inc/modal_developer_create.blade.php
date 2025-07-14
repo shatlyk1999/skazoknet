@@ -29,25 +29,35 @@
                             <textarea name="content" class="form-control" id="summernote"></textarea>
                         </div>
 
-                        <label for="image">Фото</label>
+                        <label for="image">Логотип</label>
                         <div class="form-group">
-                            <input id="image" type="file" name="image" placeholder="Фото" class="form-control">
+                            <input id="image" type="file" name="image" placeholder="Логотип"
+                                class="form-control">
                         </div>
 
                         <div class="row align-items-center">
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <input id="year_establishment" type="integer" name="year_establishment"
                                         placeholder="Год основания" class="form-control">
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <input id="sort" type="integer" name="sort" placeholder="Сортировать"
                                         class="form-control">
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
+                                <div class="form-group d-flex justify-content-end gap-3">
+                                    <span>Популярный</span>
+                                    <div class="form-check form-switch cursor-pointer">
+                                        <input class="form-check-input form-check-success" name="popular"
+                                            type="checkbox">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
                                 <div class="form-group d-flex justify-content-end gap-3">
                                     <span>Статус</span>
                                     <div class="form-check form-switch cursor-pointer">

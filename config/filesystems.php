@@ -77,7 +77,9 @@ return [
         public_path('storage') => storage_path('app/public'),
         public_path('cities') => storage_path('app/cities'),
         public_path('developer') => storage_path('app/developer'),
+        public_path('developer-small') => storage_path('app/developer-small'),
         public_path('complex') => storage_path('app/complex'),
+        public_path('complex-small') => storage_path('app/complex-small'),
         public_path('complex-images') => storage_path('app/complex-images'),
     ],
 

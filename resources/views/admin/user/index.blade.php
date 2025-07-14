@@ -38,20 +38,28 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title">
+                            <h4 class="card-title d-flex justify-content-between align-items-center">
                                 <a href="{{ route('users.create') }}">
                                     + <span style="text-transform: capitalize">Создать Пользователь</span>
                                 </a>
+                                <div class="dropdown">
+                                    <button class="btn btn-secondary dropdown-toggle me-1" type="button"
+                                        id="dropdownMenuButtonSec" data-bs-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false">
+                                        Роль
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButtonSec">
+                                        <a class="dropdown-item" href="{{ route('users.index') }}">Пользователь +
+                                            Застройщик</a>
+                                        <a class="dropdown-item"
+                                            href="{{ route('users.index') }}?role=user">Пользователь</a>
+                                        <a class="dropdown-item"
+                                            href="{{ route('users.index') }}?role=developer">Застройщик</a>
+                                    </div>
+                                </div>
                             </h4>
                         </div>
                         <div class="card-content">
-                            <div class="card-body">
-                                {{-- <p>Add <code class="highlighter-rouge">.table-hover</code> to enable a hover state on table
-                                    rows
-                                    within a
-                                    <code class="highlighter-rouge">&lt;tbody&gt;</code>.
-                                </p> --}}
-                            </div>
                             <!-- table hover -->
                             <div class="table-responsive">
                                 <table class="table table-hover mb-0">
@@ -60,6 +68,7 @@
                                             <th>№</th>
                                             <th>Имя</th>
                                             <th>Электронная почта</th>
+                                            <th>Роль</th>
                                             <th>Дата создания</th>
                                             <th>Разрешение на комментарий</th>
                                             <th>Статус</th>
@@ -77,6 +86,9 @@
                                                 </td>
                                                 <td class="text-bold-500">
                                                     {{ $user->email }}
+                                                </td>
+                                                <td class="text-bold-500">
+                                                    {{ $user->role == 'developer' ? 'Застройщик' : 'Пользователь' }}
                                                 </td>
                                                 <td>
                                                     {{ $user->created_at->format('d.m.Y') }}

@@ -38,7 +38,7 @@
                                 <p>{{ $complex->address }}</p>
                             </div>
                             <div>
-                                <b>Фото</b>
+                                <b>Логотип</b>
                                 <br>
                                 @if ($complex->image != null)
                                     <img src="{{ asset('complex/' . $complex->image) }}" alt="">
@@ -52,6 +52,15 @@
                                 <b>Сортировать</b>
                                 <p>{{ $complex->sort }}</p>
                             </div>
+                            <div class="d-flex gap-2">
+                                <b>Популярный</b>
+                                <div class="form-check form-switch cursor-pointer">
+                                    <input class="form-check-input form-check-success cursor-pointer"
+                                        style="cursor: pointer" type="checkbox"
+                                        @if ($complex->popular == '1') checked @endif disabled>
+                                </div>
+                            </div>
+                            <br>
                             <div class="d-flex gap-2">
                                 <b>Статус</b>
                                 <div class="form-check form-switch cursor-pointer">

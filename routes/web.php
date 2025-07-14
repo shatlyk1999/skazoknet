@@ -8,7 +8,9 @@ use App\Http\Controllers\Admin\SettingsControlller;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PagesController;
 use App\Http\Middleware\AdminMiddleware;
+use App\Http\Middleware\CityMiddleware;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
@@ -49,16 +51,23 @@ Route::get('recovery-confirmed', function () {
 
 
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('registration', function () {
-    return view('auth.registration');
-})->name('registration');
-Route::get('send-email-register-verify', function () {
-    return view('mail.register_mail');
+Route::group(['middleware' => CityMiddleware::class], function () {
+    Route::get('/', [HomeController::class, 'index'])->name('home');
+    Route::get('registration', function () {
+        return view('auth.registration');
+    })->name('registration');
+    Route::get('send-email-register-verify', function () {
+        return view('mail.register_mail');
+    });
+    Route::get('about-us', [HomeController::class, 'about_us'])->name('about_us');
+    Route::get('index-cities', [HomeController::class, 'cities']);
+    Route::post('update-city', [HomeController::class, 'update_city']);
+    Route::get('complexes/{type}', [PagesController::class, 'complexes'])->name('complexes');
+    Route::get('developers', [PagesController::class, 'developers'])->name('developers');
+    Route::get('complex/{slug}', [PagesController::class, 'show_complex'])->name('show.complex');
+    Route::get('developer/{slug}', [PagesController::class, 'show_developer'])->name('show.developer');
+    Route::get('complexes/by/{developer}', [PagesController::class, 'complexes_by_developer'])->name('complexes.by.developer');
 });
-Route::get('about-us', [HomeController::class, 'about_us'])->name('about_us');
-Route::get('index-cities', [HomeController::class, 'cities']);
-Route::post('update-city', [HomeController::class, 'update_city']);
 
 //auth
 // Route::middleware(['auth'])->group(function () {
@@ -91,13 +100,21 @@ Route::group([
     Route::get('complex-image/{image_id}', [ComplexController::class, 'destroyComplexImage'])->name('complex-image');
     Route::get('settings/about-us', [SettingsControlller::class, 'about_us'])->name('settings.about_us');
     Route::post('settings/about-us', [SettingsControlller::class, 'about_us_store'])->name('settings.about_us.store');
+    Route::post('developer-filter', [DeveloperController::class, 'index'])->name('developer.index.post');
+    Route::post('complex-filter', [ComplexController::class, 'index'])->name('complex.index.post');
 });
 
 Route::get('404', function () {
-    return response()->view('layouts.404', [], 404);
+    return response()->view('errors.404', [], 404);
 });
 Route::fallback(function () {
-    return response()->view('layouts.404', [], 404);
+    return response()->view('errors.404', [], 404);
+});
+Route::get('403', function () {
+    return response()->view('errors.403', [], 403);
+});
+Route::get('500', function () {
+    return response()->view('errors.500', [], 500);
 });
 
 Route::get('send-test-mail', [EmailController::class, 'sendEmail']);

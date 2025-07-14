@@ -5,13 +5,10 @@
 
     <div class="page-heading d-flex justify-content-between">
         <h3>Статистика профиля</h3>
-        @auth('web')
-            <button class="btn btn-primary" disabled>{{ Auth::user()->name }}</button>
-        @endauth
     </div>
-    {{-- <div class="page-content">
+    <div class="page-content">
         <section class="row">
-            <div class="col-12 col-lg-9">
+            <div class="col-12 col-lg-9 d-none">
                 <div class="row">
                     <div class="col-6 col-lg-3 col-md-6">
                         <div class="card">
@@ -212,20 +209,22 @@
                 </div>
             </div>
             <div class="col-12 col-lg-3">
-                <div class="card">
-                    <div class="card-body py-4 px-4">
-                        <div class="d-flex align-items-center">
-                            <div class="avatar avatar-xl">
-                                <img src="./assets/compiled/jpg/1.jpg" alt="Face 1" />
-                            </div>
-                            <div class="ms-3 name">
-                                <h5 class="font-bold">John Duck</h5>
-                                <h6 class="text-muted mb-0">@johnducky</h6>
+                @auth('web')
+                    <div class="card">
+                        <div class="card-body py-4 px-4">
+                            <div class="d-flex align-items-center">
+                                <div class="avatar avatar-xl">
+                                    <img src="{{ asset('admin/compiled/jpg/4.jpg') }}" alt="Face 1" />
+                                </div>
+                                <div class="ms-3 name">
+                                    <h5 class="font-bold">{{ Auth::user()->name }}</h5>
+                                    {{-- <h6 class="text-muted text-small mb-0">{{ Auth::user()->email }}</h6> --}}
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="card">
+                @endauth
+                {{-- <div class="card">
                     <div class="card-header">
                         <h4>Recent Messages</h4>
                     </div>
@@ -271,10 +270,10 @@
                     <div class="card-body">
                         <div id="chart-visitors-profile"></div>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </section>
-    </div> --}}
+    </div>
 
 @endsection
 

@@ -10,18 +10,20 @@ use Illuminate\Http\Request;
 use Intervention\Image\Drivers\Gd\Driver;
 use Intervention\Image\Encoders\WebpEncoder;
 use Intervention\Image\ImageManager;
+use Illuminate\Support\Str;
 
 class DeveloperController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $developers = Developer::orderBy('sort', 'desc')->orderBy('created_at', 'desc')->paginate(10);
+        $filter = $request->all() ?? '';
+        $developers = Developer::filter($filter)->orderBy('sort', 'desc')->orderBy('created_at', 'desc')->paginate(10);
         $cities = City::get();
 
-        return view('admin.developer.index', compact('developers', 'cities'));
+        return view('admin.developer.index', compact('developers', 'cities', 'filter'));
     }
 
     /**
@@ -49,12 +51,19 @@ class DeveloperController extends Controller
                 $status = true;
             }
 
+            $popular = false;
+            if ($request->has('popular')) {
+                $popular = true;
+            }
+
             $developer = Developer::create([
                 'name' => $request->name,
                 'content' => $request->content,
                 'year_establishment' => $request->year_establishment,
                 'sort' => $request->sort,
                 'status' => $status,
+                'popular' => $popular,
+                'slug' => Str::slug($request->name),
             ]);
 
             if ($request->has('image')) {
@@ -64,8 +73,13 @@ class DeveloperController extends Controller
                 if (!is_dir(storage_path('app/developer'))) {
                     mkdir(storage_path('app/developer'), 0777, true);
                 }
+                if (!is_dir(storage_path('app/developer-small'))) {
+                    mkdir(storage_path('app/developer-small'), 0777, true);
+                }
 
                 $destinationPath = storage_path('app/developer');
+                $destinationPath2 = storage_path('app/developer-small');
+
                 $manager = new ImageManager(new Driver());
                 $img = $manager->read($image);
 
@@ -100,6 +114,15 @@ class DeveloperController extends Controller
                 });
 
                 file_put_contents(($destinationPath . '/' . $input['imageName']),
+                    (string) $img->encode(new WebpEncoder(quality: 100))
+                );
+
+                $img->resize(146, 134, function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                });
+
+                file_put_contents(($destinationPath2 . '/' . $input['imageName']),
                     (string) $img->encode(new WebpEncoder(quality: 100))
                 );
 
@@ -160,8 +183,12 @@ class DeveloperController extends Controller
 
             if ($request->has('image')) {
                 $filePath = storage_path('app/developer/' . $developer->image);
+                $filePath2 = storage_path('app/developer-small/' . $developer->image);
 
                 if (($developer->image != null) && file_exists($filePath)) {
+                    unlink($filePath);
+                }
+                if (($developer->image != null) && file_exists($filePath2)) {
                     unlink($filePath);
                 }
                 $image = $request->file('image');
@@ -170,8 +197,12 @@ class DeveloperController extends Controller
                 if (!is_dir(storage_path('app/developer'))) {
                     mkdir(storage_path('app/developer'), 0777, true);
                 }
+                if (!is_dir(storage_path('app/developer-small'))) {
+                    mkdir(storage_path('app/developer-small'), 0777, true);
+                }
 
                 $destinationPath = storage_path('app/developer');
+                $destinationPath2 = storage_path('app/developer-small');
                 $manager = new ImageManager(new Driver());
                 $img = $manager->read($image);
 
@@ -191,6 +222,15 @@ class DeveloperController extends Controller
                     (string) $img->encode(new WebpEncoder(quality: 100))
                 );
 
+                $img->resize(146, 134, function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                });
+
+                file_put_contents(($destinationPath2 . '/' . $input['imageName']),
+                    (string) $img->encode(new WebpEncoder(quality: 100))
+                );
+
                 $developer->image = $input['imageName'];
                 $developer->save();
             }
@@ -199,12 +239,18 @@ class DeveloperController extends Controller
             if ($request->has('status_update')) {
                 $status = true;
             }
+            $popular = false;
+            if ($request->has('popular')) {
+                $popular = true;
+            }
             $developer->update([
                 'name' => $request->name,
                 'sort' => $request->sort,
                 'year_establishment' => $request->year_establishment,
                 'content' => $request->content,
                 'status' => $status,
+                'popular' => $popular,
+                'slug' => Str::slug($request->name),
             ]);
 
             if ($request->has('city_ids')) {

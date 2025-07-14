@@ -33,7 +33,7 @@
                                 <p>{{ $developer->year_establishment }}</p>
                             </div>
                             <div>
-                                <b>Фото</b>
+                                <b>Логотип</b>
                                 <br>
                                 <img src="{{ asset('developer/' . $developer->image) }}" alt="">
                             </div>
@@ -45,6 +45,15 @@
                                 <b>Сортировать</b>
                                 <p>{{ $developer->sort }}</p>
                             </div>
+                            <div class="d-flex gap-2">
+                                <b>Популярный</b>
+                                <div class="form-check form-switch cursor-pointer">
+                                    <input class="form-check-input form-check-success cursor-pointer"
+                                        style="cursor: pointer" type="checkbox"
+                                        @if ($developer->popular == '1') checked @endif disabled>
+                                </div>
+                            </div>
+                            <br>
                             <div class="d-flex gap-2">
                                 <b>Статус</b>
                                 <div class="form-check form-switch cursor-pointer">

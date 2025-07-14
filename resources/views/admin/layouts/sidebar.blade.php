@@ -1,5 +1,5 @@
 <?php
-$user_count = \App\Models\User::where('is_admin', '0')->count() ?? 0;
+$user_count = \App\Models\User::where('role', '!=', 'superadmin')->count() ?? 0;
 $city_count = \App\Models\City::get()->count() ?? 0;
 $developer_count = \App\Models\Developer::get()->count() ?? 0;
 $complex_count = \App\Models\Complex::get()->count() ?? 0;

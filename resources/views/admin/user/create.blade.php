@@ -62,6 +62,14 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <label for="password">Роль</label>
+                                    <select name="role" id="role" class="form-control">
+                                        <option value="user">Пользователь</option>
+                                        <option value="developer">Застройщик</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
                                     <div class="form-check form-switch">
                                         <input class="form-check-input form-check-success" name="permission_comment"
                                             type="checkbox" id="permission_comment">

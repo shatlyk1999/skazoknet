@@ -21,6 +21,18 @@
             font-size: 1.25rem;
             cursor: pointer;
         }
+
+        @media (max-width: 992px) {
+            .filter {
+                flex-direction: column !important;
+                justify-content: center !important;
+                align-items: center !important;
+            }
+
+            .filter>div {
+                width: 100%;
+            }
+        }
     </style>
     <link rel="stylesheet" href="{{ asset('admin/extensions/summernote/summernote-lite.css') }}">
 
@@ -59,30 +71,128 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title">
+                            <h4 class="card-title d-flex justify-content-between align-items-center">
                                 <button type="button" class="btn btn-outline-success" data-bs-toggle="modal"
                                     data-bs-target="#createComplex">
                                     + Создать комплекс
                                 </button>
+                                <a class="btn btn-secondary" data-bs-toggle="collapse" href="#collapseExample"
+                                    role="button" aria-expanded="false" aria-controls="collapseExample">
+                                    Фильтр
+                                </a>
                             </h4>
                         </div>
                         <div class="card-content">
-                            <div class="card-body">
-                                {{-- <p>Add <code class="highlighter-rouge">.table-hover</code> to enable a hover state on table
-                                    rows
-                                    within a
-                                    <code class="highlighter-rouge">&lt;tbody&gt;</code>.
-                                </p> --}}
-                            </div>
+                            <form action="{{ route('complex.index.post') }}" method="post">
+                                @csrf
+                                <div class="collapse {{ !empty($filter) ? 'show' : '' }}" id="collapseExample">
+                                    <div class="filter d-flex justify-content-between align-items-end">
+                                        <div>
+                                            <label for="search">Название</label>
+                                            <input type="text" name="search" class="form-control" placeholder=""
+                                                value="{{ isset($filter['search']) ? $filter['search'] : '' }}">
+                                        </div>
+                                        <div>
+                                            <label for="type">Тип</label>
+                                            <select name="type" id="type" class="form-control">
+                                                <option value="">--</option>
+                                                <option value="residential"
+                                                    @if (isset($filter['type']) && $filter['type'] == 'residential') selected @endif>
+                                                    Жилые комплекс</option>
+                                                <option value="hotel" @if (isset($filter['type']) && $filter['type'] == 'hotel') selected @endif>
+                                                    Гостиничные комплекс</option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label for="city_id">Город</label>
+                                            <select name="city_id" id="city_id" class="form-control">
+                                                <option value="">--</option>
+                                                @foreach ($cities as $city)
+                                                    <option value="{{ $city->id }}"
+                                                        @if (isset($filter['city_id']) && $filter['city_id'] == $city->id) selected @endif>
+                                                        {{ $city->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label for="developer_id">Застройщик</label>
+                                            <select name="developer_id" id="developer_id" class="form-control">
+                                                <option value="">--</option>
+                                                @foreach ($developers as $developer)
+                                                    <option value="{{ $developer->id }}"
+                                                        @if (isset($filter['developer_id']) && $filter['developer_id'] == $developer->id) selected @endif>
+                                                        {{ $developer->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label for="image">Логотип</label>
+                                            <select name="image" id="image" class="form-control">
+                                                <option value="">--</option>
+                                                <option value="1" @if (isset($filter['image']) && $filter['image'] == '1') selected @endif>
+                                                    Есть логотип</option>
+                                                <option value="0" @if (isset($filter['image']) && $filter['image'] == '0') selected @endif>
+                                                    Нет логотип</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="filter d-flex justify-content-between align-items-end">
+                                        <div>
+                                            <label for="popular">Популярный</label>
+                                            <select name="popular" id="popular" class="form-control">
+                                                <option value="">--</option>
+                                                <option value="1" @if (isset($filter['popular']) && $filter['popular'] == '1') selected @endif>
+                                                    Популярные</option>
+                                                <option value="0" @if (isset($filter['popular']) && $filter['popular'] == '0') selected @endif>
+                                                    Непопулярные</option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label for="status">Статус</label>
+                                            <select name="status" id="status" class="form-control">
+                                                <option value="">--</option>
+                                                <option value="1" @if (isset($filter['status']) && $filter['status'] == '1') selected @endif>
+                                                    Активный</option>
+                                                <option value="0" @if (isset($filter['status']) && $filter['status'] == '0') selected @endif>
+                                                    Пассивный</option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label for="images">Фотографии</label>
+                                            <select name="images" id="images" class="form-control">
+                                                <option value="">--</option>
+                                                <option value="with" @if (isset($filter['images']) && $filter['images'] == 'with') selected @endif>
+                                                    Есть фотографии</option>
+                                                <option value="without" @if (isset($filter['images']) && $filter['images'] == 'without') selected @endif>
+                                                    Нет фотографии</option>
+                                            </select>
+                                        </div>
+                                        <div class="d-flex justify-content-between align-items-end gap-1">
+                                            <div>
+                                                <button type="submit" class="btn btn-outline-primary">
+                                                    Фильтр
+                                                </button>
+                                            </div>
+                                            <div>
+                                                <a href="{{ route('complex.index') }}"
+                                                    class="btn btn-outline-danger">Очистить</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
                             <!-- table hover -->
                             <div class="table-responsive">
                                 <table class="table table-hover mb-0">
                                     <thead>
                                         <tr>
                                             <th>№</th>
-                                            <th>Фото</th>
+                                            <th>Логотип</th>
                                             <th>Название</th>
                                             <th>Тип</th>
+                                            <th>Город</th>
                                             <th>Застройщик</th>
                                             <th>Сортировать</th>
                                             <th>Статус</th>
@@ -104,11 +214,14 @@
                                                 </td>
                                                 <td>
                                                     @if ($complex->type == 'residential')
-                                                        Жилые комплексы
+                                                        ЖK
                                                     @endif
                                                     @if ($complex->type == 'hotel')
-                                                        Гостиничные комплексы
+                                                        ГK
                                                     @endif
+                                                </td>
+                                                <td class="text-bold-500">
+                                                    {{ $complex->city->name ?? ' ' }}
                                                 </td>
                                                 <td class="text-bold-500">
                                                     {{ $complex->developer->name ?? ' ' }}
@@ -126,7 +239,7 @@
                                                 </td>
                                                 <td>
                                                     <div class="d-flex gap-1">
-                                                        <button class="btn btn-outline-secondary" data-bs-toggle="modal"
+                                                        <button class="btn btn-outline-light" data-bs-toggle="modal"
                                                             data-bs-target="#info_{{ $complex->id }}">
                                                             <i class="bi bi-info-circle"></i>
                                                         </button>

@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="{{ asset('swiper/swiper-bundle.css') }}" />
     <link rel="stylesheet" href="{{ asset('@mdi/font/css/materialdesignicons.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('styles/custom.css') }}" />
+    @yield('css')
 
     {{-- @vite(['resources/sass/app.scss', 'resources/js/app.js']) --}}
 </head>
@@ -60,13 +61,13 @@
                     @endif
                     <div class="leading-10 pt-0 lg:pt-4 hidden lg:block">
                         @if (auth()->user())
-                            <div class="dropdown">
+                            <div class="dropdown dropdown-custom">
                                 <button onclick="myFunction()"
                                     class="dropbtn cursor-pointer border-none bg-transparent outline-none hover:bg-black/5 transition-colors p-2 rounded-lg text-lg flex items-center gap-x-2">
                                     <img src="{{ asset('images/user 7.png') }}" class="size-7" alt="" />
                                     {{ auth()->user()->name }}
                                 </button>
-                                <div id="myDropdown" class="dropdown-content">
+                                <div id="myDropdown" class="dropdown-content dropdown-content-custom">
                                     <form action="{{ route('logout') }}" class="" method="post">
                                         @csrf
                                         <button type="submit" class="cursor-pointer text-text">
