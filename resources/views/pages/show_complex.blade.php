@@ -59,7 +59,7 @@
                     </h4>
                     <div class="xs:inline-block hidden">|</div>
                     <div class="text-sm lg:text-base font-semibold">
-                        Количество Застройщик: {{ $complex->developer->name }}
+                        Застройщик: {{ $complex->developer->name }}
                     </div>
                 </div>
                 <hr class="md:hidden border-auth-input-border-color" />
@@ -1029,7 +1029,7 @@
                     </div>
                 </div>
             </div>
-            <div class="mt-8 block md:hidden">
+            <div class="mt-8 block md:hidden px-8 xs:px-12 sm:px-0 flex justify-center items-center text-center">
                 <a href="{{ route('complexes', 'residential') }}?developer_slug={{ $complex->developer->slug }}"
                     class="border-primary text-sm xl:text-base border rounded-3xl px-8 py-2 text-primary hover:text-white hover:border-white hover:bg-primary transition-colors cursor-pointer md:w-auto w-full">
                     Все жилые комплексы
@@ -1061,7 +1061,7 @@
                     </div>
                 </div>
             </div>
-            <div class="mt-8 block md:hidden">
+            <div class="mt-8 block md:hidden px-8 xs:px-12 sm:px-0 flex justify-center items-center text-center">
                 <a href="{{ route('complexes', 'hotel') }}?developer_slug={{ $complex->developer->slug }}"
                     class="border-primary text-sm xl:text-base border rounded-3xl px-8 py-2 text-primary hover:text-white hover:border-white hover:bg-primary transition-colors cursor-pointer md:w-auto w-full">
                     Все гостиничные комплексы

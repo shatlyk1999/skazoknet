@@ -19,7 +19,7 @@
             </div>
         </div>
     </div>
-    <div class="mt-8 block md:hidden px-8 xs:px-12 sm:px-0">
+    <div class="mt-8 block md:hidden px-8 xs:px-12 sm:px-0 flex justify-center items-center text-center">
         <a href="{{ route('complexes', 'residential') }}"
             class="border-primary text-sm xl:text-base border rounded-3xl px-8 py-2 text-primary hover:text-white hover:border-white hover:bg-primary transition-colors cursor-pointer md:w-auto w-full">
             Все жилые комплексы

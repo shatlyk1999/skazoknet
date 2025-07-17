@@ -114,12 +114,12 @@
                     </div>
                 </div>
             </div>
-            {{-- <div class="mt-8 block md:hidden">
-                <a href="{{route('')}}"
+            <div class="mt-8 block md:hidden px-8 xs:px-12 sm:px-0 flex justify-center items-center text-center">
+                <a href="{{ route('developers') }}"
                     class="border-primary text-sm xl:text-base border rounded-3xl px-8 py-2 text-primary hover:text-white hover:border-white hover:bg-primary transition-colors cursor-pointer md:w-auto w-full">
-                    Все жилые комплексы
-            </a>
-            </div> --}}
+                    Все застройщики
+                </a>
+            </div>
         </section>
     @endif
 
@@ -145,7 +145,8 @@
                         <span class="bg-primary text-white py-1 px-2 rounded-2xl text-xs xs:text-sm">17 Дополнений</span>
                     </div>
                     <div class="flex items-center justify-between mt-4">
-                        <div class="flex items-center space-x-px xs:space-x-1" aria-label="3 out of 5 stars" role="img">
+                        <div class="flex items-center space-x-px xs:space-x-1" aria-label="3 out of 5 stars"
+                            role="img">
                             <img src="../public/icons/Starmini.svg" alt="" />
                             <img src="../public/icons/Starmini.svg" alt="" />
                             <img src="../public/icons/Starmini.svg" alt="" />

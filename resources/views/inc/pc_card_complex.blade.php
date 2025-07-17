@@ -15,7 +15,7 @@
     @endif
     <div
         class="p-4 flex flex-col gap-2 group-hover:border-primary border-custom-gray border border-t-0 rounded-bl-xl rounded-br-xl">
-        <h2 class="font-semibold text-lg">
+        <h2 class="font-semibold text-lg line-clamp-1">
             {{ $complex->name }}
         </h2>
         <p>

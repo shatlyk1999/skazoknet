@@ -74,6 +74,16 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
+                                    {{-- <label for="text">Текст</label> --}}
+                                    <input type="text" name="text" class="form-control" id="text"
+                                        placeholder="Текст" required>
+                                    @error('text')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
                                     <label for="image">Фото</label>
                                     <input type="file" name="image" class="form-control" id="image" required>
                                     @error('image')

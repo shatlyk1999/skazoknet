@@ -56,6 +56,16 @@
                                         placeholder="Область" required value="{{ old('name', $city->label) }}">
                                 </div>
                                 <div class="form-group">
+                                    {{-- <label for="text">Текст</label> --}}
+                                    <input type="text" name="text" class="form-control" id="text"
+                                        placeholder="Текст" required value="{{ old('name', $city->text) }}">
+                                    @error('text')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
                                     <label for="image">Фото</label>
                                     <img src="{{ asset('cities/' . $city->image) }}" alt=""
                                         style="width: 100px;height:100px;border-radius:50px;">

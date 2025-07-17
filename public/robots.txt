@@ -1,2 +1,12 @@
 User-agent: *
-Disallow:
+Disallow: /backend/
+Disallow: /login
+Disallow: /register
+Disallow: /password/
+Disallow: /recovery-confirmed
+Disallow: /mail-confirmed
+Disallow: /send-email-register-verify
+Disallow: /send-test-mail
+Allow: /
+
+Sitemap: //

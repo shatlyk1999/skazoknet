@@ -20,13 +20,16 @@
                 Полезная информация
             </h2>
             <div class="pl-4 flex flex-col gap-2">
-                <a href="#"
+                <a href="{{ route('about_us') }}"
                     class="text-sm font-medium hover:bg-white/10 p-2 rounded-lg transition-colors duration-200">О
                     проекте</a>
-                <a href="#"
+                <a href="{{ route('developers') }}"
                     class="text-sm font-medium hover:bg-white/10 p-2 rounded-lg transition-colors duration-200">Застройщики</a>
-                <a href="#"
+                <a href="{{ route('complexes', 'residential') }}"
                     class="text-sm font-medium hover:bg-white/10 p-2 rounded-lg transition-colors duration-200">Жилые
+                    комплексы</a>
+                <a href="{{ route('complexes', 'hotel') }}"
+                    class="text-sm font-medium hover:bg-white/10 p-2 rounded-lg transition-colors duration-200">Гостиничные
                     комплексы</a>
             </div>
         </div>

@@ -5,16 +5,16 @@
             {{-- h-[13.75rem] --}}
             @if ($developer->image != null)
                 <img src="{{ asset('developer/' . $developer->image) }}"
-                    class="w-full h-auto rounded-tl-xl rounded-tr-xl max-h-[10.625rem] min-h-[10.625rem]" alt=""
+                    class="w-full h-auto rounded-tl-xl rounded-tr-xl max-h-[10.625rem]" alt=""
                     style="border-top-left-radius: 10px;border-top-right-radius:10px;" />
             @else
                 <img src="{{ asset('images/zaglushka.svg') }}"
-                    class="rounded-tl-xl rounded-tr-xl w-[50%] mx-auto max-h-[10.625rem] min-h-[10.625rem] object-contain"
-                    alt="" style="height:170px;" />
+                    class="rounded-tl-xl rounded-tr-xl w-[50%] mx-auto max-h-[10.625rem] object-contain" alt=""
+                    style="height:137px;" />
             @endif
         </div>
         <div class="p-4 flex flex-col gap-2">
-            <h2 class="font-semibold text-lg">{{ $developer->name }}</h2>
+            <h2 class="font-semibold text-lg line-clamp-1">{{ $developer->name }}</h2>
             <p>Год основания: {{ $developer->year_establishment }} г.</p>
             <p class="mt-8">Количество объектов: {{ $developer->complexes()->count() }}</p>
             <div class="flex items-center justify-between gap-x-2">

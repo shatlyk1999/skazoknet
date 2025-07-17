@@ -78,6 +78,7 @@ class CityController extends Controller
         City::create([
             'name' => $request->name,
             'label' => $request->label,
+            'text' => $request->text,
             'image' => $input['imageName'],
         ]);
 
@@ -176,6 +177,7 @@ class CityController extends Controller
             $city->update([
                 'name' => $request->name,
                 'label' => $request->label,
+                'text' => $request->text,
             ]);
 
             return to_route('city.index')->with([
