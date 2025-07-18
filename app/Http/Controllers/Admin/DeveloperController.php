@@ -83,7 +83,7 @@ class DeveloperController extends Controller
                 $manager = new ImageManager(new Driver());
                 $img = $manager->read($image);
 
-                if ($img->width() <= 500 || $img->height() <= 300) {
+                if ($img->width() < 500 || $img->height() < 300) {
                     return redirect()->back()->with([
                         'type' => 'warning',
                         'message' => 'Изображение слишком маленькое (менее 500x300)'
@@ -206,7 +206,7 @@ class DeveloperController extends Controller
                 $manager = new ImageManager(new Driver());
                 $img = $manager->read($image);
 
-                if ($img->width() <= 500 || $img->height() <= 300) {
+                if ($img->width() < 500 || $img->height() < 300) {
                     return redirect()->back()->with([
                         'type' => 'warning',
                         'message' => 'Изображение слишком маленькое (менее 500x300)'

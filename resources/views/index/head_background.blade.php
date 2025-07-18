@@ -10,7 +10,7 @@
     <div class="absolute top-[20%] md:top-[40%] left-0 leading-0 w-full z-10">
         <div class="xl:container px-8 xs:px-12 xl:px-4 mx-0 xl:mx-auto flex justify-between relative">
             <div class="w-full md:w-[calc(65%-2rem)] mr-0 md:mr-8">
-                <div class="text-white mb-[5rem]">
+                <div class="text-white mb-[2rem] xs:mb-[5rem]">
                     <h1 class="text-3xl md:text-5xl xl:text-6xl font-bold tracking-wide mb-2 md:mb-4">
                         Отзывы без иллюзий
                     </h1>
@@ -78,7 +78,7 @@
                         </div>
                     </a>
                 </div>
-                <div class="md:hidden block w-full mt-8">
+                <div class="md:hidden block w-full mt-4 xs:mt-8">
                     <button
                         class="border-white border w-full text-sm xl:text-base rounded-3xl px-3 py-2 text-white transition-colors cursor-pointer flex items-center gap-x-2 justify-center">
                         <i class="mdi mdi-plus"></i>
