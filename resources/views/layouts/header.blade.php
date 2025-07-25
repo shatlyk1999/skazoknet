@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="{{ asset('@mdi/font/css/materialdesignicons.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('styles/custom.css') }}" />
     @yield('css')
+    @yield('script')
 
     {{-- @vite(['resources/sass/app.scss', 'resources/js/app.js']) --}}
 </head>

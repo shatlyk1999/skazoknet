@@ -61,6 +61,15 @@
                                 </div>
                             </div>
                             <br>
+                            <div>
+                                <b>Координата X</b>
+                                <p>{{ $complex->map_x }}</p>
+                            </div>
+                            <div>
+                                <b>Координата Y</b>
+                                <p>{{ $complex->map_y }}</p>
+                            </div>
+                            <br>
                             <div class="d-flex gap-2">
                                 <b>Статус</b>
                                 <div class="form-check form-switch cursor-pointer">

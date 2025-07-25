@@ -3,6 +3,9 @@
 @section('title', $complex->name . ' | Сказокнет')
 
 @section('content')
+    <?php
+    $const_complex = $complex;
+    ?>
     <div class="my-6 xl:container px-12 xl:px-4 mx-0 xl:mx-auto md:flex hidden items-center">
         <a href="{{ route('home') }}" class="text-sm xl:text-xs tracking-widest cursor-pointer">Главная</a>
         <span class="px-2">|</span>
@@ -167,8 +170,8 @@
                 @if ($complex->images()->count() > 0)
                     @foreach ($complex->images as $image)
                         <div class="swiper-slide">
-                            <img src="{{ asset('complex-images/' . $image->image) }}" class="w-full h-auto max-h-[30rem]"
-                                alt="" />
+                            <img src="{{ asset('complex-images/' . $image->image) }}" class="w-full h-full object-cover"
+                                style="height: 300px;" alt="{{ $complex->name }}" />
                         </div>
                     @endforeach
                 @endif
@@ -1082,22 +1085,26 @@
 
 @section('script')
     {{-- @if ($complex->map_x && $complex->map_y) --}}
-    {{-- <script src="https://api-maps.yandex.ru/2.1/?apikey=533e70a2-eeb0-4f97-95e4-e6f35dda4aed&lang=ru_RU"
-        type="text/javascript"></script> --}}
-    <script src="{{ '//api-maps.yandex.ru/2.1-dev/?lang=ru-RU&load=package.full' }}"></script>
+    <script src="https://api-maps.yandex.ru/2.1/?apikey=533e70a2-eeb0-4f97-95e4-e6f35dda4aed&lang=ru_RU"
+        type="text/javascript"></script>
     <script type="text/javascript">
         ymaps.ready(function() {
             // Desktop map
             if (document.getElementById('map')) {
+                // Eğer harita zaten varsa temizle
+                document.getElementById('map').innerHTML = '';
+
                 var myMap = new ymaps.Map("map", {
-                    center: [45.098663, 39.059953],
+                    center: [`{{ $const_complex->map_x }}`, `{{ $const_complex->map_y }}`],
                     zoom: 16,
                     controls: ['zoomControl', 'fullscreenControl', 'typeSelector']
                 });
 
-                var myPlacemark = new ymaps.Placemark([45.099961, 39.060969, ], {
-                    balloonContent: '<div style="padding: 10px; font-family: Arial, sans-serif;"><strong style="color: #333;">{{ $complex->name }}</strong><br><small style="color: #666;">{{ $complex->address }}</small></div>',
-                    hintContent: '{{ $complex->name }}'
+                var myPlacemark = new ymaps.Placemark([`{{ $const_complex->map_x }}`,
+                    `{{ $const_complex->map_y }}`
+                ], {
+                    balloonContent: '<div style="padding: 10px; font-family: Arial, sans-serif;"><strong style="color: #333;">{{ $const_complex->name }}</strong><br><small style="color: #666;">{{ $const_complex->address }}</small></div>',
+                    hintContent: '{{ $const_complex->name }}'
                 }, {
                     preset: 'islands#redBuildingIcon',
                     iconColor: '#dc2626'
@@ -1108,15 +1115,20 @@
 
             // Mobile map
             if (document.getElementById('map-mobile')) {
+                // Eğer harita zaten varsa temizle
+                document.getElementById('map-mobile').innerHTML = '';
+
                 var myMapMobile = new ymaps.Map("map-mobile", {
-                    center: [45.099961, 39.060969],
+                    center: [`{{ $const_complex->map_x }}`, `{{ $const_complex->map_y }}`],
                     zoom: 16,
                     controls: ['zoomControl', 'typeSelector']
                 });
 
-                var myPlacemarkMobile = new ymaps.Placemark([45.099961, 39.060969], {
-                    balloonContent: '<div style="padding: 10px; font-family: Arial, sans-serif;"><strong style="color: #333;">{{ $complex->name }}</strong><br><small style="color: #666;">{{ $complex->address }}</small></div>',
-                    hintContent: '{{ $complex->name }}'
+                var myPlacemarkMobile = new ymaps.Placemark([`{{ $const_complex->map_x }}`,
+                    `{{ $const_complex->map_y }}`
+                ], {
+                    balloonContent: '<div style="padding: 10px; font-family: Arial, sans-serif;"><strong style="color: #333;">{{ $const_complex->name }}</strong><br><small style="color: #666;">{{ $const_complex->address }}</small></div>',
+                    hintContent: '{{ $const_complex->name }}'
                 }, {
                     preset: 'islands#redBuildingIcon',
                     iconColor: '#dc2626'
