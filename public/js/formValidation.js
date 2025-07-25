@@ -229,7 +229,7 @@ class FormValidator {
             });
             if (response.ok) {
                 // if (response.status === 200 || response.status === 201) {
-                window.location.replace(endpointConfig.redirectPath);
+                // window.location.replace(endpointConfig.redirectPath);
             } else {
                 const errorMessage = await response.text();
                 this.showServerErrors(errorMessage);

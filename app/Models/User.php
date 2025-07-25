@@ -9,6 +9,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Log;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -47,12 +48,22 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function sendEmailVerificationNotification()
     {
-        $this->notify(new CustomVerifyEmail);
+        try {
+            $this->notify(new CustomVerifyEmail);
+        } catch (\Exception $e) {
+            // Ignore SMTP errors in local development
+            Log::info('Email verification notification failed (ignored): ' . $e->getMessage());
+        }
     }
 
     public function sendPasswordResetNotification($token)
     {
-        $this->notify(new \App\Notifications\CustomResetPassword($token));
+        try {
+            $this->notify(new \App\Notifications\CustomResetPassword($token));
+        } catch (\Exception $e) {
+            // Ignore SMTP errors in local development
+            Log::info('Password reset notification failed (ignored): ' . $e->getMessage());
+        }
     }
 
 

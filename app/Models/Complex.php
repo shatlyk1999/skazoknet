@@ -2,13 +2,32 @@
 
 namespace App\Models;
 
+use App\Traits\HasSeo;
 use Illuminate\Database\Eloquent\Model;
 
 class Complex extends Model
 {
+    use HasSeo;
+
     protected $table = 'complexes';
     protected $guarded = ['id'];
     protected $hidden = ['created_at', 'updated_at'];
+
+    protected $fillable = [
+        'name',
+        'content',
+        'address',
+        'sort',
+        'status',
+        'popular',
+        'city_id',
+        'developer_id',
+        'type',
+        'slug',
+        'image',
+        'map_x',
+        'map_y'
+    ];
 
     //relations
     public function developer()
@@ -81,5 +100,51 @@ class Complex extends Model
         if (isset($data['status'])) {
             $query->where('status', $data['status']);
         }
+    }
+
+    // SEO Methods
+    protected function getDefaultSeoTitle()
+    {
+        return $this->name . ' - ' . $this->city?->name . ' | Жилой комплекс';
+    }
+
+    protected function getDefaultSeoDescription()
+    {
+        $description = 'Жилой комплекс ' . $this->name;
+        if ($this->city) {
+            $description .= ' в городе ' . $this->city->name;
+        }
+        if ($this->developer) {
+            $description .= ' от застройщика ' . $this->developer->name . '.';
+        }
+        if ($this->description) {
+            $description .= ' ' . substr(strip_tags($this->description), 0, 100) . '...';
+        }
+        return $description;
+    }
+
+    protected function getDefaultSeoKeywords()
+    {
+        $keywords = [$this->name, 'недвижимость', 'жилой комплекс', 'новостройки'];
+        if ($this->city) {
+            $keywords[] = $this->city->name;
+        }
+        if ($this->developer) {
+            $keywords[] = $this->developer->name;
+        }
+        if ($this->type) {
+            $keywords[] = $this->type;
+        }
+        return implode(', ', $keywords);
+    }
+
+    protected function getDefaultOgImage()
+    {
+        return $this->image ? asset('storage/' . $this->image) : null;
+    }
+
+    protected function getDefaultCanonicalUrl()
+    {
+        return route('show.complex', $this->slug);
     }
 }

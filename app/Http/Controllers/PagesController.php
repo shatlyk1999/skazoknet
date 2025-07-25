@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Facades\SEO;
 use App\Models\City;
 use App\Models\Complex;
 use App\Models\Developer;
@@ -105,6 +106,28 @@ class PagesController extends Controller
             ->limit(3)->orderBy('created_at', 'desc')
             ->get();
 
+        // SEO 
+        SEO::setTitle($complex->getSeoTitle())
+            ->setDescription($complex->getSeoDescription())
+            ->setKeywords($complex->getSeoKeywords())
+            ->setOgImage($complex->getOgImage())
+            ->setCanonicalUrl($complex->getCanonicalUrl())
+            ->addSchemaMarkup('RealEstateAgent', [
+                'name' => $complex->name,
+                'description' => $complex->getSeoDescription(),
+                'address' => [
+                    '@type' => 'PostalAddress',
+                    'streetAddress' => $complex->address,
+                    'addressLocality' => $complex->city?->name,
+                    'addressCountry' => 'RU'
+                ],
+                'geo' => $complex->map_x && $complex->map_y ? [
+                    '@type' => 'GeoCoordinates',
+                    'latitude' => $complex->map_y,
+                    'longitude' => $complex->map_x
+                ] : null
+            ]);
+
         return view('pages.show_complex', compact('complex', 'residential_complexes', 'hotel_complexes'));
     }
 
@@ -123,6 +146,19 @@ class PagesController extends Controller
             $city = $user->city;
         }
         $complexes = $developer->complexes()->where('status', '1')->where('city_id', $city->id)->get();
+
+        // SEO
+        SEO::setTitle($developer->getSeoTitle())
+            ->setDescription($developer->getSeoDescription())
+            ->setKeywords($developer->getSeoKeywords())
+            ->setOgImage($developer->getOgImage())
+            ->setCanonicalUrl($developer->getCanonicalUrl())
+            ->addSchemaMarkup('Organization', [
+                'name' => $developer->name,
+                'description' => $developer->getSeoDescription(),
+                'foundingDate' => $developer->year_establishment,
+                'url' => $developer->getCanonicalUrl()
+            ]);
 
         return view('pages.show_developer', compact('developer', 'complexes'));
     }

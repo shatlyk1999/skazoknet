@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use App\Traits\HasSeo;
 use Illuminate\Database\Eloquent\Model;
 
 class Developer extends Model
 {
+    use HasSeo;
+
     protected $table = 'developers';
     protected $guarded = ['id'];
     protected $hidden = ['created_at', 'updated_at'];
@@ -65,5 +68,42 @@ class Developer extends Model
         if (isset($data['status'])) {
             $query->where('status', $data['status']);
         }
+    }
+
+    // SEO Methods
+    protected function getDefaultSeoTitle()
+    {
+        return $this->name . ' - Застройщик | Проекты и комплексы';
+    }
+
+    protected function getDefaultSeoDescription()
+    {
+        $description = 'Застройщик ' . $this->name;
+        if ($this->year_establishment) {
+            $description .= ', основан в ' . $this->year_establishment . ' году.';
+        }
+        if ($this->description) {
+            $description .= ' ' . substr(strip_tags($this->description), 0, 100) . '...';
+        }
+        return $description;
+    }
+
+    protected function getDefaultSeoKeywords()
+    {
+        $keywords = [$this->name, 'застройщик', 'строительная компания', 'жилые проекты'];
+        if ($this->year_establishment) {
+            $keywords[] = $this->year_establishment;
+        }
+        return implode(', ', $keywords);
+    }
+
+    protected function getDefaultOgImage()
+    {
+        return $this->image ? asset('storage/' . $this->image) : null;
+    }
+
+    protected function getDefaultCanonicalUrl()
+    {
+        return route('show.developer', $this->slug);
     }
 }

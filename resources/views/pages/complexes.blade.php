@@ -3,7 +3,7 @@
 @if ($type == 'residential')
     @section('title', ' Жилые комплексы | Сказокнет')
 @endif
-@if ($type == 'residential')
+@if ($type == 'hotel')
     @section('title', ' Гостиничные комплексы | Сказокнет')
 @endif
 

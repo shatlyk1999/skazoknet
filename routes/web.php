@@ -9,7 +9,9 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PagesController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Middleware\AdminMiddleware;
+use App\Http\Middleware\AuthMiddleware;
 use App\Http\Middleware\CityMiddleware;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -67,6 +69,11 @@ Route::group(['middleware' => CityMiddleware::class], function () {
     Route::get('complex/{slug}', [PagesController::class, 'show_complex'])->name('show.complex');
     Route::get('developer/{slug}', [PagesController::class, 'show_developer'])->name('show.developer');
     Route::get('complexes/by/{developer}', [PagesController::class, 'complexes_by_developer'])->name('complexes.by.developer');
+    Route::group(['middleware' => AuthMiddleware::class], function () {
+        Route::get('user-profile/{id}', [ProfileController::class, 'userProfile'])->name('userProfile');
+        Route::get('developer-profile/{id}', [ProfileController::class, 'developerProfile'])->name('developerProfile');
+        Route::post('user-update/{id}', [ProfileController::class, 'userUpdate'])->name('userUpdate');
+    });
 });
 
 //auth
@@ -102,6 +109,9 @@ Route::group([
     Route::post('settings/about-us', [SettingsControlller::class, 'about_us_store'])->name('settings.about_us.store');
     Route::post('developer-filter', [DeveloperController::class, 'index'])->name('developer.index.post');
     Route::post('complex-filter', [ComplexController::class, 'index'])->name('complex.index.post');
+
+    // SEO Management
+    Route::resource('seo', App\Http\Controllers\Admin\SeoController::class)->names('admin.seo');
 });
 
 Route::get('404', function () {
@@ -118,3 +128,6 @@ Route::get('500', function () {
 });
 
 Route::get('send-test-mail', [EmailController::class, 'sendEmail']);
+
+// SEO Routes
+Route::get('sitemap.xml', [App\Http\Controllers\SitemapController::class, 'index']);

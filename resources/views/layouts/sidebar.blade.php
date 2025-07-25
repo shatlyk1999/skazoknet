@@ -14,7 +14,7 @@
             <img src="{{ asset('images/logo.png') }}" alt="logo" />
         </div>
     </div>
-    <nav class="flex flex-col gap-2 p-4 mt-12 overflow-auto">
+    <nav class="flex flex-col gap-2 p-4 mt-12 overflow-auto" style="max-height: calc(100% - 112px);">
         <div class="flex flex-col gap-2 border-b border-white pb-4">
             <h2 class="text-base font-bold tracking-wide">
                 Полезная информация

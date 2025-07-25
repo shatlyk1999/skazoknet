@@ -90,6 +90,21 @@
                                     </div>
                                 </div>
                                 <div class="col-md-3">
+                                    <div class="form-group">
+                                        <input id="map_x" type="text" name="map_x" placeholder="Координата X"
+                                            class="form-control" value="{{ old('map_x', $complex->map_x) }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <input id="map_y" type="text" name="map_y" placeholder="Координата Y"
+                                            class="form-control" value="{{ old('map_y', $complex->map_y) }}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row align-items-center">
+                                <div class="col-md-6"></div>
+                                <div class="col-md-3">
                                     <div class="form-group  d-flex justify-content-end gap-3">
                                         <label class="form-check-label" for="popular">Популярный
                                         </label>

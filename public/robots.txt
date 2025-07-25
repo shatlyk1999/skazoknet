@@ -7,6 +7,15 @@ Disallow: /recovery-confirmed
 Disallow: /mail-confirmed
 Disallow: /send-email-register-verify
 Disallow: /send-test-mail
+Disallow: /404
+Disallow: /403
+Disallow: /500
+Disallow: /*.json$
+Disallow: /api/
 Allow: /
 
-Sitemap: //
+# Crawl-delay for all bots
+Crawl-delay: 1
+
+# Sitemap location
+Sitemap: https://skazoknet.com/sitemap.xml

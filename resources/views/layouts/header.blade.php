@@ -5,7 +5,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title')</title>
+
+    {{-- SEO Meta Tags --}}
+    <x-seo-head />
+
+    {{-- Fallback title if SEO not set --}}
+    @if (!app('seo')->getTitle())
+        <title>@yield('title', 'Skazoknet - Проекты недвижимости')</title>
+    @endif
+
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('images/favicon.png') }}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('images/favicon.svg') }}">
     <link href="{{ asset('styles/output.css') }}" rel="stylesheet" />
@@ -61,7 +69,7 @@
                     @endif
                     <div class="leading-10 pt-0 lg:pt-4 hidden lg:block">
                         @if (auth()->user())
-                            <div class="dropdown dropdown-custom">
+                            {{-- <div class="dropdown dropdown-custom">
                                 <button onclick="myFunction()"
                                     class="dropbtn cursor-pointer border-none bg-transparent outline-none hover:bg-black/5 transition-colors p-2 rounded-lg text-lg flex items-center gap-x-2">
                                     <img src="{{ asset('images/user 7.png') }}" class="size-7" alt="" />
@@ -71,12 +79,31 @@
                                     <form action="{{ route('logout') }}" class="" method="post">
                                         @csrf
                                         <button type="submit" class="cursor-pointer text-text">
-                                            {{-- <img src="{{ asset('icons/logout.svg') }}" alt="" /> --}}
                                             Выйти
                                         </button>
                                     </form>
                                 </div>
-                            </div>
+                            </div> --}}
+                            @if (auth()->user()->role == 'developer')
+                                <a href="#" class="flex justify-center items-center gap-2">
+                                    <img src="{{ asset('images/user 7.png') }}" class="size-7" alt="" />
+                                    {{ auth()->user()->name }}
+                                </a>
+                            @endif
+                            @if (auth()->user()->role == 'user')
+                                <a href="{{ route('userProfile', auth()->user()->id) }}"
+                                    class="flex justify-center items-center gap-2">
+                                    <img src="{{ asset('images/user 7.png') }}" class="size-7" alt="" />
+                                    {{ auth()->user()->name }}
+                                </a>
+                            @endif
+                            @if (auth()->user()->role == 'superadmin')
+                                <a href="{{ route('userProfile', auth()->user()->id) }}"
+                                    class="flex justify-center items-center gap-2">
+                                    <img src="{{ asset('images/user 7.png') }}" class="size-7" alt="" />
+                                    {{ auth()->user()->name }}
+                                </a>
+                            @endif
                         @else
                             <a href="{{ route('registration') }}"
                                 class="cursor-pointer border-none bg-transparent outline-none hover:bg-black/5 transition-colors p-2 rounded-lg text-lg flex items-center gap-x-2">

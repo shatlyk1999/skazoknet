@@ -98,6 +98,36 @@ $complex_count = \App\Models\Complex::get()->count() ?? 0;
                     </a>
                 </li>
 
+                <li class="sidebar-item has-sub @if (Request::segment('3') == 'seo') active @endif">
+                    <a href="#" class="sidebar-link">
+                        <i class="bi bi-search"></i>
+                        <span>SEO Управление</span>
+                    </a>
+
+                    <ul class="submenu">
+                        <li class="submenu-item @if (Request::segment('3') == 'seo' && Request::get('type') == 'complex') active @endif">
+                            <a href="{{ route('admin.seo.index', ['type' => 'complex']) }}" class="submenu-link">
+                                SEO Комплексов
+                            </a>
+                        </li>
+                        <li class="submenu-item @if (Request::segment('3') == 'seo' && Request::get('type') == 'developer') active @endif">
+                            <a href="{{ route('admin.seo.index', ['type' => 'developer']) }}" class="submenu-link">
+                                SEO Застройщиков
+                            </a>
+                        </li>
+                        <li class="submenu-item @if (Request::segment('3') == 'seo' && Request::get('type') == 'city') active @endif">
+                            <a href="{{ route('admin.seo.index', ['type' => 'city']) }}" class="submenu-link">
+                                SEO Городов
+                            </a>
+                        </li>
+                        <li class="submenu-item">
+                            <a href="/sitemap.xml" target="_blank" class="submenu-link">
+                                <i class="bi bi-box-arrow-up-right"></i> Sitemap.xml
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
                 <li class="sidebar-item has-sub @if (Request::segment('3') == 'settings') active @endif">
                     <a href="#" class="sidebar-link">
                         <i class="bi bi-gear-fill"></i>

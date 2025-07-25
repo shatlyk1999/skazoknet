@@ -6,12 +6,12 @@
                 <div class="flex items-center justify-center h-full w-[40%]">
                     <img src="{{ asset('developer-small/' . $developer->image) }}"
                         class="h-auto h-full border border-input-border-color rounded-md"
-                        style="max-width: -webkit-fill-available" alt="" />
+                        style="max-width: -webkit-fill-available" alt="{{ $developer->name }}" />
                 </div>
             @else
                 <div class="flex items-center justify-center h-full border border-input-border-color rounded-md w-[40%]">
                     <img src="{{ asset('images/zaglushka.svg') }}"
-                        class="h-auto min-h-[6.125rem] h-full w-[50%] min-w-[50%]" alt="" />
+                        class="h-auto min-h-[6.125rem] h-full w-[50%] min-w-[50%]" alt="{{ $developer->name }}" />
                 </div>
             @endif
             <div class="flex flex-col gap-2 w-full h-full justify-between">
@@ -67,11 +67,11 @@
                 @if ($developer->image != null)
                     <img src="{{ asset('developer-small/' . $developer->image) }}"
                         class="w-full h-auto rounded-tl-xl rounded-tr-xl max-h-[10.625rem] min-h-[10.625rem]"
-                        alt="" />
+                        alt="{{ $developer->name }}" />
                 @else
                     <img src="{{ asset('images/zaglushka.svg') }}"
                         class="rounded-tl-xl rounded-tr-xl w-[50%] mx-auto max-h-[10.625rem] min-h-[10.625rem] object-contain"
-                        alt="" />
+                        alt="{{ $developer->name }}" />
                 @endif
             </div>
             <div

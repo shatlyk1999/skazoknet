@@ -5,12 +5,12 @@
             {{-- h-[13.75rem] --}}
             @if ($developer->image != null)
                 <img src="{{ asset('developer/' . $developer->image) }}"
-                    class="w-full h-auto rounded-tl-xl rounded-tr-xl max-h-[10.625rem]" alt=""
+                    class="w-full h-auto rounded-tl-xl rounded-tr-xl max-h-[10.625rem]" alt="{{ $developer->name }}"
                     style="border-top-left-radius: 10px;border-top-right-radius:10px;" />
             @else
                 <img src="{{ asset('images/zaglushka.svg') }}"
-                    class="rounded-tl-xl rounded-tr-xl w-[50%] mx-auto max-h-[10.625rem] object-contain" alt=""
-                    style="height:137px;" />
+                    class="rounded-tl-xl rounded-tr-xl w-[50%] mx-auto max-h-[10.625rem] object-contain"
+                    alt="{{ $developer->name }}" style="height:137px;" />
             @endif
         </div>
         <div class="p-4 flex flex-col gap-2">

@@ -79,6 +79,21 @@
                                 </div>
                             </div>
                             <div class="col-md-3">
+                                <div class="form-group">
+                                    <input id="map_x" type="text" name="map_x" placeholder="Координата X"
+                                        class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <input id="map_y" type="text" name="map_y" placeholder="Координата Y"
+                                        class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col-md-6"></div>
+                            <div class="col-md-3">
                                 <div class="form-group d-flex justify-content-end gap-3">
                                     <span>Популярный</span>
                                     <div class="form-check form-switch cursor-pointer">

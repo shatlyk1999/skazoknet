@@ -86,7 +86,7 @@
                             </div>
                             <input type="radio" name="role" value="user" class="border-primary" />
                             <div>
-                                Пользовател
+                                Пользователь
                             </div>
                         </div>
                         <button type="submit" id="registerButton"

@@ -72,6 +72,8 @@ class ComplexController extends Controller
                 'developer_id' => $request->developer_id,
                 'type' => $request->type,
                 'slug' => Str::slug($request->name),
+                'map_x' => $request->map_x,
+                'map_y' => $request->map_y,
             ]);
 
             if ($request->has('image')) {
@@ -275,6 +277,8 @@ class ComplexController extends Controller
                 'developer_id' => $request->developer_id,
                 'type' => $request->type,
                 'slug' => Str::slug($request->name),
+                'map_x' => $request->map_x,
+                'map_y' => $request->map_y,
             ]);
 
             if ($request->has('images')) {

@@ -24,7 +24,7 @@ class CityMiddleware
             $user = Auth::user();
             $city = $user->city ?? City::where('name', 'Краснодар')->first();
 
-            // Kullanıcının city_id yoksa, atayıp kaydet
+            // Если у пользователя нет city_id, назначаем и сохраняем
             if (!$user->city_id && $city) {
                 $user->city_id = $city->id;
                 $user->save();
@@ -38,7 +38,7 @@ class CityMiddleware
             }
         }
 
-        // View'lara $city değişkenini paylaş
+        // Передаем переменную $city в представления
         if ($city) {
             View::share('city', $city);
         }

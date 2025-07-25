@@ -8,6 +8,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
@@ -28,7 +29,13 @@ class RegisterController extends Controller
 
         $user = $this->create($request->all());
 
-        $user->sendEmailVerificationNotification();
+        // Send email verification notification (ignore SMTP errors)
+        try {
+            $user->sendEmailVerificationNotification();
+        } catch (\Exception $e) {
+            // Ignore SMTP errors in local development
+            Log::info('Email verification notification failed (ignored): ' . $e->getMessage());
+        }
 
         $this->guard()->login($user);
 

@@ -149,8 +149,13 @@
             </div>
             <div class="w-full lg:w-[calc(45%-1.5rem)] h-[25rem] lg:h-auto">
                 <div class="rounded-xl w-full h-full bg-gray-300 flex items-center justify-center">
-                    map
-                    <!-- <img src="../public/map.png" class="w-full h-auto" alt="" /> -->
+                    {{-- map --}}
+                    @if ($complex->map_x && $complex->map_y)
+                        <div id="map" style="width: 100%; height: 368px; border-radius: 12px;"></div>
+                    @else
+                        <img src="{{ asset('images/map.png') }}" class="w-full rounded-xl" alt=""
+                            style="height: 368px; object-fit: cover;" />
+                    @endif
                 </div>
             </div>
         </div>
@@ -218,12 +223,16 @@
                 </div>
             </div>
             <div class="h-[20rem] w-full border-b flex items-center justify-center">
-                map
+                @if ($complex->map_x && $complex->map_y)
+                    <div id="map-mobile" style="width: 100%; height: 20rem;"></div>
+                @else
+                    <div class="text-gray-500">Карта недоступна</div>
+                @endif
             </div>
         </div>
     </div>
 
-    <section class="xl:container px-8 xs:px-12 xl:px-4 mx-0 xl:mx-auto w-full my-12 md:my-20">
+    {{-- <section class="xl:container px-8 xs:px-12 xl:px-4 mx-0 xl:mx-auto w-full my-12 md:my-20">
         <div class="flex items-center justify-between mb-8">
             <h1 class="text-2xl lg:text-3xl xl:text-4xl font-bold tracking-wide">
                 Отзывы ЖК «Сказка Град» Краснодар
@@ -1004,7 +1013,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
 
     @if ($residential_complexes->count() > 0)
         <section class="xl:container px-8 xs:px-12 xl:px-4 mx-0 xl:mx-auto w-full my-12 md:my-20">
@@ -1069,4 +1078,53 @@
             </div>
         </section>
     @endif
+@endsection
+
+@section('script')
+    {{-- @if ($complex->map_x && $complex->map_y) --}}
+    {{-- <script src="https://api-maps.yandex.ru/2.1/?apikey=533e70a2-eeb0-4f97-95e4-e6f35dda4aed&lang=ru_RU"
+        type="text/javascript"></script> --}}
+    <script src="{{ '//api-maps.yandex.ru/2.1-dev/?lang=ru-RU&load=package.full' }}"></script>
+    <script type="text/javascript">
+        ymaps.ready(function() {
+            // Desktop map
+            if (document.getElementById('map')) {
+                var myMap = new ymaps.Map("map", {
+                    center: [45.098663, 39.059953],
+                    zoom: 16,
+                    controls: ['zoomControl', 'fullscreenControl', 'typeSelector']
+                });
+
+                var myPlacemark = new ymaps.Placemark([45.099961, 39.060969, ], {
+                    balloonContent: '<div style="padding: 10px; font-family: Arial, sans-serif;"><strong style="color: #333;">{{ $complex->name }}</strong><br><small style="color: #666;">{{ $complex->address }}</small></div>',
+                    hintContent: '{{ $complex->name }}'
+                }, {
+                    preset: 'islands#redBuildingIcon',
+                    iconColor: '#dc2626'
+                });
+
+                myMap.geoObjects.add(myPlacemark);
+            }
+
+            // Mobile map
+            if (document.getElementById('map-mobile')) {
+                var myMapMobile = new ymaps.Map("map-mobile", {
+                    center: [45.099961, 39.060969],
+                    zoom: 16,
+                    controls: ['zoomControl', 'typeSelector']
+                });
+
+                var myPlacemarkMobile = new ymaps.Placemark([45.099961, 39.060969], {
+                    balloonContent: '<div style="padding: 10px; font-family: Arial, sans-serif;"><strong style="color: #333;">{{ $complex->name }}</strong><br><small style="color: #666;">{{ $complex->address }}</small></div>',
+                    hintContent: '{{ $complex->name }}'
+                }, {
+                    preset: 'islands#redBuildingIcon',
+                    iconColor: '#dc2626'
+                });
+
+                myMapMobile.geoObjects.add(myPlacemarkMobile);
+            }
+        });
+    </script>
+    {{-- @endif --}}
 @endsection

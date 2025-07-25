@@ -17,9 +17,9 @@ const formEndpoints = {
         redirectPath: "/recovery-confirmed",
     },
     // editUserForm: {
-    //     endpoint: "https://api.example.com/edit-user",
-    //     method: "PUT",
-    //     redirectPath: "/profile",
+    //     endpoint: "/user-update/" + user_id,
+    //     method: "POST",
+    //     redirectPath: "/user-profile/" + user_id,
     // },
 };
 

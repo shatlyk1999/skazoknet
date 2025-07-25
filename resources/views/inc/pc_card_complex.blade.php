@@ -4,13 +4,13 @@
         <div class="border border-custom-gray rounded-tl-xl rounded-tr-xl">
             <img src="{{ asset('complex/' . $complex->image) }}"
                 class="rounded-tl-xl rounded-tr-xl w-full h-auto 2xl:min-h-[15.5rem] 2xl:max-h-[15.5rem] xl:min-h-[13.6875rem] min-w-full xl:max-h-[13.6875rem] min-h-[10.5rem] max-h-[10.5rem] object-cover"
-                alt="" {{-- style="border-top-left-radius: 10px;border-top-right-radius:10px;"  --}} />
+                alt="{{ $complex->name }}" {{-- style="border-top-left-radius: 10px;border-top-right-radius:10px;"  --}} />
         </div>
     @else
         <div class="border border-custom-gray rounded-tl-xl rounded-tr-xl">
             <img src="{{ asset('images/zaglushka.svg') }}"
                 class="rounded-tl-xl rounded-tr-xl w-[50%] min-w-[50%] mx-auto h-auto 2xl:min-h-[15.5rem] 2xl:max-h-[15.5rem] xl:min-h-[13.6875rem] xl:max-h-[13.6875rem] min-h-[10.5rem] max-h-[10.5rem] object-contain"
-                alt="" />
+                alt="{{ $complex->name }}" />
         </div>
     @endif
     <div
@@ -18,7 +18,7 @@
         <h2 class="font-semibold text-lg line-clamp-1">
             {{ $complex->name }}
         </h2>
-        <p>
+        <p class="line-clamp-2" style="min-height: 50px;">
             {{ $complex->address }}
         </p>
         <p class="mt-8">Застройщик: {{ $complex->developer->name }}</p>
