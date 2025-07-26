@@ -62,7 +62,8 @@
 <!-- Mobile card -->
 @if ($developers->count() > 0)
     @foreach ($developers as $key => $developer)
-        <div class="relative rounded-xl basis-full group hover:shadow-md sm:hidden block">
+        <a href="{{ route('show.developer', $developer->slug) }}"
+            class="relative rounded-xl basis-full group hover:shadow-md sm:hidden block">
             <div class="border border-custom-gray rounded-tl-xl rounded-tr-xl">
                 @if ($developer->image != null)
                     <img src="{{ asset('developer-small/' . $developer->image) }}"
@@ -110,18 +111,7 @@
                     115 Отзывов
                 </span>
             </div>
-            <div
-                class="absolute top-0 left-0 z-11 size-full bg-primary/90 rounded-xl flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity">
-                <div class="flex flex-col gap-2 items-center">
-                    <a href="{{ route('show.developer', $developer->slug) }}"> Узнать подробнее</a>
-                    {{-- <button
-                    class="border-white border text-sm xl:text-base rounded-3xl px-3 py-2 text-white transition-colors cursor-pointer flex items-center gap-x-2">
-                    <i class="mdi mdi-plus"></i>
-                    <span>Оставить отзыв</span>
-                </button> --}}
-                </div>
-            </div>
-        </div>
+        </a>
     @endforeach
 @endif
 

@@ -17,6 +17,9 @@ class SitemapController extends Controller
         // Главная страница
         $sitemap .= $this->addUrl(route('home'), now(), 'daily', '1.0');
 
+        // О нас
+        $sitemap .= $this->addUrl(route('about_us'), now(), 'monthly', '0.7');
+
         // Города
         City::all()->each(function ($city) use (&$sitemap) {
             $sitemap .= $this->addUrl(
