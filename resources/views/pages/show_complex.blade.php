@@ -119,7 +119,7 @@
             </div>
         </div>
 
-        <button
+        <button onclick="window.history.back()"
             class="absolute right-12 top-4 z-10 rounded-full px-2 py-1 bg-custom-gray-2 cursor-pointer text-white md:hidden block">
             <i class="mdi mdi-chevron-left"></i>
         </button>

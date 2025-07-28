@@ -82,7 +82,28 @@
 
 @section('script')
     <script>
+        // Password toggle functionality
+        function togglePasswordVisibility(inputId, icon) {
+            const input = document.getElementById(inputId);
+            if (!input) return;
+
+            if (input.type === "password") {
+                input.type = "text";
+                icon.classList.add("text-primary");
+            } else {
+                input.type = "password";
+                icon.classList.remove("text-primary");
+            }
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
+            // Password toggle event listener
+            document.querySelectorAll('.password-toggle').forEach(function(icon) {
+                icon.addEventListener('click', function() {
+                    const inputId = icon.getAttribute('data-input-id');
+                    togglePasswordVisibility(inputId, icon);
+                });
+            });
             const fileInput = document.getElementById('redaktFileInput');
             const profileImage = document.getElementById('userProfileImage');
             const profileContainer = document.getElementById('profileImageContainer');

@@ -1,40 +1,63 @@
+// Function to toggle sidebar - can be called directly from onclick
 const toggleSidebar = (toggleId, sidebarId, overlayId, closeId = null) => {
     const toggle = document.getElementById(toggleId);
     const sidebar = document.getElementById(sidebarId);
     const overlay = document.getElementById(overlayId);
-    const closeButton = closeId ? document.getElementById(closeId) : null;
     const html = document.documentElement;
-    if (toggle && sidebar && overlay) {
-        // Toggle sidebar on toggle button click
-        toggle.addEventListener("click", () => {
-            html.style.overflow = "hidden";
-            toggle.classList.toggle("active");
-            sidebar.classList.toggle("active");
-            overlay.classList.toggle("active");
-        });
 
+    if (toggle && sidebar && overlay) {
+        // Toggle sidebar classes
+        const isActive = sidebar.classList.contains("active");
+
+        if (isActive) {
+            // Close sidebar
+            html.style.overflow = "auto";
+            toggle.classList.remove("active");
+            sidebar.classList.remove("active");
+            overlay.classList.remove("active");
+        } else {
+            // Open sidebar
+            html.style.overflow = "hidden";
+            toggle.classList.add("active");
+            sidebar.classList.add("active");
+            overlay.classList.add("active");
+        }
+    } else {
+        console.warn(
+            `Sidebar toggle failed: Missing elements for toggleId: ${toggleId}, sidebarId: ${sidebarId}, or overlayId: ${overlayId}`
+        );
+    }
+};
+
+// Initialize sidebar event listeners when DOM is loaded
+document.addEventListener("DOMContentLoaded", function () {
+    const sidebar = document.getElementById("sidebar");
+    const overlay = document.getElementById("sidebarOverlay");
+    const closeButton = document.getElementById("closeSidebar");
+    const html = document.documentElement;
+
+    if (sidebar && overlay) {
         // Close sidebar on overlay click
         overlay.addEventListener("click", () => {
-            toggle.classList.remove("active");
+            html.style.overflow = "auto";
+            document.getElementById("menuToggle")?.classList.remove("active");
             sidebar.classList.remove("active");
             overlay.classList.remove("active");
         });
 
         // Close sidebar on close button click (if provided)
         if (closeButton) {
-            html.style.overflow = "auto";
             closeButton.addEventListener("click", () => {
-                toggle.classList.remove("active");
+                html.style.overflow = "auto";
+                document
+                    .getElementById("menuToggle")
+                    ?.classList.remove("active");
                 sidebar.classList.remove("active");
                 overlay.classList.remove("active");
             });
         }
-    } else {
-        console.warn(
-            `Sidebar toggle initialization failed: Missing elements for toggleId: ${toggleId}, sidebarId: ${sidebarId}, or overlayId: ${overlayId}`
-        );
     }
-};
+});
 
 const toggleCollapse = (contentSelector, buttonSelector) => {
     const content = document.querySelector(contentSelector);

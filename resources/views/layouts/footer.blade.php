@@ -83,6 +83,11 @@
     </div>
 </div>
 <!-- Modal -->
+
+<!-- Sidebar -->
+@include('layouts.sidebar')
+<!-- Sidebar -->
+
 </div>
 
 <script src="{{ asset('js/component.js') }}" defer></script>

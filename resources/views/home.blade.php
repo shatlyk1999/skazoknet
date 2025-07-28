@@ -8,9 +8,4 @@
     @include('index.property_developers')
     @include('index.comments')
 
-
-    <!-- Sidebar -->
-    @include('layouts.sidebar')
-    <!-- Sidebar -->
-
 @endsection
