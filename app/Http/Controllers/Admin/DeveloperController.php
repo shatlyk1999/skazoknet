@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\City;
 use App\Models\Developer;
+use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 use Intervention\Image\Drivers\Gd\Driver;
@@ -22,8 +23,14 @@ class DeveloperController extends Controller
         $filter = $request->all() ?? '';
         $developers = Developer::filter($filter)->orderBy('sort', 'desc')->orderBy('created_at', 'desc')->paginate(10);
         $cities = City::get();
+        $users = User::where('role', 'developer')
+            ->whereDoesntHave('developer')
+            ->get();
+        $developer_users = User::where('role', 'developer')
+            ->whereHas('developer')
+            ->get();
 
-        return view('admin.developer.index', compact('developers', 'cities', 'filter'));
+        return view('admin.developer.index', compact('developers', 'cities', 'filter', 'users', 'developer_users'));
     }
 
     /**
@@ -64,6 +71,7 @@ class DeveloperController extends Controller
                 'status' => $status,
                 'popular' => $popular,
                 'slug' => Str::slug($request->name),
+                'user_id' => $request->user_id,
             ]);
 
             if ($request->has('image')) {
@@ -251,6 +259,7 @@ class DeveloperController extends Controller
                 'status' => $status,
                 'popular' => $popular,
                 'slug' => Str::slug($request->name),
+                'user_id' => $request->user_id,
             ]);
 
             if ($request->has('city_ids')) {

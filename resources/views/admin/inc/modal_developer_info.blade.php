@@ -15,6 +15,10 @@
                     @if (isset($developer))
                         <div>
                             <div>
+                                <b>Пользователь</b>
+                                <p>{{ $developer->user->name ?? '' }}</p>
+                            </div>
+                            <div>
                                 <b>Название</b>
                                 <p>{{ $developer->name }}</p>
                             </div>

@@ -79,6 +79,12 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->belongsTo(City::class, 'city_id');
     }
 
+
+    public function developer()
+    {
+        return $this->hasOne(Developer::class, 'user_id');
+    }
+
     public function scopeFilter($query, $data)
     {
         if (isset($data['role'])) {

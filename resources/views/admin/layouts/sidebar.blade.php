@@ -98,6 +98,27 @@ $complex_count = \App\Models\Complex::get()->count() ?? 0;
                     </a>
                 </li>
 
+                <li class="sidebar-item @if (Request::segment('3') == 'access') active @endif">
+                    <a href="{{ route('admin.access.index') }}" class="sidebar-link d-flex justify-content-between">
+                        <span class="m-0 position-relative">
+                            <i class="bi bi-file-earmark-text"></i>
+                            <span>Заявки</span>
+                            @php
+                                $pending_count = \App\Models\Access::where('status', 'pending')->count();
+                            @endphp
+                            @if ($pending_count > 0)
+                                <span
+                                    class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                                    style="font-size: 10px; padding: 2px 6px;">
+                                    {{ $pending_count }}
+                                </span>
+                            @endif
+                        </span>
+                        <span class="badge bg-secondary"
+                            style="margin-left: 0;">{{ \App\Models\Access::where('status', 'pending')->count() }}</span>
+                    </a>
+                </li>
+
                 <li class="sidebar-item has-sub @if (Request::segment('3') == 'seo') active @endif">
                     <a href="#" class="sidebar-link">
                         <i class="bi bi-search"></i>
@@ -151,7 +172,7 @@ $complex_count = \App\Models\Complex::get()->count() ?? 0;
                 <li class="sidebar-item">
                     <form action="{{ route('logout') }}" class="sidebar-link" method="post">
                         @csrf
-                        <i class="bi bi-arrow-right-circle-fill"></i>
+                        <i class="bi bi-arrow-left-circle-fill"></i>
                         <button type="submit" style="background: inherit;border:none;">
                             <span>
                                 Выйти

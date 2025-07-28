@@ -17,7 +17,13 @@
                      <span class="py-1 xl:py-2 px-3 xl:px-4 rounded-xl bg-white text-primary">15</span>
                  </div>
              </a>
-             @if (auth()->user()->role == 'developer')
+             @if (auth()->user()->role == 'developer' || auth()->user()->role == 'superadmin')
+                 <a href="#"
+                     class="border-b border-white text-white font-semibold text-base inline-block w-full py-3 xl:py-4 px-6">
+                     <div class="flex items-center justify-between">
+                         <span>О компании</span>
+                     </div>
+                 </a>
                  <a href="#"
                      class="border-b border-white text-white font-semibold text-base inline-block w-full py-3 xl:py-4 px-6">
                      <div class="flex items-center justify-between">
@@ -28,7 +34,8 @@
                  <a href="#"
                      class="border-b border-white text-white font-semibold text-base inline-block w-full py-3 xl:py-4 px-6">
                      <div class="flex items-center justify-between">
-                         <span>О компании</span>
+                         <span>Всего отзывов</span>
+                         <span class="py-1 xl:py-2 px-3 xl:px-4 rounded-xl bg-white text-primary">15</span>
                      </div>
                  </a>
              @endif
@@ -41,11 +48,14 @@
              </a>
          </div>
          <div class="pb-6 pl-6">
-             <a href="{{ route('logout') }}"
-                 class="border-none bg-transparent text-white outline-none hover:bg-black/5 transition-colors p-2 rounded-lg text-lg flex items-center gap-x-2">
+             <form action="{{ route('logout') }}" class="sidebar-link flex" method="post">
+                 @csrf
                  <img src="{{ asset('icons/logout.svg') }}" alt="" />
-                 Войти
-             </a>
+                 <button type="submit"
+                     class="border-none bg-transparent text-white outline-none hover:bg-black/5 transition-colors p-2 rounded-lg text-lg flex items-center gap-x-2">
+                     Выйти
+                 </button>
+             </form>
          </div>
      </div>
  </div>

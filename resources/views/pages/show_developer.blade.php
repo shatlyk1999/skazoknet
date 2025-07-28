@@ -48,7 +48,8 @@
         <div class="mt-8 w-full xl:w-[80%] mr-0 xl:mr-auto flex items-center justify-between md:flex-nowrap flex-wrap">
             <div
                 class="text-xs 2xl:text-sm tracking-wide order-4 md:order-none md:w-auto w-full md:mt-0 mt-4 md:text-left text-center">
-                Ваша компания? <a href="#" class="text-primary">Оставьте заявку</a>
+                Ваша компания? <a href="{{ route('gainingaccess', ['company_id' => $developer->id]) }}"
+                    class="text-primary">Оставьте заявку</a>
             </div>
             <div class="text-xl lg:text-3xl flex items-center w-[50%] md:w-auto order-1 md:order-0">
                 <span class="pr-1">4.79</span>

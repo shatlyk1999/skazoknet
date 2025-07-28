@@ -28,6 +28,11 @@ class Developer extends Model
         return $this->hasMany(Complex::class, 'developer_id');
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
     public function scopeStatus()
     {
         return $this->where('status', '1');
@@ -67,6 +72,9 @@ class Developer extends Model
         }
         if (isset($data['status'])) {
             $query->where('status', $data['status']);
+        }
+        if (isset($data['user_id'])) {
+            $query->where('user_id', $data['user_id']);
         }
     }
 

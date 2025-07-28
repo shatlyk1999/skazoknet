@@ -206,6 +206,9 @@ class FormValidator {
             return;
         }
 
+        // Add CSRF token to form data
+        formData._token = csrfToken;
+
         // Fetch submission
         const endpointConfig = formEndpoints[this.form.id];
         if (!endpointConfig) {
@@ -228,8 +231,9 @@ class FormValidator {
                 },
             });
             if (response.ok) {
-                // if (response.status === 200 || response.status === 201) {
-                // window.location.replace(endpointConfig.redirectPath);
+                // Başarılı login için redirect
+                window.location.href = endpointConfig.redirectPath;
+                return;
             } else {
                 const errorMessage = await response.text();
                 this.showServerErrors(errorMessage);

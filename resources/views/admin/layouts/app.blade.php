@@ -217,7 +217,21 @@
                                     <img src="{{ asset('admin/compiled/jpg/4.jpg') }}" alt="Face 1" />
                                 </div>
                                 <div class="ms-3 name">
-                                    <h5 class="font-bold">{{ Auth::user()->name }}</h5>
+                                    <div class="d-flex align-items-center">
+                                        <h5 class="font-bold mb-0">{{ Auth::user()->name }}</h5>
+                                        <div class="position-relative ms-2">
+                                            <a href="{{ route('admin.access.index') }}" class="text-decoration-none">
+                                                <i class="bi bi-envelope" style="font-size: 18px; color: #6c757d;"></i>
+                                                @if (\App\Models\Access::where('status', 'pending')->count() > 0)
+                                                    <span
+                                                        class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                                                        style="font-size: 10px; padding: 2px 6px;">
+                                                        {{ \App\Models\Access::where('status', 'pending')->count() }}
+                                                    </span>
+                                                @endif
+                                            </a>
+                                        </div>
+                                    </div>
                                     {{-- <h6 class="text-muted text-small mb-0">{{ Auth::user()->email }}</h6> --}}
                                 </div>
                             </div>

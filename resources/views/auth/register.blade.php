@@ -79,7 +79,7 @@
                                 <span class="inline-block w-[90%]"></span>
                             </div>
                         </div>
-                        <div class="mt-4 text-xs tracking-wide flex items-center gap-x-2 justify-center">
+                        {{-- <div class="mt-4 text-xs tracking-wide flex items-center gap-x-2 justify-center">
                             <input type="radio" name="role" value="developer" class="border-primary" />
                             <div>
                                 Застройщик
@@ -88,7 +88,7 @@
                             <div>
                                 Пользователь
                             </div>
-                        </div>
+                        </div> --}}
                         <button type="submit" id="registerButton"
                             class="text-center h-12.5 rounded-3xl border border-primary text-primary text-sm font-bold tracking-wide px-8 hover:bg-primary hover:text-white transition-colors cursor-pointer mt-4"
                             style="opacity: 0.5; cursor: not-allowed;" disabled>

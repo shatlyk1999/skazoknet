@@ -16,6 +16,23 @@
                 <div class="modal-body">
                     <div class="modal-body">
                         @if (isset($developer))
+
+                            <div class="form-group">
+                                <label for="user_id">Пользователь</label>
+                                <select name="user_id" id="user_id" class="form-control">
+                                    <option value="{{ $developer->user->id ?? '' }}">
+                                        {{ $developer->user->name ?? 'Пользователь' }}
+                                        ({{ $developer->user->email ?? '' }})</option>
+                                    @foreach ($users as $user)
+                                        <option value="{{ $user->id }}">
+                                            {{-- @if ($developer->user_id == $user->id) selected @endif> --}}
+                                            {{ $user->name }} ({{ $user->email }})
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+
                             <label for="name">Название</label>
                             <div class="form-group">
                                 <input id="name" type="text" name="name"

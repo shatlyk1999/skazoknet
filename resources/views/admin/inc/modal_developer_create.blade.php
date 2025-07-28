@@ -14,6 +14,19 @@
                 </div>
                 <div class="modal-body">
                     <div class="modal-body">
+
+                        <div class="form-group">
+                            {{-- <label for="user_id">Пользователь</label> --}}
+                            <select name="user_id" id="user_id" class="form-control">
+                                <option value="">Пользователь</option>
+                                @foreach ($users as $user)
+                                    <option value="{{ $user->id }}" {{-- {{ isset($developer) && $developer->user_id == $user->id ? 'selected' : '' }} --}}>
+                                        {{ $user->name }} ({{ $user->email }})
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+
                         {{-- <label for="name">Название</label> --}}
                         <div class="form-group">
                             <input id="name" type="text" name="name" placeholder="Название"

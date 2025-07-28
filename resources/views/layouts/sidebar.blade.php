@@ -4,7 +4,16 @@
 <div id="sidebar"
     class="fixed top-0 h-full w-full sm:w-[50%] bg-primary text-white transition-all duration-300 ease-in-out z-30 rounded-r-lg shadow-lg block lg:hidden"
     role="navigation">
-    <div class="flex justify-end p-4 relative">
+    <div class="flex justify-between p-4 relative">
+        @php
+            $user = auth()->user();
+        @endphp
+        @if ($user)
+            <a href="{{ route('userProfile', auth()->user()->id) }}" class="flex justify-center items-center gap-2">
+                <img src="{{ asset('images/user 7.png') }}" class="size-7" alt="" />
+                {{ auth()->user()->name }}
+            </a>
+        @endif
         <button id="closeSidebar" onclick="toggleSidebar('menuToggle', 'sidebar', 'sidebarOverlay', 'closeSidebar')"
             class="text-white text-2xl hover:rotate-90 hover:bg-white/10 px-1 rounded-full transition-all duration-200 border border-white"
             aria-label="Close menu">

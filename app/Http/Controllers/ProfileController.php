@@ -19,7 +19,7 @@ class ProfileController extends Controller
         $this->middleware('auth');
     }
 
-    public function userProfile(Request $request, $id)
+    public function userProfile($id)
     {
         return view('cabinet.user');
     }
@@ -117,5 +117,20 @@ class ProfileController extends Controller
         }
 
         return back();
+    }
+
+    public function aboutCompany($id)
+    {
+        // Fetch company information from the database
+        // $companyInfo = ::first();
+
+        // if (!$companyInfo) {
+        //     return redirect()->back()->with([
+        //         'type' => 'error',
+        //         'message' => 'Информация о компании не найдена'
+        //     ]);
+        // }
+
+        // return view('cabinet.about_company', compact('companyInfo'));
     }
 }

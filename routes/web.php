@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AccessController;
 use App\Http\Controllers\Admin\CityController;
 use App\Http\Controllers\Admin\ComplexController;
 use App\Http\Controllers\Admin\DashboardController;
@@ -73,7 +74,10 @@ Route::group(['middleware' => CityMiddleware::class], function () {
         Route::get('user-profile/{id}', [ProfileController::class, 'userProfile'])->name('userProfile');
         Route::get('developer-profile/{id}', [ProfileController::class, 'developerProfile'])->name('developerProfile');
         Route::post('user-update/{id}', [ProfileController::class, 'userUpdate'])->name('userUpdate');
+        Route::get('about-company/{id}', [ProfileController::class, 'aboutCompany'])->name('aboutCompany');
     });
+    Route::get('gaining-access', [AccessController::class, 'index'])->name('gainingaccess');
+    Route::post('access-post', [AccessController::class, 'store'])->name('access.post');
 });
 
 //auth
@@ -83,6 +87,24 @@ Route::group(['middleware' => CityMiddleware::class], function () {
 //     });
 // });
 
+
+Route::get('404', function () {
+    return response()->view('errors.404', [], 404);
+});
+Route::fallback(function () {
+    return response()->view('errors.404', [], 404);
+});
+Route::get('403', function () {
+    return response()->view('errors.403', [], 403);
+});
+Route::get('500', function () {
+    return response()->view('errors.500', [], 500);
+});
+
+Route::get('send-test-mail', [EmailController::class, 'sendEmail']);
+
+// SEO sitemap
+Route::get('sitemap.xml', [App\Http\Controllers\SitemapController::class, 'index']);
 
 
 
@@ -110,24 +132,13 @@ Route::group([
     Route::post('developer-filter', [DeveloperController::class, 'index'])->name('developer.index.post');
     Route::post('complex-filter', [ComplexController::class, 'index'])->name('complex.index.post');
 
+    // Access Management (Заявки)
+    Route::get('access', [App\Http\Controllers\Admin\AccessController::class, 'index'])->name('admin.access.index');
+    Route::get('access/{id}/reject', [App\Http\Controllers\Admin\AccessController::class, 'reject'])->name('admin.access.reject');
+    Route::post('access/{id}/reject', [App\Http\Controllers\Admin\AccessController::class, 'sendRejectMessage'])->name('admin.access.sendReject');
+    Route::get('access/{id}/approve', [App\Http\Controllers\Admin\AccessController::class, 'approve'])->name('admin.access.approve');
+    Route::post('access/{id}/approve', [App\Http\Controllers\Admin\AccessController::class, 'sendApproveMessage'])->name('admin.access.sendApprove');
+
     // SEO Management
     Route::resource('seo', App\Http\Controllers\Admin\SeoController::class)->names('admin.seo');
 });
-
-Route::get('404', function () {
-    return response()->view('errors.404', [], 404);
-});
-Route::fallback(function () {
-    return response()->view('errors.404', [], 404);
-});
-Route::get('403', function () {
-    return response()->view('errors.403', [], 403);
-});
-Route::get('500', function () {
-    return response()->view('errors.500', [], 500);
-});
-
-Route::get('send-test-mail', [EmailController::class, 'sendEmail']);
-
-// SEO Routes
-Route::get('sitemap.xml', [App\Http\Controllers\SitemapController::class, 'index']);

@@ -1,5 +1,6 @@
 /.phpunit.cache
 /node_modules
+/public/avatar
 /public/cities
 /public/complex/
 /public/developer

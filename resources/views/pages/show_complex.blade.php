@@ -74,7 +74,8 @@
         <div class="mt-8 w-full xl:w-[80%] mr-0 xl:mr-auto flex items-center justify-between md:flex-nowrap flex-wrap">
             <div
                 class="text-xs 2xl:text-sm tracking-wide order-4 md:order-none md:w-auto w-full md:mt-0 mt-4 md:text-left text-center">
-                Ваша компания? <a href="#" class="text-primary">Оставьте заявку</a>
+                Ваша компания? <a href="{{ route('gainingaccess', ['company_id' => $complex->developer->id]) }}"
+                    class="text-primary">Оставьте заявку</a>
             </div>
             <div class="text-xl lg:text-3xl flex items-center w-[50%] md:w-auto order-1 md:order-0">
                 <span class="pr-1">4.79</span>
@@ -231,6 +232,17 @@
                 @else
                     <div class="text-gray-500">Карта недоступна</div>
                 @endif
+            </div>
+            <div class="mt-8 block md:hidden px-8 xs:px-12 sm:px-0 flex justify-center items-center text-center">
+                <a href="#"
+                    class="border-primary text-sm xl:text-base border rounded-3xl px-8 py-2 text-primary hover:text-white hover:border-white hover:bg-primary transition-colors cursor-pointer md:w-auto w-full">
+                    Оставить отзыв
+                </a>
+            </div>
+            <div
+                class="text-xs 2xl:text-sm tracking-wide order-4 md:order-none md:w-auto w-full md:mt-0 mt-4 md:text-left text-center">
+                Ваша компания? <a href="{{ route('gainingaccess', ['company_id' => $complex->developer->id]) }}"
+                    class="text-primary">Оставьте заявку</a>
             </div>
         </div>
     </div>

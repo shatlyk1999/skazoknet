@@ -84,72 +84,7 @@
                             </h4>
                         </div>
                         <div class="card-content">
-                            <form action="{{ route('developer.index.post') }}" method="post">
-                                @csrf
-                                <div class="collapse {{ !empty($filter) ? 'show' : '' }}" id="collapseExample">
-                                    <div class="filter d-flex justify-content-between align-items-end">
-                                        <div>
-                                            <label for="name_year">Название или Год основания</label>
-                                            <input type="text" name="name_year" class="form-control" placeholder=""
-                                                value="{{ isset($filter['name_year']) ? $filter['name_year'] : '' }}">
-                                        </div>
-                                        <div>
-                                            <label for="city_id">Город</label>
-                                            <select name="city_id" id="city_id" class="form-control">
-                                                <option value="">--</option>
-                                                @foreach ($cities as $city)
-                                                    <option value="{{ $city->id }}"
-                                                        @if (isset($filter['city_id']) && $filter['city_id'] == $city->id) selected @endif>
-                                                        {{ $city->name }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div>
-                                            <label for="image">Логотип</label>
-                                            <select name="image" id="image" class="form-control">
-                                                <option value="">--</option>
-                                                <option value="1" @if (isset($filter['image']) && $filter['image'] == '1') selected @endif>
-                                                    Есть
-                                                    логотип</option>
-                                                <option value="0" @if (isset($filter['image']) && $filter['image'] == '0') selected @endif>Нет
-                                                    логотип</option>
-                                            </select>
-                                        </div>
-                                        <div>
-                                            <label for="popular">Популярный</label>
-                                            <select name="popular" id="popular" class="form-control">
-                                                <option value="">--</option>
-                                                <option value="1" @if (isset($filter['popular']) && $filter['popular'] == '1') selected @endif>
-                                                    Популярные</option>
-                                                <option value="0" @if (isset($filter['popular']) && $filter['popular'] == '0') selected @endif>
-                                                    Непопулярные</option>
-                                            </select>
-                                        </div>
-                                        <div>
-                                            <label for="status">Статус</label>
-                                            <select name="status" id="status" class="form-control">
-                                                <option value="">--</option>
-                                                <option value="1" @if (isset($filter['status']) && $filter['status'] == '1') selected @endif>
-                                                    Активный</option>
-                                                <option value="0" @if (isset($filter['status']) && $filter['status'] == '0') selected @endif>
-                                                    Пассивный</option>
-                                            </select>
-                                        </div>
-                                        <div class="d-flex justify-content-between align-items-end gap-1">
-                                            <div>
-                                                <button type="submit" class="btn btn-outline-primary">
-                                                    Фильтр
-                                                </button>
-                                            </div>
-                                            <div>
-                                                <a href="{{ route('developer.index') }}"
-                                                    class="btn btn-outline-danger">Очистить</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
+                            @include('admin.inc.filter_developer')
                             <!-- table hover -->
                             <div class="table-responsive">
                                 <table class="table table-hover mb-0">
@@ -157,6 +92,7 @@
                                         <tr>
                                             <th>№</th>
                                             <th>Логотип</th>
+                                            {{-- <th>Пользователь</th> --}}
                                             <th>Название</th>
                                             <th>Сортировать</th>
                                             <th>Статус</th>
@@ -173,6 +109,9 @@
                                                     <img src="{{ asset('developer/' . $developer->image) }}"
                                                         style="width:50px;height:50px;border-radius:10px;" alt="">
                                                 </td>
+                                                {{-- <td>
+                                                    {{ $developer->user->name }} ({{ $developer->user->email }})
+                                                </td> --}}
                                                 <td>
                                                     {{ $developer->name }}
                                                 </td>

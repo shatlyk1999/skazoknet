@@ -37,19 +37,28 @@
                      <span class="py-1 xl:py-2 px-3 xl:px-4 rounded-xl bg-white text-primary">15</span>
                  </div>
              </a>
-             <a href="#"
-                 class="border-b border-white text-white font-semibold text-base inline-block w-full py-3 xl:py-4 px-6">
-                 <div class="flex items-center justify-between">
-                     <span>О компании</span>
-                 </div>
-             </a>
-             <a href="#"
-                 class="border-b border-b-transparent text-white font-semibold text-base inline-block w-full py-3 xl:py-4 px-6">
-                 <div class="flex items-center justify-between">
-                     <span>Мои сообщения</span>
-                     <span class="py-1 xl:py-2 px-3 xl:px-4 rounded-xl bg-white text-primary">+10</span>
-                 </div>
-             </a>
+             @if (auth()->user()->role == 'developer' || auth()->user()->role == 'superadmin')
+                 <a href="#"
+                     class="border-b border-b-transparent text-white font-semibold text-base inline-block w-full py-3 xl:py-4 px-6">
+                     <div class="flex items-center justify-between">
+                         <span>Мои сообщения</span>
+                         <span class="py-1 xl:py-2 px-3 xl:px-4 rounded-xl bg-white text-primary">+10</span>
+                     </div>
+                 </a>
+                 <a href="#"
+                     class="border-b border-white text-white font-semibold text-base inline-block w-full py-3 xl:py-4 px-6">
+                     <div class="flex items-center justify-between">
+                         <span>О компании</span>
+                     </div>
+                 </a>
+                 <a href="#"
+                     class="border-b border-b-transparent text-white font-semibold text-base inline-block w-full py-3 xl:py-4 px-6">
+                     <div class="flex items-center justify-between">
+                         <span>Всего отзывов</span>
+                         <span class="py-1 xl:py-2 px-3 xl:px-4 rounded-xl bg-white text-primary">+10</span>
+                     </div>
+                 </a>
+             @endif
          </div>
          <div class="pb-6 pl-6 flex items-center justify-center">
              <button
