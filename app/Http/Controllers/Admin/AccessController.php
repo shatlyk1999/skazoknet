@@ -27,6 +27,9 @@ class AccessController extends Controller
     public function reject($id)
     {
         $access = Access::findOrFail($id);
+        if ($access->status != 'pending') {
+            return back();
+        }
         return view('admin.access.reject', compact('access'));
     }
 
@@ -38,7 +41,10 @@ class AccessController extends Controller
         ]);
 
         $access = Access::findOrFail($id);
-
+        if ($access->status != 'pending') {
+            return back();
+        }
+        // Send rejection email
         try {
             Mail::send('emails.access_reject', [
                 'title' => $request->title,
@@ -61,6 +67,9 @@ class AccessController extends Controller
     public function approve($id)
     {
         $access = Access::findOrFail($id);
+        if ($access->status != 'pending') {
+            return back();
+        }
         return view('admin.access.approve', compact('access'));
     }
 
@@ -74,7 +83,10 @@ class AccessController extends Controller
         ]);
 
         $access = Access::findOrFail($id);
-
+        if ($access->status != 'pending') {
+            return back();
+        }
+        // Send approval email with login and password
         try {
             Mail::send('emails.access_approve', [
                 'title' => $request->title,
