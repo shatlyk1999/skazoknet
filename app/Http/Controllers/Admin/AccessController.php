@@ -46,11 +46,13 @@ class AccessController extends Controller
         }
         // Send rejection email
         try {
-            Mail::send('emails.access_reject', [
+            $emailContent = view('emails.access_reject', [
                 'title' => $request->title,
                 'message' => $request->message,
                 'company_name' => $access->company_name
-            ], function ($mail) use ($access, $request) {
+            ])->render();
+
+            Mail::html($emailContent, function ($mail) use ($access, $request) {
                 $mail->to($access->email)
                     ->subject($request->title);
             });
@@ -88,13 +90,15 @@ class AccessController extends Controller
         }
         // Send approval email with login and password
         try {
-            Mail::send('emails.access_approve', [
+            $emailContent = view('emails.access_approve', [
                 'title' => $request->title,
                 'login' => $request->login,
                 'password' => $request->password,
                 'message' => $request->message,
                 'company_name' => $access->company_name
-            ], function ($mail) use ($access, $request) {
+            ])->render();
+
+            Mail::html($emailContent, function ($mail) use ($access, $request) {
                 $mail->to($access->email)
                     ->subject($request->title);
             });
