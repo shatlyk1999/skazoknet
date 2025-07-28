@@ -46,24 +46,31 @@ class AccessController extends Controller
         }
         // Send rejection email
         try {
+            Log::info('Attempting to send rejection email to: ' . $access->email);
+
             $emailContent = view('emails.access_reject', [
                 'title' => $request->title,
                 'message' => $request->message,
                 'company_name' => $access->company_name
             ])->render();
 
+            Log::info('Email content rendered successfully');
+
             Mail::html($emailContent, function ($mail) use ($access, $request) {
                 $mail->to($access->email)
                     ->subject($request->title);
             });
+
+            Log::info('Email sent successfully to: ' . $access->email);
         } catch (\Exception $e) {
-            Log::info('Email sending failed (ignored): ' . $e->getMessage());
+            Log::error('Email sending failed: ' . $e->getMessage());
         }
 
         $access->update(['status' => 'rejected']);
 
         return redirect()->route('admin.access.index')
-            ->with('success', 'Заявка отклонена и уведомление отправлено');
+            ->with('message', 'Заявка отклонена и уведомление отправлено')
+            ->with('type', 'success');
     }
 
     public function approve($id)
@@ -90,6 +97,8 @@ class AccessController extends Controller
         }
         // Send approval email with login and password
         try {
+            Log::info('Attempting to send approval email to: ' . $access->email);
+
             $emailContent = view('emails.access_approve', [
                 'title' => $request->title,
                 'login' => $request->login,
@@ -98,17 +107,22 @@ class AccessController extends Controller
                 'company_name' => $access->company_name
             ])->render();
 
+            Log::info('Email content rendered successfully');
+
             Mail::html($emailContent, function ($mail) use ($access, $request) {
                 $mail->to($access->email)
                     ->subject($request->title);
             });
+
+            Log::info('Email sent successfully to: ' . $access->email);
         } catch (\Exception $e) {
-            Log::info('Email sending failed (ignored): ' . $e->getMessage());
+            Log::error('Email sending failed: ' . $e->getMessage());
         }
 
         $access->update(['status' => 'approved']);
 
         return redirect()->route('admin.access.index')
-            ->with('success', 'Заявка одобрена и данные отправлены');
+            ->with('message', 'Заявка одобрена и данные отправлены')
+            ->with('type', 'success');
     }
 }
