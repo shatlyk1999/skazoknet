@@ -130,8 +130,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                            {{ $users->onEachSide(1) }}
-                            {{-- {{ $users->links('vendor.pagination.tailwind') }} --}}
+                            {{ $users->appends(request()->query())->links('custom-pagination') }}
                         </div>
                     </div>
                 </div>

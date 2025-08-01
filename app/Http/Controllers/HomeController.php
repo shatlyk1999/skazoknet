@@ -35,6 +35,7 @@ class HomeController extends Controller
             $selected_city_id = session('selected_city_id');
             $city = City::find($selected_city_id);
         } else {
+            sleep(1);
             $city = $user->city;
         }
 

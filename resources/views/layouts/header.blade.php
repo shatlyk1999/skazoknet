@@ -85,11 +85,13 @@
                                     </form>
                                 </div>
                             </div> --}}
-                            @if (auth()->user()->role == 'developer')
-                                <a href="#" class="flex justify-center items-center gap-2">
-                                    <img src="{{ asset('images/user 7.png') }}" class="size-7" alt="" />
-                                    {{ auth()->user()->name }}
-                                </a>
+                            <a href="{{ route('userProfile', auth()->user()->id) }}"
+                                class="flex justify-center items-center gap-2">
+                                <img src="{{ auth()->user()->avatar ? asset('avatar/' . auth()->user()->avatar) : asset('images/user2.png') }}"
+                                    class="size-7" alt="" style="border-radius: 25px;object-fit:cover" />
+                                {{ auth()->user()->name }}
+                            </a>
+                            {{-- @if (auth()->user()->role == 'developer')
                             @endif
                             @if (auth()->user()->role == 'user')
                                 <a href="{{ route('userProfile', auth()->user()->id) }}"
@@ -104,7 +106,7 @@
                                     <img src="{{ asset('images/user 7.png') }}" class="size-7" alt="" />
                                     {{ auth()->user()->name }}
                                 </a>
-                            @endif
+                            @endif --}}
                         @else
                             <a href="{{ route('registration') }}"
                                 class="cursor-pointer border-none bg-transparent outline-none hover:bg-black/5 transition-colors p-2 rounded-lg text-lg flex items-center gap-x-2">

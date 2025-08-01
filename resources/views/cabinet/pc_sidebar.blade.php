@@ -18,17 +18,18 @@
                  </div>
              </a>
              @if (auth()->user()->role == 'developer' || auth()->user()->role == 'superadmin')
-                 <a href="#"
+                 <a href="{{ route('aboutCompany', auth()->user()->id) }}"
                      class="border-b border-white text-white font-semibold text-base inline-block w-full py-3 xl:py-4 px-6">
                      <div class="flex items-center justify-between">
                          <span>О компании</span>
                      </div>
                  </a>
-                 <a href="#"
+                 <a href="{{ route('myComplexes', auth()->user()->id) }}"
                      class="border-b border-white text-white font-semibold text-base inline-block w-full py-3 xl:py-4 px-6">
                      <div class="flex items-center justify-between">
                          <span>Мои комплексы</span>
-                         <span class="py-1 xl:py-2 px-3 xl:px-4 rounded-xl bg-white text-primary">15</span>
+                         <span
+                             class="py-1 xl:py-2 px-3 xl:px-4 rounded-xl bg-white text-primary">{{ auth()->user()->developer ? auth()->user()->developer->complexes()->count() : 0 }}</span>
                      </div>
                  </a>
                  <a href="#"

@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="{{ asset('styles/sidebar.css') }}" />
     <link rel="stylesheet" href="{{ asset('styles/menu.css') }}" />
     <link rel="stylesheet" href="{{ asset('@mdi/font/css/materialdesignicons.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/simple-editor.css') }}" />
     {{-- <link rel="stylesheet" href="{{ asset('styles/custom.css') }}" /> --}}
     @yield('css')
     <style>
@@ -34,6 +35,9 @@
     {{-- <script type="module" src="{{ asset('js/formRules.js') }}"></script> --}}
     <script src="{{ asset('swiper/swiper-bundle.min.js') }}" defer></script>
     <script type="module" src="{{ asset('js/swiper.js') }}"></script>
+
+    <!-- Simple Editor -->
+    <script src="{{ asset('js/simple-editor.js') }}"></script>
     <script type="module">
         // FormValidator temporarily disabled for file upload testing
         /*

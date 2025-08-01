@@ -75,6 +75,16 @@ Route::group(['middleware' => CityMiddleware::class], function () {
         Route::get('developer-profile/{id}', [ProfileController::class, 'developerProfile'])->name('developerProfile');
         Route::post('user-update/{id}', [ProfileController::class, 'userUpdate'])->name('userUpdate');
         Route::get('about-company/{id}', [ProfileController::class, 'aboutCompany'])->name('aboutCompany');
+        Route::put('about-company/{id}', [ProfileController::class, 'updateCompany'])->name('updateCompany');
+
+        // Complex routes
+        Route::get('my-complexes/{id}', [ProfileController::class, 'myComplexes'])->name('myComplexes');
+        Route::get('search-complexes/{id}', [ProfileController::class, 'searchComplexes'])->name('searchComplexes');
+        Route::get('create-complex/{id}', [ProfileController::class, 'createComplex'])->name('createComplex');
+        Route::post('create-complex/{id}', [ProfileController::class, 'storeComplex'])->name('storeComplex');
+        Route::get('edit-complex/{userId}/{complexId}', [ProfileController::class, 'editComplex'])->name('editComplex');
+        Route::put('edit-complex/{userId}/{complexId}', [ProfileController::class, 'updateComplex'])->name('updateComplex');
+        Route::delete('complex-image/{imageId}', [ProfileController::class, 'deleteComplexImage'])->name('deleteComplexImage');
     });
     Route::get('gaining-access', [AccessController::class, 'index'])->name('gainingaccess');
     Route::post('access-post', [AccessController::class, 'store'])->name('access.post');
