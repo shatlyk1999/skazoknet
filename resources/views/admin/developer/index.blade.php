@@ -155,7 +155,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                            {{ $developers->onEachSide(1) }}
+                            {{ $developers->appends(request()->query())->links('admin-pagination') }}
                         </div>
                     </div>
                 </div>

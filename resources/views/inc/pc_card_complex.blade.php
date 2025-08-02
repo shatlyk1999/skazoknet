@@ -1,5 +1,5 @@
-<div onclick="handleCardClick(event, this)"
-    class="relative rounded-xl basis-[calc((100%-32px)/2)] lg:basis-[calc((100%-64px)/3)] group hover:shadow-md">
+<div onclick="window.location.href='{{ route('show.complex', $complex->slug) }}'"
+    class="relative rounded-xl basis-[calc((100%-32px)/2)] lg:basis-[calc((100%-64px)/3)] group hover:shadow-md cursor-pointer">
     @if ($complex->image != null)
         <div class="border border-custom-gray rounded-tl-xl rounded-tr-xl">
             <img src="{{ asset('complex/' . $complex->image) }}"
@@ -57,16 +57,5 @@
             115 Отзывов
         </span>
     </div>
-    <div data-id="overlay" data-card-overlay-id="11"
-        class="absolute top-0 left-0 z-11 size-full bg-primary/90 rounded-xl flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-all pointer-events-none group-hover:pointer-events-auto">
-        <div class="flex flex-col gap-2 items-center">
-            <a href="{{ route('show.complex', $complex->slug) }}"> Узнать подробнее</a>
-            {{-- <button
-                onclick="handleOverlayButtonClick(event, '11')"
-                class="border-white border text-sm xl:text-base rounded-3xl px-3 py-2 text-white transition-colors cursor-pointer flex items-center gap-x-2">
-                <i class="mdi mdi-plus"></i>
-                <span>Оставить отзыв</span>
-            </button> --}}
-        </div>
-    </div>
+
 </div>

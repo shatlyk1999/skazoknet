@@ -95,7 +95,8 @@ class PagesController extends Controller
             ->where('type', 'residential')
             ->where('city_id', $city->id)
             ->where('slug', '!=', $complex->slug)
-            ->limit(3)->orderBy('created_at', 'desc')
+            // ->limit(3)
+            ->orderBy('created_at', 'desc')
             ->get();
 
         $hotel_complexes = Complex::status()
@@ -103,7 +104,8 @@ class PagesController extends Controller
             ->where('type', 'hotel')
             ->where('city_id', $city->id)
             ->where('slug', '!=', $complex->slug)
-            ->limit(3)->orderBy('created_at', 'desc')
+            // ->limit(3)
+            ->orderBy('created_at', 'desc')
             ->get();
 
         // SEO 

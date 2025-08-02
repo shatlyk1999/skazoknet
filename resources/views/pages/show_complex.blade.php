@@ -11,10 +11,10 @@
         <span class="px-2">|</span>
         <a href="{{ route('complexes', $complex->type) }}" class="text-sm xl:text-xs tracking-widest cursor-pointer">
             @if ($complex->type == 'residential')
-                Жилые комплекс
+                Жилой комплекс
             @endif
             @if ($complex->type == 'hotel')
-                Гостиничные комплекс
+                Гостиничный комплекс
             @endif
         </a>
         <span class="px-2">|</span>
@@ -1036,8 +1036,8 @@
                 <h1 class="text-2xl lg:text-3xl xl:text-4xl font-bold tracking-wide">
                     Другие жилые комплексы «{{ $complex->developer->name }}»
                 </h1>
-                <a href="{{ route('complexes', 'residential') }}?developer_slug={{ $complex->developer->slug }}"
-                    class="md:inline-block hidden">Все жилые комплексы</a>
+                {{-- <a href="{{ route('complexes', 'residential') }}?developer_slug={{ $complex->developer->slug }}"
+                    class="md:inline-block hidden">Все жилые комплексы</a> --}}
             </div>
             <div class="hidden sm:flex gap-8 flex-wrap">
                 @foreach ($residential_complexes as $complex)
@@ -1053,12 +1053,12 @@
                     </div>
                 </div>
             </div>
-            <div class="mt-8 block md:hidden px-8 xs:px-12 sm:px-0 flex justify-center items-center text-center">
+            {{-- <div class="mt-8 block md:hidden px-8 xs:px-12 sm:px-0 flex justify-center items-center text-center">
                 <a href="{{ route('complexes', 'residential') }}?developer_slug={{ $complex->developer->slug }}"
                     class="border-primary text-sm xl:text-base border rounded-3xl px-8 py-2 text-primary hover:text-white hover:border-white hover:bg-primary transition-colors cursor-pointer md:w-auto w-full">
                     Все жилые комплексы
                 </a>
-            </div>
+            </div> --}}
         </section>
     @endif
 
@@ -1068,8 +1068,8 @@
                 <h1 class="text-2xl lg:text-3xl xl:text-4xl font-bold tracking-wide">
                     Другие гостиничные комплексы «{{ $complex->developer->name }}»
                 </h1>
-                <a href="{{ route('complexes', 'hotel') }}?developer_slug={{ $complex->developer->slug }}"
-                    class="md:inline-block hidden">Все жилые комплексы</a>
+                {{-- <a href="{{ route('complexes', 'hotel') }}?developer_slug={{ $complex->developer->slug }}"
+                    class="md:inline-block hidden">Все гостиничные комплексы</a> --}}
             </div>
             <div class="hidden sm:flex gap-8 flex-wrap">
                 @foreach ($hotel_complexes as $complex)
@@ -1085,12 +1085,12 @@
                     </div>
                 </div>
             </div>
-            <div class="mt-8 block md:hidden px-8 xs:px-12 sm:px-0 flex justify-center items-center text-center">
+            {{-- <div class="mt-8 block md:hidden px-8 xs:px-12 sm:px-0 flex justify-center items-center text-center">
                 <a href="{{ route('complexes', 'hotel') }}?developer_slug={{ $complex->developer->slug }}"
                     class="border-primary text-sm xl:text-base border rounded-3xl px-8 py-2 text-primary hover:text-white hover:border-white hover:bg-primary transition-colors cursor-pointer md:w-auto w-full">
                     Все гостиничные комплексы
                 </a>
-            </div>
+            </div> --}}
         </section>
     @endif
 @endsection

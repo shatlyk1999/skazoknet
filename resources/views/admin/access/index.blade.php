@@ -137,7 +137,7 @@
 
                                 <!-- Pagination -->
                                 <div class="mt-3">
-                                    {{ $accesses->appends(request()->query())->links() }}
+                                    {{ $accesses->appends(request()->query())->links('admin-pagination') }}
                                 </div>
                             </div>
                         </div>

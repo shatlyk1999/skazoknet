@@ -37,6 +37,7 @@ class CityController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'label' => 'required|string|max:255',
+            'developer_text' => 'nullable|string|max:255',
             'image' => 'required|image|max:10240', // max 10MB
         ]);
 
@@ -79,6 +80,7 @@ class CityController extends Controller
             'name' => $request->name,
             'label' => $request->label,
             'text' => $request->text,
+            'developer_text' => $request->developer_text,
             'image' => $input['imageName'],
         ]);
 
@@ -127,7 +129,8 @@ class CityController extends Controller
         $request->validate([
             'image' => 'image|max:10240', // max 10MB
             'name' => 'required',
-            'label' => 'required'
+            'label' => 'required',
+            'developer_text' => 'nullable|string|max:255'
         ]);
 
         $city = City::find($id);
@@ -178,6 +181,7 @@ class CityController extends Controller
                 'name' => $request->name,
                 'label' => $request->label,
                 'text' => $request->text,
+                'developer_text' => $request->developer_text,
             ]);
 
             return to_route('city.index')->with([

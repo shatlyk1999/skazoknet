@@ -59,6 +59,7 @@
                                             <th>Фото</th>
                                             <th>Город</th>
                                             <th>Область</th>
+                                            <th>Текст (застройщик)</th>
                                             <th>Действия</th>
                                         </tr>
                                     </thead>
@@ -77,6 +78,9 @@
                                                 </td>
                                                 <td>
                                                     {{ $city->label }}
+                                                </td>
+                                                <td>
+                                                    {{ $city->developer_text ?? '-' }}
                                                 </td>
                                                 <td>
                                                     <div class="d-flex gap-1">
@@ -99,8 +103,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                            {{ $cities->onEachSide(1) }}
-                            {{-- {{ $citess->links('vendor.pagination.tailwind') }} --}}
+                            {{ $cities->appends(request()->query())->links('admin-pagination') }}
                         </div>
                     </div>
                 </div>

@@ -266,7 +266,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                            {{ $complexes->onEachSide(1) }}
+                            {{ $complexes->appends(request()->query())->links('admin-pagination') }}
                         </div>
                     </div>
                 </div>

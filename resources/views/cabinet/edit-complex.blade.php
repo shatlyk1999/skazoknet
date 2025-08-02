@@ -46,7 +46,7 @@
                     <div class="rounded-3xl border-auth-input-border-color border px-4 h-12.5 flex items-center mt-1">
                         <input type="text" name="name" id="complexName" required value="{{ $complex->name }}"
                             class="h-12.5 text-input-divider text-sm font-semibold tracking-wide w-full outline-none border-none"
-                            placeholder="ЖК Губернский" />
+                            placeholder="Введите название комплекса" />
                     </div>
                 </div>
 
@@ -57,7 +57,7 @@
                     <div class="rounded-3xl border-auth-input-border-color border px-4 h-12.5 flex items-center mt-1">
                         <input type="text" name="address" id="complexAddress" value="{{ $complex->address }}"
                             class="h-12.5 text-input-divider text-sm font-semibold tracking-wide w-full outline-none border-none"
-                            placeholder="г. Краснодар, ул.Западный обход,33" />
+                            placeholder="Адрес комплекса" />
                     </div>
                 </div>
 
@@ -88,7 +88,7 @@
                 </div> --}}
 
                 <!-- Status and Popular -->
-                <div class="form-item w-full lg:w-[calc(50%-1.5rem)]">
+                {{-- <div class="form-item w-full lg:w-[calc(50%-1.5rem)]">
                     <label for="complexStatus"
                         class="text-input-divider text-xs font-medium tracking-wide pl-2">Статус:</label>
                     <div class="rounded-3xl border-auth-input-border-color border px-4 h-12.5 flex items-center mt-1">
@@ -98,7 +98,7 @@
                             <option value="0" {{ $complex->status == 0 ? 'selected' : '' }}>Неактивный</option>
                         </select>
                     </div>
-                </div>
+                </div> --}}
 
                 {{-- <div class="form-item w-full lg:w-[calc(50%-1.5rem)]">
                     <label for="complexPopular"
@@ -119,7 +119,7 @@
                     <div class="rounded-3xl border-auth-input-border-color border px-4 h-12.5 flex items-center mt-1">
                         <input type="text" name="map_x" id="complexMapX" value="{{ $complex->map_x }}"
                             class="h-12.5 text-input-divider text-sm font-semibold tracking-wide w-full outline-none border-none"
-                            placeholder="45.035470" />
+                            placeholder="Координата X" />
                     </div>
                 </div>
 
@@ -129,7 +129,7 @@
                     <div class="rounded-3xl border-auth-input-border-color border px-4 h-12.5 flex items-center mt-1">
                         <input type="text" name="map_y" id="complexMapY" value="{{ $complex->map_y }}"
                             class="h-12.5 text-input-divider text-sm font-semibold tracking-wide w-full outline-none border-none"
-                            placeholder="38.975313" />
+                            placeholder="Координата Y" />
                     </div>
                 </div>
 
@@ -151,7 +151,7 @@
                         <div class="flex flex-wrap gap-4 mt-2" id="existingImagesContainer">
                             @foreach ($complex->images as $image)
                                 <div class="relative border rounded-xl p-2 h-20 w-20 flex items-center justify-center">
-                                    <img src="{{ asset('complex/' . $image->image) }}"
+                                    <img src="{{ asset('complex-images/' . $image->image) }}"
                                         class="w-full h-full object-cover rounded" alt="Complex image" />
                                     <button type="button" onclick="removeExistingImage({{ $image->id }}, this)"
                                         class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs hover:bg-red-600">

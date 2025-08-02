@@ -115,6 +115,13 @@ class ProfileController extends Controller
 
         $developer = $user->developer;
 
+        if (!$developer) {
+            return redirect()->back()->with([
+                'type' => 'error',
+                'message' => 'Профиль компании не найден'
+            ]);
+        }
+
         return view('cabinet.company', compact('developer'));
     }
 
@@ -211,7 +218,7 @@ class ProfileController extends Controller
             }
 
             // Update developer information (same fields as admin)
-            $status = $request->has('status') ? (bool)$request->status : false;
+            $status = $request->has('status') ? (bool)$request->status : true;
             $popular = $request->has('popular') ? (bool)$request->popular : false;
 
             $developer->update([
@@ -623,7 +630,7 @@ class ProfileController extends Controller
             }
 
             // Update complex information (same fields as admin)
-            $status = $request->has('status') ? (bool)$request->status : false;
+            $status = $request->has('status') ? (bool)$request->status : true;
             $popular = $request->has('popular') ? (bool)$request->popular : false;
 
             $complex->update([

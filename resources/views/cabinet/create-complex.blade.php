@@ -37,7 +37,7 @@
                     <div class="rounded-3xl border-auth-input-border-color border px-4 h-12.5 flex items-center mt-1">
                         <input type="text" name="name" id="complexName" required
                             class="h-12.5 text-input-divider text-sm font-semibold tracking-wide w-full outline-none border-none"
-                            placeholder="ЖК Губернский" />
+                            placeholder="Введите название комплекса" />
                     </div>
                 </div>
 
@@ -48,7 +48,7 @@
                     <div class="rounded-3xl border-auth-input-border-color border px-4 h-12.5 flex items-center mt-1">
                         <input type="text" name="address" id="complexAddress"
                             class="h-12.5 text-input-divider text-sm font-semibold tracking-wide w-full outline-none border-none"
-                            placeholder="г. Краснодар, ул.Западный обход,33" />
+                            placeholder="Адрес комплекса" />
                     </div>
                 </div>
 
@@ -76,7 +76,7 @@
                 </div> --}}
 
                 <!-- Status and Popular -->
-                <div class="form-item w-full lg:w-[calc(50%-1.5rem)]">
+                {{-- <div class="form-item w-full lg:w-[calc(50%-1.5rem)]">
                     <label for="complexStatus"
                         class="text-input-divider text-xs font-medium tracking-wide pl-2">Статус:</label>
                     <div class="rounded-3xl border-auth-input-border-color border px-4 h-12.5 flex items-center mt-1">
@@ -86,7 +86,7 @@
                             <option value="0">Неактивный</option>
                         </select>
                     </div>
-                </div>
+                </div> --}}
 
                 {{-- <div class="form-item w-full lg:w-[calc(50%-1.5rem)]">
                     <label for="complexPopular"
@@ -107,7 +107,7 @@
                     <div class="rounded-3xl border-auth-input-border-color border px-4 h-12.5 flex items-center mt-1">
                         <input type="text" name="map_x" id="complexMapX"
                             class="h-12.5 text-input-divider text-sm font-semibold tracking-wide w-full outline-none border-none"
-                            placeholder="45.035470" />
+                            placeholder="Координата X" />
                     </div>
                 </div>
 
@@ -117,7 +117,7 @@
                     <div class="rounded-3xl border-auth-input-border-color border px-4 h-12.5 flex items-center mt-1">
                         <input type="text" name="map_y" id="complexMapY"
                             class="h-12.5 text-input-divider text-sm font-semibold tracking-wide w-full outline-none border-none"
-                            placeholder="38.975313" />
+                            placeholder="Координата Y" />
                     </div>
                 </div>
 

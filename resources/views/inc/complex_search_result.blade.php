@@ -110,12 +110,7 @@
                     115 Отзывов
                 </span>
             </div>
-            {{-- <div
-                class="absolute top-0 left-0 z-11 size-full bg-primary/90 rounded-xl flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity">
-                <div class="flex flex-col gap-2 items-center">
-                    <a href="#"> Узнать подробнее</a>
-                </div>
-            </div> --}}
+
         </a>
     @endforeach
 @endif

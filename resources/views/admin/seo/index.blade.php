@@ -98,7 +98,7 @@
                         </table>
                     </div>
 
-                    {{ $seoMetas->links() }}
+                    {{ $seoMetas->appends(request()->query())->links('admin-pagination') }}
                 </div>
             </div>
         </section>

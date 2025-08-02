@@ -130,7 +130,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                            {{ $users->appends(request()->query())->links('custom-pagination') }}
+                            {{ $users->appends(request()->query())->links('admin-pagination') }}
                         </div>
                     </div>
                 </div>

@@ -9,7 +9,7 @@
         <a href="{{ route('developers') }}" class="text-sm xl:text-xs tracking-widest cursor-pointer">Застройщики</a>
         <span class="px-2">|</span>
         <span class="text-sm xl:text-xs tracking-widest text-primary">
-            Точно</span>
+            {{ $developer->name }}</span>
     </div>
 
     <div class="my-12 md:my-20 xl:container px-8 xs:px-12 xl:px-4 mx-0 xl:mx-auto relative">

@@ -58,8 +58,19 @@
                                 <div class="form-group">
                                     {{-- <label for="text">Текст</label> --}}
                                     <input type="text" name="text" class="form-control" id="text"
-                                        placeholder="Текст" required value="{{ old('name', $city->text) }}">
+                                        placeholder="Текст" required value="{{ old('text', $city->text) }}">
                                     @error('text')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    {{-- <label for="developer_text">Текст (застройщик)</label> --}}
+                                    <input type="text" name="developer_text" class="form-control" id="developer_text"
+                                        placeholder="Текст (застройщик)"
+                                        value="{{ old('developer_text', $city->developer_text) }}">
+                                    @error('developer_text')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
