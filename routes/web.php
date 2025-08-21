@@ -85,6 +85,11 @@ Route::group(['middleware' => CityMiddleware::class], function () {
         Route::get('edit-complex/{userId}/{complexId}', [ProfileController::class, 'editComplex'])->name('editComplex');
         Route::put('edit-complex/{userId}/{complexId}', [ProfileController::class, 'updateComplex'])->name('updateComplex');
         Route::delete('complex-image/{imageId}', [ProfileController::class, 'deleteComplexImage'])->name('deleteComplexImage');
+
+        // Reviews: addition create (static view)
+        Route::get('addition-create', function () {
+            return view('cabinet.addition-create');
+        })->name('addition.create');
     });
     Route::get('gaining-access', [AccessController::class, 'index'])->name('gainingaccess');
     Route::post('access-post', [AccessController::class, 'store'])->name('access.post');
