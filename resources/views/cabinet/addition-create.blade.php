@@ -14,7 +14,7 @@
                             Мои отзывы
                         </h1>
                         <p class="mt-2 text-xs font-semibold">
-                            Отзыв: <span class="text-primary">№1223133</span>
+                            Отзыв: <span class="text-primary">{{ $review?->id ? '№' . $review->id : '—' }}</span>
                         </p>
                     </div>
                     <button
@@ -28,30 +28,39 @@
                 <div class="flex items-center xl:items-end justify-between gap-4 xl:flex-nowrap flex-wrap">
                     <div class="flex flex-col gap-1">
                         <label class="text-input-divider text-xs font-medium tracking-wide pl-2">Тип отзыва:</label>
-                        <span class="bg-primary text-white rounded-3xl px-5 py-3 font-medium text-sm">Положительный отзыв</span>
+                        <span class="bg-primary text-white rounded-3xl px-5 py-3 font-medium text-sm">
+                            {{ $review?->type === 'negative' ? 'Отрицательный отзыв' : ($review?->type === 'neutral' ? 'Нейтральный отзыв' : 'Положительный отзыв') }}
+                        </span>
                     </div>
                     <div class="flex flex-col gap-1">
                         <label class="text-input-divider text-xs font-medium tracking-wide">Моя оценка:</label>
                         <div class="text-xl lg:text-3xl flex items-center w-[50%] md:w-auto order-1 md:order-0">
-                            <span class="pr-1 text-lg">4.79</span>
-                            <div class="flex items-center space-x-px xs:space-x-1" aria-label="3 out of 5 stars" role="img">
-                                <img src="{{ asset('icons/Starmini.svg') }}" class="inline-block" alt="" />
-                                <img src="{{ asset('icons/Starmini.svg') }}" class="inline-block" alt="" />
-                                <img src="{{ asset('icons/Starmini.svg') }}" class="inline-block" alt="" />
-                                <img src="{{ asset('icons/Stargraymini.svg') }}" class="inline-block" alt="" />
-                                <img src="{{ asset('icons/Stargraymini.svg') }}" class="inline-block" alt="" />
+                            <span class="pr-1 text-lg">{{ $review?->rating ?? '—' }}</span>
+                            @php
+                                $rating = (float) ($review?->rating ?? 0);
+                                $fullStars = (int) floor($rating);
+                                $emptyStars = max(0, 5 - $fullStars);
+                            @endphp
+                            <div class="flex items-center space-x-px xs:space-x-1" role="img">
+                                @for ($i = 0; $i < $fullStars; $i++)
+                                    <img src="{{ asset('icons/Starmini.svg') }}" class="inline-block" alt="" />
+                                @endfor
+                                @for ($i = 0; $i < $emptyStars; $i++)
+                                    <img src="{{ asset('icons/Stargraymini.svg') }}" class="inline-block" alt="" />
+                                @endfor
                             </div>
                         </div>
                     </div>
                     <div class="w-fit flex items-center sm:items-start gap-4 sm:flex-row flex-col xl:gap-8">
                         <div class="min-h-[8.125rem] flex items-center justify-center border rounded-xl">
-                            <img src="{{ asset('images/image4.png') }}" class="w-[80%] mx-auto h-auto min-h-[6.125rem]" alt="" />
+                            @php($complexImage = $review?->complex?->image ?? null)
+                            <img src="{{ $complexImage ? asset('complex/' . $complexImage) : asset('images/image4.png') }}" class="w-[80%] mx-auto h-auto min-h-[6.125rem]" alt="" />
                         </div>
                         <div class="flex flex-col gap-2 w-full">
-                            <h2 class="text-lg font-bold text-text2 tracking-wide">ЖК “Cказка Град”</h2>
-                            <p class="font-semibold text-sm tracking-wide text-text2">г. Краснодар, ул.Западный обход,33</p>
+                            <h2 class="text-lg font-bold text-text2 tracking-wide">{{ $review?->complex?->name ?? 'ЖК “Cказка Град”' }}</h2>
+                            <p class="font-semibold text-sm tracking-wide text-text2">{{ $review?->complex?->address ?? 'г. Краснодар, ул.Западный обход,33' }}</p>
                             <div class="font-semibold text-sm tracking-wide mt-4">
-                                Застройщик: <span class="text-primary">ТОЧНО</span>
+                                Застройщик: <span class="text-primary">{{ $review?->complex?->developer?->name ?? 'ТОЧНО' }}</span>
                             </div>
                         </div>
                     </div>
@@ -63,14 +72,14 @@
                 <div class="form-item w-full">
                     <label for="name" class="text-input-divider text-xs font-medium tracking-wide pl-2">Заголовок:</label>
                     <div class="rounded-3xl border-auth-input-border-color border px-4 h-12.5 flex items-center mt-1">
-                        <input type="text" class="h-12.5 text-input-divider text-sm font-semibold tracking-wide w-full outline-none border-none" placeholder="Password" id="name" value="ЖК “Губернский”" />
+                        <input type="text" class="h-12.5 text-input-divider text-sm font-semibold tracking-wide w-full outline-none border-none" placeholder="Заголовок" id="title" name="title" value="{{ old('title', $review?->title ?? '') }}" />
                     </div>
                 </div>
 
                 <div class="form-item w-full">
                     <label for="name" class="text-input-divider text-xs font-medium tracking-wide pl-2">Текст отзыва:</label>
                     <div class="rounded-3xl border-auth-input-border-color border px-4 py-2 flex items-center mt-1">
-                        <textarea placeholder="Введите текст" id="name" rows="5" value="Купили квартиру на стадии строительства у застройщика ЮгСтройИмпериал в ЖК Родные просторы. Цены приятно удивили. Ну, понятное дело, на старте обычно дешевле........" class="text-input-divider text-sm font-semibold tracking-wide w-full outline-none border-none"></textarea>
+                        <textarea placeholder="Введите текст" id="text" name="text" rows="5" class="text-input-divider text-sm font-semibold tracking-wide w-full outline-none border-none">{{ old('text', $review?->text ?? '') }}</textarea>
                     </div>
                 </div>
 
@@ -81,7 +90,7 @@
                 <div class="form-item w-full">
                     <label for="name" class="text-input-divider text-xs font-medium tracking-wide pl-2">Дополнение к отзыву:</label>
                     <div class="rounded-3xl border-auth-input-border-color border px-4 h-12.5 flex items-center mt-1">
-                        <input type="text" class="h-12.5 text-input-divider text-sm font-semibold tracking-wide w-full outline-none border-none" placeholder="Введите текст текст дополнения" id="name" value="ЖК “Губернский”" />
+                        <input type="text" class="h-12.5 text-input-divider text-sm font-semibold tracking-wide w-full outline-none border-none" placeholder="Введите текст текст дополнения" id="addition" name="addition" value="{{ old('addition') }}" />
                     </div>
                 </div>
 

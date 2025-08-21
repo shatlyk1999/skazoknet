@@ -11,6 +11,7 @@ use App\Http\Controllers\EmailController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReviewController;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\AuthMiddleware;
 use App\Http\Middleware\CityMiddleware;
@@ -86,10 +87,8 @@ Route::group(['middleware' => CityMiddleware::class], function () {
         Route::put('edit-complex/{userId}/{complexId}', [ProfileController::class, 'updateComplex'])->name('updateComplex');
         Route::delete('complex-image/{imageId}', [ProfileController::class, 'deleteComplexImage'])->name('deleteComplexImage');
 
-        // Reviews: addition create (static view)
-        Route::get('addition-create', function () {
-            return view('cabinet.addition-create');
-        })->name('addition.create');
+        // Reviews: addition create (dynamic)
+        Route::get('addition-create', [ReviewController::class, 'create'])->name('addition.create');
     });
     Route::get('gaining-access', [AccessController::class, 'index'])->name('gainingaccess');
     Route::post('access-post', [AccessController::class, 'store'])->name('access.post');
