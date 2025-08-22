@@ -11,18 +11,28 @@
 		<div class="col-12">
 			<div class="card">
 				<div class="card-header d-flex justify-content-between align-items-center">
-					<form class="d-flex gap-2" method="get">
+					<form class="d-flex flex-wrap gap-2 align-items-center" method="get">
+						<label class="small text-muted">Модерация</label>
 						<select name="is_approved" class="form-select form-select-sm" style="max-width: 180px;">
-							<option value="">— Модерация —</option>
+							<option value="">Все</option>
 							<option value="1" {{ request('is_approved')==='1' ? 'selected' : '' }}>Одобренные</option>
 							<option value="0" {{ request('is_approved')==='0' ? 'selected' : '' }}>Не одобренные</option>
 						</select>
+
+						<label class="small text-muted">Дополнения</label>
 						<select name="has_additions" class="form-select form-select-sm" style="max-width: 220px;">
-							<option value="">— Дополнения —</option>
+							<option value="">Все</option>
 							<option value="1" {{ request('has_additions')==='1' ? 'selected' : '' }}>С дополнениями</option>
 							<option value="0" {{ request('has_additions')==='0' ? 'selected' : '' }}>Без дополнений</option>
 						</select>
+
+						<div class="form-check form-switch">
+							<input class="form-check-input" type="checkbox" role="switch" id="pendingAddSwitch" name="pending_additions" value="1" {{ request('pending_additions')==='1' ? 'checked' : '' }}>
+							<label class="form-check-label" for="pendingAddSwitch">Только не одобренные дополнения</label>
+						</div>
+
 						<button class="btn btn-primary btn-sm" type="submit">Фильтр</button>
+						<a class="btn btn-outline-secondary btn-sm" href="{{ route('admin.reviews.index') }}">Сбросить</a>
 					</form>
 					<div class="d-flex align-items-center gap-3">
 						<span class="badge bg-danger">Не одобрено: {{ $pendingCount }}</span>

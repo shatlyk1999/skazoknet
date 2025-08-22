@@ -22,6 +22,11 @@ class ReviewAdminController extends Controller
                 $query->doesntHave('additions');
             }
         }
+        if ($request->filled('pending_additions') && $request->pending_additions === '1') {
+            $query->whereHas('additions', function ($q) {
+                $q->where('is_approved', false);
+            });
+        }
 
         $reviews = $query->orderByDesc('created_at')->paginate(15)->withQueryString();
         $pendingCount = Review::where('is_approved', false)->count();
