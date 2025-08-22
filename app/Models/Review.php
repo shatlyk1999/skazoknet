@@ -16,6 +16,11 @@ class Review extends Model
         'rating',
         'title',
         'text',
+        'is_approved',
+    ];
+
+    protected $casts = [
+        'is_approved' => 'boolean',
     ];
 
     public function user()
@@ -26,6 +31,11 @@ class Review extends Model
     public function complex()
     {
         return $this->belongsTo(Complex::class);
+    }
+
+    public function additions()
+    {
+        return $this->hasMany(ReviewAddition::class);
     }
 }
 

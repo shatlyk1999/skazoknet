@@ -3,6 +3,8 @@ $user_count = \App\Models\User::where('role', '!=', 'superadmin')->count() ?? 0;
 $city_count = \App\Models\City::get()->count() ?? 0;
 $developer_count = \App\Models\Developer::get()->count() ?? 0;
 $complex_count = \App\Models\Complex::get()->count() ?? 0;
+$reviews_pending = class_exists('App\\Models\\Review') ? \App\Models\Review::where('is_approved', false)->count() : 0;
+$additions_pending = class_exists('App\\Models\\ReviewAddition') ? \App\Models\ReviewAddition::where('is_approved', false)->count() : 0;
 ?>
 <div id="sidebar">
     <div class="sidebar-wrapper active">
@@ -95,6 +97,22 @@ $complex_count = \App\Models\Complex::get()->count() ?? 0;
                             <span style="font-size: 14px;">Жилые комплексы</span>
                         </span>
                         <span class="badge bg-secondary" style="margin-left: 0;">{{ $complex_count }}</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item @if (Request::segment('3') == 'reviews') active @endif">
+                    <a href="{{ route('admin.reviews.index') }}" class="sidebar-link d-flex justify-content-between">
+                        <span class="m-0 position-relative">
+                            <i class="bi bi-chat-dots"></i>
+                            <span>Отзывы</span>
+                            @if (($reviews_pending + $additions_pending) > 0)
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                                    style="font-size: 10px; padding: 2px 6px;">
+                                    {{ $reviews_pending + $additions_pending }}
+                                </span>
+                            @endif
+                        </span>
+                        <span class="badge bg-secondary" style="margin-left: 0;">{{ $reviews_pending }}</span>
                     </a>
                 </li>
 
