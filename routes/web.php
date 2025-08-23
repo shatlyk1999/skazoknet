@@ -11,6 +11,8 @@ use App\Http\Controllers\EmailController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\Admin\ReviewAdminController;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\AuthMiddleware;
 use App\Http\Middleware\CityMiddleware;
@@ -85,6 +87,9 @@ Route::group(['middleware' => CityMiddleware::class], function () {
         Route::get('edit-complex/{userId}/{complexId}', [ProfileController::class, 'editComplex'])->name('editComplex');
         Route::put('edit-complex/{userId}/{complexId}', [ProfileController::class, 'updateComplex'])->name('updateComplex');
         Route::delete('complex-image/{imageId}', [ProfileController::class, 'deleteComplexImage'])->name('deleteComplexImage');
+
+        // Reviews: addition create (dynamic)
+        Route::get('addition-create', [ReviewController::class, 'create'])->name('addition.create');
     });
     Route::get('gaining-access', [AccessController::class, 'index'])->name('gainingaccess');
     Route::post('access-post', [AccessController::class, 'store'])->name('access.post');
@@ -132,6 +137,7 @@ Route::group([
     Route::resource('city', CityController::class);
     Route::resource('developer', DeveloperController::class);
     Route::resource('complex', ComplexController::class);
+    Route::get('reviews', [ReviewAdminController::class, 'index'])->name('admin.reviews.index');
     Route::post('user-status', [UserController::class, 'updateStatus']);
     Route::post('user-permission-comment', [UserController::class, 'updatePermissionComment']);
     Route::post('developer-status', [DeveloperController::class, 'updateStatus']);
