@@ -91,4 +91,14 @@ class User extends Authenticatable implements MustVerifyEmail
             $query->where('role', $data['role']);
         }
     }
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(ReviewComment::class);
+    }
 }

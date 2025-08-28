@@ -74,12 +74,14 @@ const toggleCollapse = (contentSelector, buttonSelector) => {
         content.classList.remove("h-[2.5rem]");
         content.classList.add("h-full");
         toggleButton.querySelector("span").textContent = "Свернуть";
-        icon.src = "../public/icons/up.svg";
+        // icon.src = "/icons/up.svg";
+        icon.src = upIcon;
     } else {
         content.classList.add("h-[2.5rem]");
         content.classList.remove("h-full");
         toggleButton.querySelector("span").textContent = "Развернуть";
-        icon.src = "../public/icons/down.svg";
+        // icon.src = "/icons/down.svg";
+        icon.src = downIcon;
     }
 };
 

@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\DB;
 use Intervention\Image\Drivers\Gd\Driver;
 use Intervention\Image\Encoders\WebpEncoder;
 use Intervention\Image\ImageManager;
@@ -734,5 +735,172 @@ class ProfileController extends Controller
             Log::error('Complex image deletion failed: ' . $e->getMessage());
             return response()->json(['success' => false, 'message' => 'Ошибка при удалении изображения']);
         }
+    }
+
+    public function myReviews($id)
+    {
+        $user = User::find($id);
+
+        if (!$user) {
+            return redirect()->back()->with([
+                'type' => 'error',
+                'message' => 'Пользователь не найден',
+            ]);
+        }
+
+
+
+        // Get filter parameters
+        $filter = request()->get('filter', 'default');
+
+        // Build query with filtering
+        $query = $user->reviews()->with(['reviewable', 'reviewLikes', 'images']);
+
+        // Apply filters
+        switch ($filter) {
+            case 'positive':
+                $query->where('type', 'positive');
+                break;
+            case 'negative':
+                $query->where('type', 'negative');
+                break;
+            case 'developer':
+                $query->where('reviewable_type', 'App\Models\Developer');
+                break;
+            case 'complex':
+                $query->where('reviewable_type', 'App\Models\Complex');
+                break;
+            case 'default':
+            default:
+                // No additional filtering, show all
+                break;
+        }
+
+        // Apply sorting
+        $query->orderBy('created_at', 'desc');
+
+        // Get paginated results
+        $reviews = $query->paginate(4); // 4 reviews per page (2 rows on desktop)
+
+        // Calculate statistics from all reviews
+        $allReviews = $user->reviews()->get();
+        $positiveReviews = $allReviews->where('type', 'positive')->count();
+        $negativeReviews = $allReviews->where('type', 'negative')->count();
+        $totalReviews = $allReviews->count();
+
+        // If AJAX request, return only the reviews HTML
+        if (request()->ajax()) {
+            $html = view('cabinet.partials.review-cards', compact('reviews'))->render();
+            return response()->json([
+                'html' => $html,
+                'hasMore' => $reviews->hasMorePages(),
+                'nextPage' => $reviews->currentPage() + 1
+            ]);
+        }
+
+        return view('cabinet.my-reviews', compact('user', 'reviews', 'positiveReviews', 'negativeReviews', 'totalReviews'));
+    }
+
+    public function allReviews($id)
+    {
+        $user = User::find($id);
+        if (!$user) {
+            return redirect()->back()->with([
+                'type' => 'error',
+                'message' => 'Пользователь не найден',
+            ]);
+        }
+
+        // Check if user has developer role
+        if ($user->role !== 'developer' && $user->role !== 'superadmin') {
+            return redirect()->back()->with([
+                'type' => 'error',
+                'message' => 'У вас нет прав доступа к этой странице'
+            ]);
+        }
+
+        $developer = $user->developer;
+
+        if (!$developer) {
+            return redirect()->back()->with([
+                'type' => 'error',
+                'message' => 'Профиль компании не найден'
+            ]);
+        }
+
+        // Get filter parameters
+        $filter = request()->get('filter', 'default');
+
+        // Get complex IDs belonging to this developer
+        $complexIds = $developer->complexes()->pluck('id')->toArray();
+
+        // Build base query for reviews related to developer and their complexes
+        $query = \App\Models\Review::where(function ($q) use ($developer, $complexIds) {
+            $q->where(function ($subQ) use ($developer) {
+                // Reviews about the developer company
+                $subQ->where('reviewable_type', 'App\Models\Developer')
+                    ->where('reviewable_id', $developer->id);
+            })->orWhere(function ($subQ) use ($complexIds) {
+                // Reviews about developer's complexes
+                $subQ->where('reviewable_type', 'App\Models\Complex')
+                    ->whereIn('reviewable_id', $complexIds);
+            });
+        })->with(['reviewable', 'reviewLikes', 'images', 'user']);
+
+        // Apply filters
+        switch ($filter) {
+            case 'positive':
+                $query->where('type', 'positive');
+                break;
+            case 'negative':
+                $query->where('type', 'negative');
+                break;
+            case 'developer':
+                $query->where('reviewable_type', 'App\Models\Developer');
+                break;
+            case 'complex':
+                $query->where('reviewable_type', 'App\Models\Complex');
+                break;
+            case 'default':
+            default:
+                // No additional filtering, show all
+                break;
+        }
+
+        // Apply sorting
+        $query->orderBy('created_at', 'desc');
+
+        // Get paginated results
+        $reviews = $query->paginate(4); // 4 reviews per page (2 rows on desktop)
+
+        // Calculate statistics from all reviews (without filters)
+        $allReviewsQuery = \App\Models\Review::where(function ($q) use ($developer, $complexIds) {
+            $q->where(function ($subQ) use ($developer) {
+                // Reviews about the developer company
+                $subQ->where('reviewable_type', 'App\Models\Developer')
+                    ->where('reviewable_id', $developer->id);
+            })->orWhere(function ($subQ) use ($complexIds) {
+                // Reviews about developer's complexes
+                $subQ->where('reviewable_type', 'App\Models\Complex')
+                    ->whereIn('reviewable_id', $complexIds);
+            });
+        });
+
+        $allReviews = $allReviewsQuery->get();
+        $positiveReviews = $allReviews->where('type', 'positive')->count();
+        $negativeReviews = $allReviews->where('type', 'negative')->count();
+        $totalReviews = $allReviews->count();
+
+        // If AJAX request, return only the reviews HTML
+        if (request()->ajax()) {
+            $html = view('cabinet.partials.all-review-cards', compact('reviews'))->render();
+            return response()->json([
+                'html' => $html,
+                'hasMore' => $reviews->hasMorePages(),
+                'nextPage' => $reviews->currentPage() + 1
+            ]);
+        }
+
+        return view('cabinet.all-reviews', compact('user', 'reviews', 'positiveReviews', 'negativeReviews', 'totalReviews'));
     }
 }

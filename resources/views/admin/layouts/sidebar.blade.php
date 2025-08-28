@@ -92,7 +92,7 @@ $complex_count = \App\Models\Complex::get()->count() ?? 0;
                     <a href="{{ route('complex.index') }}" class="sidebar-link d-flex justify-content-between">
                         <span class="m-0">
                             <i class="bi bi-building"></i>
-                            <span style="font-size: 14px;">Жилые комплексы</span>
+                            <span style="font-size: 14px;">Комплексы</span>
                         </span>
                         <span class="badge bg-secondary" style="margin-left: 0;">{{ $complex_count }}</span>
                     </a>
@@ -116,6 +116,38 @@ $complex_count = \App\Models\Complex::get()->count() ?? 0;
                         </span>
                         <span class="badge bg-secondary"
                             style="margin-left: 0;">{{ \App\Models\Access::where('status', 'pending')->count() }}</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item @if (Request::segment('3') == 'bad-word') active @endif">
+                    <a href="{{ route('bad-word.index') }}" class="sidebar-link d-flex justify-content-between">
+                        <span class="m-0">
+                            <i class="bi bi-chat-text-fill"></i>
+                            <span>Плохие слова</span>
+                        </span>
+                        <span class="badge bg-secondary"
+                            style="margin-left: 0;">{{ \App\Models\BadWord::count() }}</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item @if (Request::segment('3') == 'reviews') active @endif">
+                    <a href="{{ route('reviews.index') }}" class="sidebar-link d-flex justify-content-between">
+                        <span class="m-0 position-relative">
+                            <i class="bi bi-chat-quote"></i>
+                            <span>Отзывы</span>
+                            @php
+                                $pending_reviews = \App\Models\Review::where('is_approved', false)->count();
+                            @endphp
+                            @if ($pending_reviews > 0)
+                                <span
+                                    class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                                    style="font-size: 10px; padding: 2px 6px;">
+                                    {{ $pending_reviews }}
+                                </span>
+                            @endif
+                        </span>
+                        <span class="badge bg-secondary"
+                            style="margin-left: 0;">{{ \App\Models\Review::count() }}</span>
                     </a>
                 </li>
 

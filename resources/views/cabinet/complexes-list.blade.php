@@ -23,7 +23,7 @@
                 <h2 class="text-lg font-bold tracking-wide text-text3">
                     @if ($complex->type == 'residential')
                         ЖК "{{ $complex->name }}"
-                    @elseif ($complex->type == 'commercial')
+                    @elseif ($complex->type == 'hotel')
                         ГК "{{ $complex->name }}"
                     @else
                         "{{ $complex->name }}"

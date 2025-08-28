@@ -47,14 +47,14 @@
                             Застройщики
                         </h2>
                         <p class="text-sm xl:text-base text-custom-gray hidden md:block">
-                            {{ count($developers) }}
+                            {{ $count_developers }}
                         </p>
                         <div class="w-full md:hidden flex flex-col gap-2">
                             <h2 class="text-base md:h-12 xl:h-auto xl:text-lg font-bold">
                                 Застройщики
                             </h2>
                             <p class="text-sm xl:text-base text-custom-gray inline-block">
-                                {{ count($developers) }}
+                                {{ $count_developers }}
                             </p>
                         </div>
                     </a>

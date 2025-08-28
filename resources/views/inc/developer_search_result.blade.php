@@ -34,19 +34,25 @@
                 <div
                     class="flex items-start xl:items-center xl:flex-row flex-col xs:flex-row sm:flex-col justify-between my-0 xl:my-2 gap-y-1 xl:gap-0">
                     <div class="flex items-center gap-x-2">
-                        <span class="text-lg font-semibold">4.7</span>
-                        <div class="flex items-center space-x-px xs:space-x-1" aria-label="3 out of 5 stars"
+                        {{-- <span class="text-lg font-semibold">4.7</span> --}}
+                        {{-- <div class="flex items-center space-x-px xs:space-x-1" aria-label="3 out of 5 stars"
                             role="img">
                             <img src="{{ asset('icons/Starmini.svg') }}" alt="" />
                             <img src="{{ asset('icons/Starmini.svg') }}" alt="" />
                             <img src="{{ asset('icons/Starmini.svg') }}" alt="" />
                             <img src="{{ asset('icons/Starmini.svg') }}" alt="" />
                             <img src="{{ asset('icons/Stargraymini.svg') }}" alt="" />
-                        </div>
+                        </div> --}}
+                        @include('inc.star_rating', [
+                            'type' => 'developer',
+                            'main' => 'true',
+                            'width' => '27px',
+                            'height' => '27px',
+                        ])
                     </div>
                     <div class="flex items-center gap-x-2">
                         <span class="bg-primary text-white p-1 px-2 rounded-lg text-sm">
-                            115</span>
+                            {{ $developer->reviews()->where('is_approved', true)->count() }}</span>
                         <span class="text-sm tracking-wide">Комментариев</span>
                     </div>
                 </div>
@@ -84,16 +90,23 @@
                 <p class="mt-8">Количество объектов: {{ $developer->complexes()->count() }}</p>
                 <div class="flex items-center justify-between gap-x-2">
                     <div class="flex md:flex-col gap-2 flex-row justify-between w-full md:w-auto">
-                        <div class="flex items-center space-x-px xs:space-x-1" aria-label="3 out of 5 stars"
+                        {{-- <div class="flex items-center space-x-px xs:space-x-1" aria-label="3 out of 5 stars"
                             role="img">
                             <img src="{{ asset('icons/Starmini.svg') }}" alt="" />
                             <img src="{{ asset('icons/Starmini.svg') }}" alt="" />
                             <img src="{{ asset('icons/Starmini.svg') }}" alt="" />
                             <img src="{{ asset('icons/Stargraymini.svg') }}" alt="" />
                             <img src="{{ asset('icons/Stargraymini.svg') }}" alt="" />
-                        </div>
+                        </div> --}}
+                        @include('inc.star_rating', [
+                            'type' => 'developer',
+                            'main' => 'false',
+                            'width' => '27px',
+                            'height' => '27px',
+                        ])
                         <div class="text-primary text-sm">
-                            115/<span class="text-red-500">15</span>
+                            {{ $developer->reviews()->where('is_approved', true)->where('type', 'positive')->count() }}/<span
+                                class="text-red-500">{{ $developer->reviews()->where('is_approved', true)->where('type', 'negative')->count() }}</span>
                         </div>
                     </div>
                     <div class="group-hover:hidden">
@@ -108,7 +121,7 @@
             </div>
             <div class="absolute top-4 right-4 z-10">
                 <span class="bg-primary text-white py-2 px-3 rounded-lg">
-                    115 Отзывов
+                    {{ $developer->reviews()->where('is_approved', true)->count() }} Отзывов
                 </span>
             </div>
         </a>

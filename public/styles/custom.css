@@ -65,3 +65,27 @@
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
 }
+
+.bg-green-500 {
+    background-color: rgba(25, 135, 85, 1);
+}
+
+#reviewExistsModalContent {
+    width: 500px;
+}
+
+.text-yellow-400 {
+    color: #f6e05e;
+}
+
+.text-gray-300 {
+    color: #e2e8f0;
+}
+
+.w-40 {
+    width: 40px;
+}
+
+.h-40 {
+    height: 40px;
+}

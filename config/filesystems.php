@@ -82,6 +82,8 @@ return [
         public_path('complex-small') => storage_path('app/complex-small'),
         public_path('complex-images') => storage_path('app/complex-images'),
         public_path('avatar') => storage_path('app/avatar'),
+        public_path('reviews') => storage_path('app/reviews'),
+        public_path('addition-images') => storage_path('app/addition-images'),
     ],
 
 ];

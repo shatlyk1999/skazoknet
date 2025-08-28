@@ -96,6 +96,10 @@
 <script src="{{ asset('js/swiper.js') }}" defer></script>
 <script src="{{ asset('js/card.js') }}" defer></script>
 <script src="{{ asset('js/custom.js') }}" defer></script>
+<script>
+    const upIcon = "{{ asset('icons/up.svg') }}";
+    const downIcon = "{{ asset('icons/down.svg') }}";
+</script>
 @yield('script')
 </body>
 

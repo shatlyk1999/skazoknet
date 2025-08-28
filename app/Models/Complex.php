@@ -13,21 +13,6 @@ class Complex extends Model
     protected $guarded = ['id'];
     protected $hidden = ['created_at', 'updated_at'];
 
-    protected $fillable = [
-        'name',
-        'content',
-        'address',
-        'sort',
-        'status',
-        'popular',
-        'city_id',
-        'developer_id',
-        'type',
-        'slug',
-        'image',
-        'map_x',
-        'map_y'
-    ];
 
     //relations
     public function developer()
@@ -43,6 +28,21 @@ class Complex extends Model
     public function images()
     {
         return $this->hasMany(ComplexImage::class, 'complex_id');
+    }
+
+    public function reviews()
+    {
+        return $this->morphMany(Review::class, 'reviewable');
+    }
+
+    public function approvedReviews()
+    {
+        return $this->reviews()->approved()->visible();
+    }
+
+    public function visibleReviews()
+    {
+        return $this->reviews()->approved()->visible();
     }
 
     public function scopeStatus()
@@ -147,4 +147,56 @@ class Complex extends Model
     {
         return route('show.complex', $this->slug);
     }
+
+    // // Calculate average rating from reviews
+    // public function getAverageRatingAttribute()
+    // {
+    //     $reviews = $this->reviews()->where('is_approved', true)->where('include_in_rating', true);
+
+    //     if ($reviews->count() == 0) {
+    //         return 0;
+    //     }
+
+    //     $totalPoints = 0;
+    //     $totalReviews = 0;
+
+    //     foreach ($reviews->get() as $review) {
+    //         $totalPoints += $review->rating;
+    //         $totalReviews++;
+    //     }
+
+    //     if ($totalReviews == 0) {
+    //         return 0;
+    //     }
+
+    //     return round($totalPoints / $totalReviews, 2);
+    // }
+
+    // // Get rating breakdown (how many reviews for each star)
+    // public function getRatingBreakdownAttribute()
+    // {
+    //     $reviews = $this->reviews()->where('is_approved', true)->where('include_in_rating', true);
+
+    //     $breakdown = [
+    //         5 => 0,
+    //         4 => 0,
+    //         3 => 0,
+    //         2 => 0,
+    //         1 => 0
+    //     ];
+
+    //     foreach ($reviews->get() as $review) {
+    //         if (isset($breakdown[$review->rating])) {
+    //             $breakdown[$review->rating]++;
+    //         }
+    //     }
+
+    //     return $breakdown;
+    // }
+
+    // // Get total approved reviews count
+    // public function getApprovedReviewsCountAttribute()
+    // {
+    //     return $this->reviews()->where('is_approved', true)->where('include_in_rating', true)->count();
+    // }
 }

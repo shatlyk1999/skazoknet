@@ -1,16 +1,19 @@
 <?php
 
 use App\Http\Controllers\AccessController;
+use App\Http\Controllers\AdditionController;
 use App\Http\Controllers\Admin\CityController;
 use App\Http\Controllers\Admin\ComplexController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DeveloperController;
+use App\Http\Controllers\Admin\ReviewCommentController;
 use App\Http\Controllers\Admin\SettingsControlller;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReviewController;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\AuthMiddleware;
 use App\Http\Middleware\CityMiddleware;
@@ -53,7 +56,6 @@ Route::get('recovery-confirmed', function () {
 });
 
 
-
 Route::group(['middleware' => CityMiddleware::class], function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::get('registration', function () {
@@ -70,12 +72,31 @@ Route::group(['middleware' => CityMiddleware::class], function () {
     Route::get('complex/{slug}', [PagesController::class, 'show_complex'])->name('show.complex');
     Route::get('developer/{slug}', [PagesController::class, 'show_developer'])->name('show.developer');
     Route::get('complexes/by/{developer}', [PagesController::class, 'complexes_by_developer'])->name('complexes.by.developer');
+
+    // Review routes
+    Route::get('review/{review}/show', [ReviewController::class, 'show'])->name('review.show');
+    Route::get('review/create', [ReviewController::class, 'create'])->name('review.create');
+    Route::get('all-reviews-weekly', [ReviewController::class, 'allWeekly'])->name('allWeekly');
+    Route::get('all-reviews-by-developer/{developer}', [ReviewController::class, 'allReviewByDeveloper'])->name('allReviewByDeveloper');
+    Route::get('all-reviews-by-complex/{complex}', [ReviewController::class, 'allReviewByComplex'])->name('allReviewByComplex');
     Route::group(['middleware' => AuthMiddleware::class], function () {
+        Route::post('review/store', [ReviewController::class, 'store'])->name('review.store');
+        Route::post('review/{review}/like', [ReviewController::class, 'like'])->name('review.like');
+        Route::post('review/{review}/dislike', [ReviewController::class, 'dislike'])->name('review.dislike');
+        Route::post('review/{review}/official-response', [ReviewController::class, 'officialResponse'])->name('post.official_response');
+        Route::post('reviews/{review}/comments', [ReviewController::class, 'storeComment'])->name('reviews.comments.store');
+        // Route::get('my-reviews', [AdditionController::class, 'myReviews'])->name('myReviews');
+        Route::get('reviews/{review}/additions/create', [AdditionController::class, 'createAddition'])->name('reviews.additions.create');
+        Route::post('reviews/{review}/additions', [AdditionController::class, 'storeAddition'])->name('reviews.additions.store');
         Route::get('user-profile/{id}', [ProfileController::class, 'userProfile'])->name('userProfile');
         Route::get('developer-profile/{id}', [ProfileController::class, 'developerProfile'])->name('developerProfile');
         Route::post('user-update/{id}', [ProfileController::class, 'userUpdate'])->name('userUpdate');
         Route::get('about-company/{id}', [ProfileController::class, 'aboutCompany'])->name('aboutCompany');
         Route::put('about-company/{id}', [ProfileController::class, 'updateCompany'])->name('updateCompany');
+
+        // Review routes
+        Route::get('my-reviews/{id}', [ProfileController::class, 'myReviews'])->name('myReviews');
+        Route::get('all-reviews/{id}', [ProfileController::class, 'allReviews'])->name('allReviews');
 
         // Complex routes
         Route::get('my-complexes/{id}', [ProfileController::class, 'myComplexes'])->name('myComplexes');
@@ -85,6 +106,10 @@ Route::group(['middleware' => CityMiddleware::class], function () {
         Route::get('edit-complex/{userId}/{complexId}', [ProfileController::class, 'editComplex'])->name('editComplex');
         Route::put('edit-complex/{userId}/{complexId}', [ProfileController::class, 'updateComplex'])->name('updateComplex');
         Route::delete('complex-image/{imageId}', [ProfileController::class, 'deleteComplexImage'])->name('deleteComplexImage');
+        // Reviews: addition create (static view)
+        Route::get('addition-create', function () {
+            return view('cabinet.addition-create');
+        })->name('addition.create');
     });
     Route::get('gaining-access', [AccessController::class, 'index'])->name('gainingaccess');
     Route::post('access-post', [AccessController::class, 'store'])->name('access.post');
@@ -151,4 +176,20 @@ Route::group([
 
     // SEO Management
     Route::resource('seo', App\Http\Controllers\Admin\SeoController::class)->names('admin.seo');
+
+    // Bad Words Management
+    Route::resource('bad-word', App\Http\Controllers\Admin\BadWordController::class);
+
+    // Reviews Management
+    Route::resource('reviews', App\Http\Controllers\Admin\ReviewController::class)->only(['index', 'update', 'destroy']);
+    Route::post('reviews/{review}/approve', [App\Http\Controllers\Admin\ReviewController::class, 'approve'])->name('reviews.approve');
+    Route::post('reviews/{review}/reject', [App\Http\Controllers\Admin\ReviewController::class, 'reject'])->name('reviews.reject');
+    Route::post('reviews/{review}/toggle-rating', [App\Http\Controllers\Admin\ReviewController::class, 'toggleRating'])->name('reviews.toggle-rating');
+    Route::post('reviews/{review}/hide', [App\Http\Controllers\Admin\ReviewController::class, 'hide'])->name('reviews.hide');
+    Route::post('reviews/{review}/unhide', [App\Http\Controllers\Admin\ReviewController::class, 'unhide'])->name('reviews.unhide');
+    Route::get('review/{id}/additions', [\App\Http\Controllers\Admin\AdditionController::class, 'additions'])->name('admin.review.additions');
+    Route::post('review/additions/{addition}/approve', [\App\Http\Controllers\Admin\AdditionController::class, 'approveAddition'])->name('admin.review.additions.approve');
+    Route::post('review/additions/{addition}/reject', [\App\Http\Controllers\Admin\AdditionController::class, 'rejectAddition'])->name('admin.review.additions.reject');
+    Route::get('review-comments', [ReviewCommentController::class, 'index'])->name('admin.review_comments.index');
+    Route::get('review-comments/{id}', [ReviewCommentController::class, 'show'])->name('admin.review_comments.show');
 });

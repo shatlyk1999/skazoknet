@@ -155,7 +155,7 @@ class ComplexController extends Controller
                 }
             }
 
-            return redirect()->back()->with([
+            return to_route('complex.index')->with([
                 'type' => 'success',
                 'message' => 'Комплекс успешно создан',
             ]);
@@ -314,8 +314,7 @@ class ComplexController extends Controller
                     $complex->images()->create(['image' => $input['imageName']]);
                 }
             }
-
-            return redirect()->back()->with([
+            return to_route('complex.index')->with([
                 'type' => 'success',
                 'message' => 'Комплекс успешно отредактирован',
             ]);

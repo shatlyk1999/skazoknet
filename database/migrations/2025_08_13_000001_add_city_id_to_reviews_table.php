@@ -11,10 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('cities', function (Blueprint $table) {
-            if (Schema::hasColumn('cities', 'developer_text')) {
-                $table->text('developer_text')->nullable()->after('text');
-            }
+        Schema::table('reviews', function (Blueprint $table) {
+            $table->foreignId('city_id')->nullable()->constrained()->onDelete('cascade');
         });
     }
 
@@ -23,8 +21,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('cities', function (Blueprint $table) {
-            //
+        Schema::table('reviews', function (Blueprint $table) {
+            $table->dropForeign(['city_id']);
+            $table->dropColumn('city_id');
         });
     }
 };

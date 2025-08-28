@@ -21,16 +21,23 @@
         <div class="flex items-start justify-between">
             <div class="flex items-center justify-between gap-x-2">
                 <div class="flex md:flex-col gap-2 flex-row justify-between w-full md:w-auto">
-                    <div class="flex items-center space-x-px xs:space-x-px" aria-label="3 out of 5 stars"
+                    {{-- <div class="flex items-center space-x-px xs:space-x-px" aria-label="3 out of 5 stars"
                         role="img">
                         <img src="{{ asset('icons/Starmini.svg') }}" alt="" />
                         <img src="{{ asset('icons/Starmini.svg') }}" alt="" />
                         <img src="{{ asset('icons/Starmini.svg') }}" alt="" />
                         <img src="{{ asset('icons/Stargraymini.svg') }}" alt="" />
                         <img src="{{ asset('icons/Stargraymini.svg') }}" alt="" />
-                    </div>
+                    </div> --}}
+                    @include('inc.star_rating', [
+                        'type' => 'developer',
+                        'main' => 'false',
+                        'width' => '27px',
+                        'height' => '27px',
+                    ])
                     <div class="text-primary text-sm">
-                        115/<span class="text-red-500">15</span>
+                        {{ $developer->reviews()->where('is_approved', true)->where('type', 'positive')->count() }}/<span
+                            class="text-red-500">{{ $developer->reviews()->where('is_approved', true)->where('type', 'negative')->count() }}</span>
                     </div>
                 </div>
                 {{-- <div class="group-hover:hidden">
@@ -52,7 +59,7 @@
     </div>
     <div class="absolute top-4 right-4 z-10">
         <span class="bg-primary text-white py-2 px-3 rounded-lg text-xs xs:text-sm">
-            115 Отзывов
+            {{ $developer->reviews()->where('is_approved', true)->count() }} Отзывов
         </span>
     </div>
 

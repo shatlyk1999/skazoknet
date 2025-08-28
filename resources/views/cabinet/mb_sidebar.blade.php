@@ -23,11 +23,12 @@
                      <span>Мой профиль</span>
                  </div>
              </a>
-             <a href="#"
+             <a href="{{ route('myReviews', auth()->user()->id) }}"
                  class="border-b border-white text-white font-semibold text-base inline-block w-full py-3 xl:py-4 px-6">
                  <div class="flex items-center justify-between">
                      <span>Мои отзывы</span>
-                     <span class="py-1 xl:py-2 px-3 xl:px-4 rounded-xl bg-white text-primary">15</span>
+                     <span
+                         class="py-1 xl:py-2 px-3 xl:px-4 rounded-xl bg-white text-primary">{{ auth()->user()->reviews()->count() }}</span>
                  </div>
              </a>
              <a href="{{ route('myComplexes', auth()->user()->id) }}"
@@ -43,7 +44,7 @@
                      class="border-b border-b-transparent text-white font-semibold text-base inline-block w-full py-3 xl:py-4 px-6">
                      <div class="flex items-center justify-between">
                          <span>Мои сообщения</span>
-                         <span class="py-1 xl:py-2 px-3 xl:px-4 rounded-xl bg-white text-primary">+10</span>
+                         <span class="py-1 xl:py-2 px-3 xl:px-4 rounded-xl bg-white text-primary">0</span>
                      </div>
                  </a>
                  <a href="{{ route('aboutCompany', auth()->user()->id) }}"
@@ -52,18 +53,41 @@
                          <span>О компании</span>
                      </div>
                  </a>
-                 <a href="#"
+                 <a href="{{ route('allReviews', auth()->user()->id) }}"
                      class="border-b border-b-transparent text-white font-semibold text-base inline-block w-full py-3 xl:py-4 px-6">
                      <div class="flex items-center justify-between">
                          <span>Всего отзывов</span>
-                         <span class="py-1 xl:py-2 px-3 xl:px-4 rounded-xl bg-white text-primary">+10</span>
+                         <span class="py-1 xl:py-2 px-3 xl:px-4 rounded-xl bg-white text-primary">
+                             @php
+                                 $totalReviews = 0;
+                                 if (auth()->user()->developer) {
+                                     $developer = auth()->user()->developer;
+                                     $developerReviews = \App\Models\Review::where(
+                                         'reviewable_type',
+                                         'App\Models\Developer',
+                                     )
+                                         ->where('reviewable_id', $developer->id)
+                                         ->where('is_approved', true)
+                                         ->count();
+                                     $complexReviews = \App\Models\Review::where(
+                                         'reviewable_type',
+                                         'App\Models\Complex',
+                                     )
+                                         ->whereIn('reviewable_id', $developer->complexes()->pluck('id'))
+                                         ->where('is_approved', true)
+                                         ->count();
+                                     $totalReviews = $developerReviews + $complexReviews;
+                                 }
+                             @endphp
+                             {{ $totalReviews }}
+                         </span>
                      </div>
                  </a>
              @endif
          </div>
          <div class="pb-6 pl-6 flex items-center justify-center">
              <button
-                 class="border-none bg-transparent text-white outline-none hover:bg-black/5 transition-colors p-2 rounded-lg text-lg flex items-center gap-x-2">
+                 class="border-none bg-transparent text-white outline-none hover:bg-black/5 transition-colors p-2 rounded-lg text-lg flex items-center gap-x-2 cursor-pointer">
                  <img src="{{ asset('icons/logout.svg') }}" alt="" />
                  Войти
              </button>

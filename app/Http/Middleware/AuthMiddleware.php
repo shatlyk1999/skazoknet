@@ -19,6 +19,6 @@ class AuthMiddleware
         if (Auth::check()) {
             return $next($request);
         }
-        return redirect('404');
+        return redirect('login');
     }
 }

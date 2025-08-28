@@ -24,6 +24,10 @@
         [data-image-uploaded="true"] #deleteProfileImage {
             display: flex;
         }
+
+        .bg-green-500 {
+            background-color: rgba(25, 135, 85, 1);
+        }
     </style>
     <script>
         const user_id = `{{ auth()->user()->id }}`

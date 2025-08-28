@@ -108,6 +108,22 @@ class PagesController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
 
+        // Get approved reviews for this complex
+        $reviews = $complex->reviews()
+            ->where('is_approved', true)
+            ->where('is_hidden', false)
+            ->with(['user', 'images'])
+            ->orderBy('created_at', 'desc')
+            ->limit(6)
+            ->get();
+
+        // Calculate average rating using our custom attribute
+        $averageRating = $complex->average_rating;
+
+        $totalReviews = $complex->reviews()
+            ->where('is_approved', true)
+            ->count();
+
         // SEO 
         SEO::setTitle($complex->getSeoTitle())
             ->setDescription($complex->getSeoDescription())
@@ -130,7 +146,7 @@ class PagesController extends Controller
                 ] : null
             ]);
 
-        return view('pages.show_complex', compact('complex', 'residential_complexes', 'hotel_complexes'));
+        return view('pages.show_complex', compact('complex', 'residential_complexes', 'hotel_complexes', 'reviews', 'averageRating', 'totalReviews'));
     }
 
     public function show_developer(Request $request, $slug)
@@ -149,6 +165,22 @@ class PagesController extends Controller
         }
         $complexes = $developer->complexes()->where('status', '1')->where('city_id', $city->id)->get();
 
+        // Get approved reviews for this developer
+        $reviews = $developer->reviews()
+            ->where('is_approved', true)
+            ->where('is_hidden', false)
+            ->with(['user', 'images'])
+            ->orderBy('created_at', 'desc')
+            ->limit(6)
+            ->get();
+
+        // Calculate average rating using our custom attribute
+        $averageRating = $developer->average_rating;
+
+        $totalReviews = $developer->reviews()
+            ->where('is_approved', true)
+            ->count();
+
         // SEO
         SEO::setTitle($developer->getSeoTitle())
             ->setDescription($developer->getSeoDescription())
@@ -162,19 +194,19 @@ class PagesController extends Controller
                 'url' => $developer->getCanonicalUrl()
             ]);
 
-        return view('pages.show_developer', compact('developer', 'complexes'));
+        return view('pages.show_developer', compact('developer', 'complexes', 'reviews', 'averageRating', 'totalReviews'));
     }
 
     public function complexes_by_developer(Request $request, $slug, $filter = null)
     {
         $query = $request->query() ?? '';
 
-        $developer = Developer::status()->where('slug', $slug)->firts();
+        $developer = Developer::status()->where('slug', $slug)->first();
         if (!$developer) {
             return to_route('500');
         }
         try {
-            $complex = $developer->complexes()->filter($query)->where('status', '1')->orderBy('sort', 'desc')->paginate(10);
+            $complexes = $developer->complexes()->filter($query)->where('status', '1')->orderBy('sort', 'desc')->paginate(10);
 
             if ($request->header('HX-Request')) {
                 return view('inc.complex_search_result', compact('complexes', 'residential', 'query'));

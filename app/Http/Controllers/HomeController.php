@@ -6,6 +6,7 @@ use App\Models\AboutUs;
 use App\Models\City;
 use App\Models\Complex;
 use App\Models\Developer;
+use App\Models\Review;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
@@ -35,16 +36,51 @@ class HomeController extends Controller
             $selected_city_id = session('selected_city_id');
             $city = City::find($selected_city_id);
         } else {
-            sleep(1);
             $city = $user->city;
         }
 
         $index_page = true;
+
+        // Guard: if no city is available at all, return safe empty datasets
+        if (!$city) {
+            $complexes_residential = collect();
+            $complexes_hotel = collect();
+            $residential_count = 0;
+            $hotel_count = 0;
+            $developers = collect();
+            $count_developers = 0;
+            $reviews = collect();
+
+            return view('home', compact(
+                'index_page',
+                'city',
+                'complexes_residential',
+                'complexes_hotel',
+                'residential_count',
+                'hotel_count',
+                'developers',
+                'reviews',
+                'count_developers',
+            ));
+        }
+
         $complexes_residential = Complex::status()->where('city_id', $city->id)->where('type', 'residential')->orderBy('sort', 'desc')->limit(6)->get();
         $complexes_hotel = Complex::status()->where('city_id', $city->id)->where('type', 'hotel')->orderBy('sort', 'desc')->limit(6)->get();
         $residential_count = Complex::status()->where('city_id', $city->id)->where('type', 'residential')->count();
         $hotel_count = Complex::status()->where('city_id', $city->id)->where('type', 'hotel')->count();
         $developers = $city->developers()->where('status', '1')->orderBy('sort', 'desc')->limit(6)->get();
+        $count_developers = $city->developers()->where('status', '1')->count();
+
+        // Get best reviews of the week - sorted by likes first, then views, filtered by city
+        $reviews = Review::where('is_approved', true)
+            ->where('is_hidden', false)
+            ->where('city_id', $city->id)
+            ->where('created_at', '>=', now()->subWeek())
+            ->with(['user', 'reviewable', 'images'])
+            ->withCount(['reviewLikes as user_likes_count'])
+            ->orderByRaw('(likes + user_likes_count) DESC, views DESC')
+            ->limit(6)
+            ->get();
         return view('home', compact(
             'index_page',
             'city',
@@ -53,6 +89,8 @@ class HomeController extends Controller
             'residential_count',
             'hotel_count',
             'developers',
+            'reviews',
+            'count_developers',
         ));
     }
 

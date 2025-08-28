@@ -268,7 +268,7 @@ class DeveloperController extends Controller
                 $developer->cities()->delete();
             }
 
-            return redirect()->back()->with([
+            return to_route('developer.index')->with([
                 'type' => 'success',
                 'message' => 'Застройщик успешно отредактирован',
             ]);

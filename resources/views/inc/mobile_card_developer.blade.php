@@ -20,16 +20,22 @@
             <p class="mt-8">Количество объектов: {{ $developer->complexes()->count() }}</p>
             <div class="flex items-center justify-between gap-x-2">
                 <div class="flex md:flex-col flex-row gap-2 justify-between w-full">
-                    <div class="flex items-center space-x-px xs:space-x-1" aria-label="3 out of 5 stars" role="img">
-                        <!--<img src="../public/icons/Starmini.svg" alt="" /> -->
+                    {{-- <div class="flex items-center space-x-px xs:space-x-1" aria-label="3 out of 5 stars" role="img">
                         <img src="{{ asset('icons/Starmini.svg') }}" alt="" />
                         <img src="{{ asset('icons/Starmini.svg') }}" alt="" />
                         <img src="{{ asset('icons/Starmini.svg') }}" alt="" />
                         <img src="{{ asset('icons/Starmini.svg') }}" alt="" />
                         <img src="{{ asset('icons/Stargraymini.svg') }}" alt="" />
-                    </div>
+                    </div> --}}
+                    @include('inc.star_rating', [
+                        'type' => 'developer',
+                        'main' => 'false',
+                        'width' => '23px',
+                        'height' => '23px',
+                    ])
                     <div class="text-primary text-sm">
-                        115/<span class="text-red-500">15</span>
+                        {{ $developer->reviews()->where('is_approved', true)->where('type', 'positive')->count() }}/<span
+                            class="text-red-500">{{ $developer->reviews()->where('is_approved', true)->where('type', 'negative')->count() }}</span>
                     </div>
                 </div>
                 <div class="group-hover:hidden">
@@ -43,7 +49,7 @@
         </div>
         <div class="absolute top-4 right-4 z-10">
             <span class="bg-primary text-white py-2 px-3 rounded-lg text-xs xs:text-sm">
-                115 Отзывов
+                {{ $developer->reviews()->where('is_approved', true)->count() }} Отзывов
             </span>
         </div>
 
