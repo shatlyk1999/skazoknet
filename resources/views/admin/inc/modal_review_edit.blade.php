@@ -127,10 +127,12 @@
                                     </div>
                                     <div class="mb-2">
                                         <strong>Статус:</strong>
-                                        @if ($review->is_approved)
-                                            <span class="badge bg-success">Одобрен</span>
-                                        @else
-                                            <span class="badge bg-warning">На модерации</span>
+                                        @if ($review->is_approved == 0)
+                                            <span class="badge bg-warning">{{ $review->approval_status }}</span>
+                                        @elseif ($review->is_approved == 1)
+                                            <span class="badge bg-danger">{{ $review->approval_status }}</span>
+                                        @elseif ($review->is_approved == 2)
+                                            <span class="badge bg-success">{{ $review->approval_status }}</span>
                                         @endif
                                     </div>
                                 </div>

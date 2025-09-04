@@ -44,12 +44,16 @@
 
                         @if ($developers->count() > 0)
                             <label for="developer_id">Застройщик</label>
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 <select class="form-control" name="developer_id" placeholder="Застройщик">
                                     @foreach ($developers as $key => $developer)
                                         <option value="{{ $developer->id }}">{{ $developer->name }}</option>
                                     @endforeach
                                 </select>
+                            </div> --}}
+                            <div class="form-group">
+                                <select id="select-links" name="developer_id"
+                                    placeholder="Застройщик">Застройщик</select>
                             </div>
                         @else
                             Застройщик не найден

@@ -2,7 +2,7 @@
     <section class="xl:container px-0 sm:px-12 xl:px-4 mx-0 xl:mx-auto w-full my-12 md:my-25">
         <div class="px-8 xs:px-12 sm:px-0 flex items-center justify-between mb-8">
             <h1 class="text-2xl lg:text-3xl xl:text-4xl font-bold tracking-wide">
-                Гостиничные комплексы в {{ $city->text }}
+                Гостиничные комплексы в {{ $city->text ?? '' }}
             </h1>
             <a href="{{ route('complexes', 'hotel') }}" class="md:inline-block hidden">Все гостиничные комплексы</a>
         </div>

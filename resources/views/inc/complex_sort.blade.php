@@ -3,7 +3,7 @@
         class="flex items-center gap-2 bg-transparent hover:bg-black/5 px-3 py-2 transition-colors rounded-lg cursor-pointer">
         @if (empty($query))
             <span>По умолчанию</span>
-        @elseif(!empty($query) && (isset($query['popular']) && $query['popular'] == 'on'))
+        @elseif(!empty($query) && (isset($query['popular']) && $query['popular'] == '1'))
             <span>Популярные</span>
         @else
             <span>По умолчанию</span>

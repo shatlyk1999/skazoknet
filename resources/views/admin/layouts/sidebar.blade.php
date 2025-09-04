@@ -136,7 +136,7 @@ $complex_count = \App\Models\Complex::get()->count() ?? 0;
                             <i class="bi bi-chat-quote"></i>
                             <span>Отзывы</span>
                             @php
-                                $pending_reviews = \App\Models\Review::where('is_approved', false)->count();
+                                $pending_reviews = \App\Models\Review::whereIn('is_approved', [0])->count();
                             @endphp
                             @if ($pending_reviews > 0)
                                 <span

@@ -29,13 +29,20 @@
             @endphp
             <div class="flex items-center justify-between mt-4">
                 {{-- <div class="flex items-center space-x-px xs:space-x-1" aria-label="3 out of 5 stars" role="img"> --}}
-                @include('inc.star_rating', [
-                    'type' => $type,
-                    'main' => 'false',
-                    'width' => '23px',
-                    'height' => '23px',
-                    // 'star_count_class' => 'pr-1',
-                ])
+                @for ($i = 0; $i < $review->rating; $i++)
+                    <svg class=" text-yellow-400" fill="currentColor" viewBox="0 0 24 24"
+                        style="width:{{ '23px' }};height:{{ '23px' }}">
+                        <path
+                            d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.46,13.97L5.82,21L12,17.27Z" />
+                    </svg>
+                @endfor
+                @for ($i = 0; $i < 5 - $review->rating; $i++)
+                    <svg class=" text-gray-300" fill="currentColor" viewBox="0 0 24 24"
+                        style="width:{{ '23px' }};height:{{ '23px' }}">
+                        <path
+                            d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.46,13.97L5.82,21L12,17.27Z" />
+                    </svg>
+                @endfor
                 {{-- </div> --}}
                 <span class="text-sm">{{ $review->created_at->format('Y/m/d') }}</span>
             </div>
@@ -76,9 +83,19 @@
                     <span>{{ $review->comments()->count() ?? 0 }}</span>
                 </div>
 
-                <span class="md:inline-block hidden text-xs text-green-600">
-                    Одобрен
-                </span>
+                @if ($review->is_approved == 0)
+                    <span class="md:inline-block hidden text-xs text-orange-600">
+                        {{ $review->approval_status }}
+                    </span>
+                @elseif ($review->is_approved == 1)
+                    <span class="md:inline-block hidden text-xs text-red-600">
+                        {{ $review->approval_status }}
+                    </span>
+                @elseif ($review->is_approved == 2)
+                    <span class="md:inline-block hidden text-xs text-green-600">
+                        {{ $review->approval_status }}
+                    </span>
+                @endif
             </div>
         </div>
     </div>

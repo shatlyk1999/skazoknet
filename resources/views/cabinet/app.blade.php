@@ -66,9 +66,9 @@
                     <img src="{{ asset('icons/menu.svg') }}" alt="" />
                 </div>
             </div>
-            <div class="absolute top-0 left-0 h-full w-full flex items-center justify-center">
+            <a href="{{ route('home') }}" class="absolute top-0 left-0 h-full w-full flex items-center justify-center">
                 <img src="{{ asset('images/logo.png') }}" alt="" />
-            </div>
+            </a>
         </div>
     </header>
     <div class="bg-white h-[calc(100dvh-4.375rem)] md:h-dvh flex justify-end relative">

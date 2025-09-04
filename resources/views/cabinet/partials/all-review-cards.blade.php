@@ -82,7 +82,7 @@
                         {{ $review->images->count() }} фото
                     </span>
                     <span class="text-text text-xs font-normal tracking-wide text-right">
-                        {{ $review->is_approved ? 'Одобрен' : 'На модерации' }}
+                        {{ $review->approval_status }}
                     </span>
                 </div>
             </div>
@@ -161,7 +161,7 @@
                 </div>
                 <div class="flex flex-col items-end gap-1">
                     <span class="text-xs text-gray-500">
-                        {{ $review->is_approved ? 'Одобрен' : 'На модерации' }}
+                        {{ $review->approval_status }}
                     </span>
                     @if ($review->images->count() > 0)
                         <span class="bg-primary text-white py-1 px-2 rounded-xl text-xs">

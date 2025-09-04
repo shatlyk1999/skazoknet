@@ -120,7 +120,7 @@ class ReviewController extends Controller
             'text' => $text,
             'rating' => $request->rating,
             'city_id' => session('selected_city_id'),
-            'is_approved' => false, // Needs admin approval
+            'is_approved' => 0, // 0: На модерации
         ]);
 
         // Handle image uploads
@@ -171,9 +171,8 @@ class ReviewController extends Controller
 
     public function show(Review $review)
     {
-        // dd($review->reviewable);
-        // Onaylanmamış yorumları sadece yazan kullanıcı görebilir
-        if (!$review->is_approved && (!Auth::check() || Auth::id() !== $review->user_id)) {
+        // Reddedilen yorumları sadece yazan kullanıcı görebilir
+        if ($review->is_approved == 1 && (!Auth::check() || Auth::id() !== $review->user_id)) {
             abort(404);
         }
 
@@ -197,8 +196,8 @@ class ReviewController extends Controller
             return redirect()->route('login');
         }
 
-        // Check if review is approved and visible
-        if (!$review->is_approved || $review->is_hidden) {
+        // Check if review is approved and visible (0=модерация, 2=одобрен можно лайкать, 1=отклонен нельзя)
+        if ($review->is_approved == 1 || $review->is_hidden) {
             if (request()->ajax()) {
                 return response()->json(['success' => false, 'message' => 'Отзыв недоступен для оценки.'], 403);
             }
@@ -266,8 +265,8 @@ class ReviewController extends Controller
             return redirect()->route('login');
         }
 
-        // Check if review is approved and visible
-        if (!$review->is_approved || $review->is_hidden) {
+        // Check if review is approved and visible (0=модерация, 2=одобрен можно лайкать, 1=отклонен нельзя)
+        if ($review->is_approved == 1 || $review->is_hidden) {
             if (request()->ajax()) {
                 return response()->json(['success' => false, 'message' => 'Отзыв недоступен для оценки.'], 403);
             }
@@ -388,7 +387,7 @@ class ReviewController extends Controller
         } else {
             $city = $user->city;
         }
-        $reviews = Review::where('is_approved', true)
+        $reviews = Review::whereIn('is_approved', [0, 2])
             ->where('is_hidden', false)
             ->where('city_id', $city->id)
             ->where('created_at', '>=', now()->subWeek())
@@ -404,7 +403,7 @@ class ReviewController extends Controller
     {
         $reviews = Review::where('reviewable_type', Developer::class)
             ->where('reviewable_id', $developer->id)
-            ->where('is_approved', true)
+            ->whereIn('is_approved', [0, 2])
             ->where('is_hidden', false)
             ->with(['user', 'images'])
             ->orderByDesc('created_at')
@@ -417,7 +416,7 @@ class ReviewController extends Controller
     {
         $reviews = Review::where('reviewable_type', Complex::class)
             ->where('reviewable_id', $complex->id)
-            ->where('is_approved', true)
+            ->whereIn('is_approved', [0, 2])
             ->where('is_hidden', false)
             ->with(['user', 'images'])
             ->orderByDesc('created_at')

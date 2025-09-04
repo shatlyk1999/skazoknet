@@ -35,8 +35,8 @@
                         'height' => '27px',
                     ])
                     <div class="text-primary text-sm">
-                        {{ $complex->reviews()->where('is_approved', true)->where('type', 'positive')->count() }}/<span
-                            class="text-red-500">{{ $complex->reviews()->where('is_approved', true)->where('type', 'negative')->count() }}</span>
+                        {{ $complex->reviews()->whereIn('is_approved', [0, 2])->where('is_hidden', false)->where('type', 'positive')->count() }}/<span
+                            class="text-red-500">{{ $complex->reviews()->whereIn('is_approved', [0, 2])->where('is_hidden', false)->where('type', 'negative')->count() }}</span>
                     </div>
                 </div>
                 {{-- <div class="group-hover:hidden">
@@ -56,7 +56,7 @@
     </div>
     <div class="absolute top-4 right-4 z-10">
         <span class="bg-primary text-white py-2 px-3 rounded-lg text-xs xs:text-sm">
-            {{ $complex->reviews()->where('is_approved', true)->count() }} Отзывов
+            {{ $complex->reviews()->whereIn('is_approved', [0, 2])->where('is_hidden', false)->count() }} Отзывов
         </span>
     </div>
 

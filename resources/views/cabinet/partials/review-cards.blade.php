@@ -11,8 +11,21 @@
                     class="bg-{{ $review->type === 'positive' ? 'green' : 'red' }}-500 text-white rounded-4xl px-5 xl:px-7 py-2 xl:py-3 text-xs tracking-wide font-bold">
                     {{ $review->type === 'positive' ? 'Положительный отзыв' : 'Негативный отзыв' }}
                 </div>
+                @if (class_basename($review->reviewable_type) == 'Developer')
+                    {{ $type == 'developer' }}
+                @endif
+                @if (class_basename($review->reviewable_type) == 'Complex')
+                    {{ $type == 'complex' }}
+                @endif
                 <div class="text-xl lg:text-3xl flex items-center">
-                    <x-star-rating :rating="$review->rating" size="normal" />
+                    {{-- <x-star-rating :rating="$review->rating" size="normal" /> --}}
+                    @include('inc.star_rating', [
+                        'type' => $type,
+                        'main' => 'true',
+                        'width' => '40px',
+                        'height' => '40px',
+                        'star_count_class' => 'pr-1',
+                    ])
                 </div>
             </div>
 
@@ -66,7 +79,7 @@
                         {{ $review->images->count() }} фото
                     </span>
                     <span class="text-text text-xs font-normal tracking-wide text-right">
-                        {{ $review->is_approved ? 'Одобрен' : 'На модерации' }}
+                        {{ $review->approval_status }}
                     </span>
                 </div>
             </div>
@@ -101,8 +114,21 @@
                     @endif
                 </h4>
             </div>
+            @if (class_basename($review->reviewable_type) == 'Developer')
+                {{ $type == 'developer' }}
+            @endif
+            @if (class_basename($review->reviewable_type) == 'Complex')
+                {{ $type == 'complex' }}
+            @endif
             <div class="flex items-center justify-between">
-                <x-star-rating :rating="$review->rating" size="small" />
+                {{-- <x-star-rating :rating="$review->rating" size="small" /> --}}
+                @include('inc.star_rating', [
+                    'type' => $type,
+                    'main' => 'true',
+                    'width' => '40px',
+                    'height' => '40px',
+                    'star_count_class' => 'pr-1',
+                ])
             </div>
 
             <h4 class="text-2xl font-bold tracking-tight text-text mt-3 line-clamp-1">
@@ -128,7 +154,7 @@
                 </div>
                 <div class="flex flex-col items-end gap-1">
                     <span class="text-xs text-gray-500">
-                        {{ $review->is_approved ? 'Одобрен' : 'На модерации' }}
+                        {{ $review->approval_status }}
                     </span>
                     @if ($review->images->count() > 0)
                         <span class="bg-primary text-white py-1 px-2 rounded-xl text-xs">

@@ -3,7 +3,7 @@
         class="flex items-center gap-2 bg-transparent hover:bg-black/5 px-3 py-2 transition-colors rounded-lg cursor-pointer">
         @if (empty($query))
             <span>По умолчанию</span>
-        @elseif(!empty($query) && $query['popular'] == 'on')
+        @elseif(!empty($query) && (isset($query['popular']) && $query['popular'] == '1'))
             <span>Популярные</span>
         @endif
         <img src="{{ asset('icons/Group 334.svg') }}" alt="" />
@@ -29,7 +29,7 @@
             <a href="{{ route('developers') }}?popular=on">
                 Популярные
             </a>
-            @if (!empty($query) && $query['popular'] == 'on')
+            @if (!empty($query) && (isset($query['popular']) && $query['popular'] == '1'))
                 <span class="check-icon">✔</span>
             @endif
         </div>

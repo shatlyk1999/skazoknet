@@ -245,7 +245,7 @@
                     @endif
                     @if ($complex->type == 'hotel')
                         Гостиничные комплекс
-                    @endif «{{ $complex->name }}», {{ $city->text }}
+                    @endif «{{ $complex->name }}», {{ $city->text ?? '' }}
                 </h1>
                 <h4 class="text-sm font-medium mt-3 text-text3">
                     {{ $complex->address }}
@@ -329,7 +329,7 @@
                 @endif
                 @if ($complex->type == 'hotel')
                     ГК
-                @endif «{{ $complex->name }}» {{ $city->text }}
+                @endif «{{ $complex->name }}» {{ $city->text ?? '' }}
             </h1>
             <div class="hidden items-center gap-x-2 md:flex">
                 <span class="bg-primary text-white p-1 px-2 rounded-lg text-sm">
@@ -354,7 +354,7 @@
             </div>
         @else
             <div class="flex itemx-center justify-center">
-                Нет отзывы
+                Нет отзывов
             </div>
         @endif
 

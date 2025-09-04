@@ -28,8 +28,8 @@ class Addition extends Model
 
     public function scopeApproved($query): mixed
     {
+        // return $query->whereIn('is_approved', [0, 2])->where('is_hidden', false);
         return $query->where('is_approved', true);
-        // ->where('is_hidden', false);
     }
 
     // Filter bad words

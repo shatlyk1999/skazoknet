@@ -72,7 +72,7 @@ class HomeController extends Controller
         $count_developers = $city->developers()->where('status', '1')->count();
 
         // Get best reviews of the week - sorted by likes first, then views, filtered by city
-        $reviews = Review::where('is_approved', true)
+        $reviews = Review::whereIn('is_approved', [0, 2])
             ->where('is_hidden', false)
             ->where('city_id', $city->id)
             ->where('created_at', '>=', now()->subWeek())

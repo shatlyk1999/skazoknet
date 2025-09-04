@@ -280,6 +280,72 @@
 @endsection
 
 @section('script')
+    <script src="{{ asset('js/tom-select-2.4.3.js') }}"></script>
+    <script>
+        const developers = @json($developers);
+        // console.log(developers);
+        new TomSelect('#select-links', {
+            valueField: 'id',
+            searchField: 'name',
+            options: developers,
+            render: {
+                option: function(data, escape) {
+                    return '<div>' +
+                        '<span class="name">' + escape(data.name) + '</span>' +
+                        // '<span class="label">' + escape(data.label) + '</span>' +
+                        '</div>';
+                },
+                item: function(data, escape) {
+                    return '<div name="' + '">' + escape(data.name) + '</div>';
+                }
+            }
+        });
+    </script>
+
+    <script>
+        const selectedDeveloper = {
+            @foreach ($complexes as $complex)
+                {{ $complex->id }}: @json($complex->developer->id),
+            @endforeach
+        };
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.modal').forEach(modalEl => {
+                modalEl.addEventListener('shown.bs.modal', function() {
+                    const modalId = modalEl.getAttribute('id'); // example: edit_12
+                    if (!modalId.startsWith('edit_')) return;
+
+                    const complexId = modalId.split('_')[1];
+                    const selectEl = modalEl.querySelector(`#select-links-${complexId}`);
+
+                    if (!selectEl.tomselect) {
+                        new TomSelect(selectEl, {
+                            valueField: 'id',
+                            searchField: 'name',
+                            options: developers,
+                            render: {
+                                option: function(data, escape) {
+                                    return `<div><span>${escape(data.name)}</span></div>`;
+                                },
+                                item: function(data, escape) {
+                                    return `<div>${escape(data.name)}</div>`;
+                                }
+                            }
+                        });
+                    }
+
+                    // Seçili şehirleri ata
+                    const selected = selectedDeveloper[complexId];
+                    if (selected) {
+                        selectEl.tomselect.setValue(selected);
+                    }
+                });
+            });
+        });
+    </script>
+
     <script src="{{ asset('admin/extensions/summernote/summernote-lite.min.js') }}"></script>
     <script src="{{ asset('admin/static/js/pages/summernote.js') }}"></script>
     <script>

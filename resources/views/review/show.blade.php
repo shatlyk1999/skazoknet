@@ -128,7 +128,7 @@
             </div>
             <div class="flex items-center gap-x-2 w-[50%] md:w-auto order-2 md:order-none md:justify-start justify-end">
                 <span class="bg-primary text-white p-1 px-2 rounded-lg text-sm">
-                    {{ $review->reviewable->reviews()->where('is_approved', true)->count() }}
+                    {{ $review->reviewable->reviews()->whereIn('is_approved', [0, 2])->where('is_hidden', false)->count() }}
                 </span>
                 <span class="text-sm tracking-wide">Отзывов</span>
             </div>
@@ -227,7 +227,7 @@
                         </span>
                     @endif --}}
                     <span class="bg-primary text-white py-1 px-3 rounded-2xl text-sm hidden lg:inline-block">
-                        17 Дополнений
+                        {{ $review->additions()->count() ?? 0 }} Дополнений
                     </span>
                     <span class="text-sm text-text">{{ $review->created_at->format('Y/m/d') }}</span>
                 </div>
@@ -290,7 +290,7 @@
                     </span>
                 @endif --}}
                 <span class="bg-primary text-white py-1 px-3 rounded-2xl text-sm inline-block lg:hidden">
-                    17 Дополнений
+                    {{ $review->additions()->count() ?? 0 }} Дополнений
                 </span>
             </div>
 
@@ -358,7 +358,13 @@
                 </div>
             @endif
             <div class="text-xs font-normal tracking-wider text-text xl:text-sm text-right">
-                {{ $review->is_approved ? 'Одобрен' : 'На модерации' }}
+                @if ($review->is_approved == 0)
+                    <span class="text-orange-600">{{ $review->approval_status }}</span>
+                @elseif ($review->is_approved == 1)
+                    <span class="text-red-600">{{ $review->approval_status }}</span>
+                @elseif ($review->is_approved == 2)
+                    <span class="text-green-600">{{ $review->approval_status }}</span>
+                @endif
             </div>
         </div>
 
@@ -439,7 +445,7 @@
             </div>
         @endif
 
-        @if (!isset($review->official_response) && $developer->user_id == @auth()->user()->id)
+        @if (!isset($review->official_response) && auth()->check() && $developer->user_id == auth()->user()->id)
             <form action="{{ route('post.official_response', $review) }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="rounded-2xl border-primary border-2 p-6 shadow-md">
@@ -517,11 +523,13 @@
             </div>
             <div class="flex items-center justify-start sm:justify-end">
                 <button id="rc-btn" data-auth="{{ auth()->check() ? '1' : '0' }}"
-                    data-login-url="{{ route('login') }}" data-post-url="{{ route('reviews.comments.store', $review) }}"
-                    type="button"
+                    data-login-url="{{ route('login') }}"
+                    data-post-url="{{ route('reviews.comments.store', $review) }}" type="button"
                     class="flex items-center sm:justify-start justify-center gap-x-2 px-10 w-full group py-3.5 rounded-3xl border border-primary text-primary sm:w-max text-sm hover:bg-primary hover:text-white transition-all duration-300 ease-in-out cursor-pointer hover:shadow-lg">
-                    <img src="{{ asset('icons/comment_blue.svg') }} " class="group-hover:hidden block" alt="" />
-                    <img src="{{ asset('icons/comment_white.svg') }}" class="hidden group-hover:block" alt="" />
+                    <img src="{{ asset('icons/comment_blue.svg') }} " class="group-hover:hidden block"
+                        alt="" />
+                    <img src="{{ asset('icons/comment_white.svg') }}" class="hidden group-hover:block"
+                        alt="" />
 
                     <span>Оставить свой комментарий</span>
                 </button>

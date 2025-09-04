@@ -48,7 +48,7 @@
                             </div>
 
                             <label for="developer_id">Застройщик</label>
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 <select class="form-control" name="developer_id" placeholder="Застройщик">
                                     @foreach ($developers as $key => $developer)
                                         <option value="{{ $developer->id }}"
@@ -57,6 +57,10 @@
                                         </option>
                                     @endforeach
                                 </select>
+                            </div> --}}
+                            <div class="form-group">
+                                <select class="select-links" id="select-links-{{ $complex->id }}" name="developer_id"
+                                    placeholder="Застройщик">Застройщик</select>
                             </div>
 
                             <div class="form-group">

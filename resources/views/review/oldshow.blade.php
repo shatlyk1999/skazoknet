@@ -64,9 +64,9 @@
                         Строительная компания «{{ $review->reviewable->name }}», {{ $city->developer_text }}
                     @else
                         @if ($review->reviewable->type == 'residential')
-                            Жилой комплекс «{{ $review->reviewable->name }}», {{ $city->text }}
+                            Жилой комплекс «{{ $review->reviewable->name }}», {{ $city->text ?? '' }}
                         @else
-                            Гостиничный комплекс «{{ $review->reviewable->name }}», {{ $city->text }}
+                            Гостиничный комплекс «{{ $review->reviewable->name }}», {{ $city->text ?? '' }}
                         @endif
                     @endif
                 </h1>
@@ -138,7 +138,7 @@
                     <div
                         class="flex items-center gap-x-2 w-[50%] md:w-auto order-2 md:order-none md:justify-start justify-end">
                         <span class="bg-primary text-white p-1 px-2 rounded-lg text-sm">
-                            {{ $review->reviewable->reviews()->where('is_approved', true)->count() }}
+                            {{ $review->reviewable->reviews()->whereIn('is_approved', [0, 2])->where('is_hidden', false)->count() }}
                         </span>
                         <span class="text-sm tracking-wide">Отзывов</span>
                     </div>
@@ -236,7 +236,7 @@
             </div>
             <div class="flex items-center gap-x-2 w-[50%] md:w-auto order-2 md:order-none md:justify-start justify-end">
                 <span class="bg-primary text-white p-1 px-2 rounded-lg text-sm">
-                    {{ $review->reviewable->reviews()->where('is_approved', true)->count() }}
+                    {{ $review->reviewable->reviews()->whereIn('is_approved', [0, 2])->where('is_hidden', false)->count() }}
                 </span>
                 <span class="text-sm tracking-wide">Отзывов</span>
             </div>
@@ -423,7 +423,7 @@
             @endif
 
             <div class="text-xs font-normal tracking-wider text-text xl:text-sm text-right">
-                {{ $review->is_approved ? 'Одобрен' : 'На модерации' }}
+                {{ $review->approval_status }}
             </div>
         </div>
     </div>

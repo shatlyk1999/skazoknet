@@ -86,6 +86,23 @@
                                             </div>
                                             <div class="col-md-1">
                                                 <div class="form-group">
+                                                    <select class="form-control" name="is_approved">
+                                                        <option value="">Статус</option>
+                                                        <option value="0"
+                                                            {{ request('is_approved') == '0' ? 'selected' : '' }}>На
+                                                            модерации
+                                                        </option>
+                                                        <option value="1"
+                                                            {{ request('is_approved') == '1' ? 'selected' : '' }}>Не одобрен
+                                                        </option>
+                                                        <option value="2"
+                                                            {{ request('is_approved') == '2' ? 'selected' : '' }}>Одобрен
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-1">
+                                                <div class="form-group">
                                                     <select class="form-control" name="include_in_rating">
                                                         <option value="">Рейтинг</option>
                                                         <option value="1"
@@ -164,6 +181,7 @@
                                             <th>Заголовок</th>
                                             <th>Рейтинг</th>
                                             <th>Статус</th>
+                                            <th>Модерация</th>
                                             <th>В рейтинге</th>
                                             <th>Видимость</th>
                                             <th>Просмотры</th>
@@ -209,10 +227,15 @@
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    @if ($review->is_approved)
-                                                        <span class="badge bg-success">Одобрен</span>
-                                                    @else
-                                                        <span class="badge bg-warning">На модерации</span>
+                                                    @if ($review->is_approved == 0)
+                                                        <span
+                                                            class="badge bg-warning">{{ $review->approval_status }}</span>
+                                                    @elseif ($review->is_approved == 1)
+                                                        <span
+                                                            class="badge bg-danger">{{ $review->approval_status }}</span>
+                                                    @elseif ($review->is_approved == 2)
+                                                        <span
+                                                            class="badge bg-success">{{ $review->approval_status }}</span>
                                                     @endif
                                                 </td>
                                                 <td>
@@ -249,7 +272,7 @@
                                                             data-bs-target="#editReviewModal_{{ $review->id }}">
                                                             <i class="bi bi-pencil"></i>
                                                         </button>
-                                                        @if (!$review->is_approved)
+                                                        @if ($review->is_approved != 2)
                                                             <form action="{{ route('reviews.approve', $review->id) }}"
                                                                 method="post" style="margin-bottom: 0px;">
                                                                 @csrf
@@ -258,7 +281,8 @@
                                                                     <i class="bi bi-check"></i>
                                                                 </button>
                                                             </form>
-                                                        @else
+                                                        @endif
+                                                        @if ($review->is_approved != 1)
                                                             <form action="{{ route('reviews.reject', $review->id) }}"
                                                                 method="post" style="margin-bottom: 0px;">
                                                                 @csrf
@@ -486,12 +510,15 @@
                                                                         <div class="card-body">
                                                                             <div class="mb-2">
                                                                                 <strong>Статус:</strong>
-                                                                                @if ($review->is_approved)
+                                                                                @if ($review->is_approved == 0)
                                                                                     <span
-                                                                                        class="badge bg-success">Одобрен</span>
-                                                                                @else
-                                                                                    <span class="badge bg-warning">На
-                                                                                        модерации</span>
+                                                                                        class="badge bg-warning">{{ $review->approval_status }}</span>
+                                                                                @elseif ($review->is_approved == 1)
+                                                                                    <span
+                                                                                        class="badge bg-danger">{{ $review->approval_status }}</span>
+                                                                                @elseif ($review->is_approved == 2)
+                                                                                    <span
+                                                                                        class="badge bg-success">{{ $review->approval_status }}</span>
                                                                                 @endif
                                                                             </div>
                                                                             <div class="mb-2">

@@ -151,7 +151,7 @@ class Complex extends Model
     // // Calculate average rating from reviews
     // public function getAverageRatingAttribute()
     // {
-    //     $reviews = $this->reviews()->where('is_approved', true)->where('include_in_rating', true);
+    //     $reviews = $this->reviews()->whereIn('is_approved', [0, 2])->where('is_hidden', false)->where('include_in_rating', true);
 
     //     if ($reviews->count() == 0) {
     //         return 0;
@@ -175,7 +175,7 @@ class Complex extends Model
     // // Get rating breakdown (how many reviews for each star)
     // public function getRatingBreakdownAttribute()
     // {
-    //     $reviews = $this->reviews()->where('is_approved', true)->where('include_in_rating', true);
+    //     $reviews = $this->reviews()->whereIn('is_approved', [0, 2])->where('is_hidden', false)->where('include_in_rating', true);
 
     //     $breakdown = [
     //         5 => 0,
@@ -197,6 +197,6 @@ class Complex extends Model
     // // Get total approved reviews count
     // public function getApprovedReviewsCountAttribute()
     // {
-    //     return $this->reviews()->where('is_approved', true)->where('include_in_rating', true)->count();
+    //     return $this->reviews()->whereIn('is_approved', [0, 2])->where('is_hidden', false)->where('include_in_rating', true)->count();
     // }
 }

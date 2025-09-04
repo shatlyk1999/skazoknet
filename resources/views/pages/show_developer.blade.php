@@ -99,7 +99,7 @@
             </div>
             <div class="flex items-center gap-x-2 w-[50%] md:w-auto order-2 md:order-none md:justify-start justify-end">
                 <span class="bg-primary text-white p-1 px-2 rounded-lg text-sm">
-                    {{ $developer->reviews()->where('is_approved', true)->count() }}</span>
+                    {{ $developer->reviews()->whereIn('is_approved', [0, 2])->where('is_hidden', false)->count() }}</span>
                 <span class="text-sm tracking-wide">Отзывов</span>
             </div>
             <div class="order-3 md:order-none md:mt-0 mt-4 md:w-auto w-full">

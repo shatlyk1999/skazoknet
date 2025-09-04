@@ -31,6 +31,10 @@ class ReviewController extends Controller
             $query->where('is_approved', $request->is_approved);
         }
 
+        if ($request->filled('is_approved')) {
+            $query->where('is_approved', $request->is_approved);
+        }
+
         if ($request->filled('include_in_rating')) {
             $query->where('include_in_rating', $request->include_in_rating);
         }
@@ -89,7 +93,7 @@ class ReviewController extends Controller
     public function approve(Review $review)
     {
         try {
-            $review->update(['is_approved' => true]);
+            $review->update(['is_approved' => 2]);
 
             return redirect()->back()->with([
                 'type' => 'success',
@@ -106,7 +110,7 @@ class ReviewController extends Controller
     public function reject(Review $review)
     {
         try {
-            $review->update(['is_approved' => false]);
+            $review->update(['is_approved' => 1]);
 
             return redirect()->back()->with([
                 'type' => 'success',

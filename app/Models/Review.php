@@ -13,7 +13,7 @@ class Review extends Model
     protected $guarded = ['id'];
 
     protected $casts = [
-        'is_approved' => 'boolean',
+        'is_approved' => 'integer',
         'include_in_rating' => 'boolean',
         'is_hidden' => 'boolean',
         'views' => 'integer',
@@ -82,7 +82,31 @@ class Review extends Model
 
     public function scopeApproved($query)
     {
-        return $query->where('is_approved', true);
+        return $query->whereIn('is_approved', [0, 2]);
+    }
+
+    // public function scopeVisible($query)
+    // {
+    //     return $query->whereIn('is_approved', [0, 2])->where('is_hidden', false);
+    // }
+
+    public function getApprovalStatusAttribute()
+    {
+        switch ($this->is_approved) {
+            case 0:
+                return 'На модерации';
+            case 1:
+                return 'Не одобрен';
+            case 2:
+                return 'Одобрен';
+            default:
+                return 'Неизвестно';
+        }
+    }
+
+    public function isVisible()
+    {
+        return in_array($this->is_approved, [0, 2]) && !$this->is_hidden;
     }
 
     public function scopeIncludedInRating($query)

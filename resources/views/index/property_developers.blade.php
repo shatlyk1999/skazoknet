@@ -1,7 +1,7 @@
 <section class="xl:container px-0 sm:px-12 xl:px-4 mx-0 xl:mx-auto w-full my-12 md:my-25">
     <div class="flex items-center justify-between mb-8 px-8 xs:px-12 sm:px-0">
         <h1 class="text-2xl lg:text-3xl xl:text-4xl font-bold tracking-wide">
-            {{ $city->developer_text ?? 'Застройщики' }} в {{ $city->text }}
+            {{ $city->developer_text ?? 'Застройщики' }} в {{ $city->text ?? '' }}
         </h1>
         <a href="{{ route('developers') }}" class="md:inline-block hidden">Все застройщики</a>
     </div>

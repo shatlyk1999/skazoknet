@@ -42,10 +42,11 @@
     }
 @endphp
 
-<div class="flex items-center space-x-px xs:space-x-px" aria-label="{{ $star_count }} out of 5 stars" role="img">
+{{-- space-x-px xs:space-x-px --}}
+<div class="flex items-center " aria-label="{{ $star_count }} out of 5 stars" role="img">
     @if ($main == 'true')
         <span class="{{ $star_count_class ?? 'text-lg font-semibold' }}">
-            {{ $star_count }}
+            {{ number_format($star_count, 2) }}
         </span>
     @endif
     @for ($i = 1; $i <= 5; $i++)

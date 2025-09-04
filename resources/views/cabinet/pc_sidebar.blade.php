@@ -47,14 +47,16 @@
                                          'App\Models\Developer',
                                      )
                                          ->where('reviewable_id', $developer->id)
-                                         ->where('is_approved', true)
+                                         ->whereIn('is_approved', [0, 2])
+                                         ->where('is_hidden', false)
                                          ->count();
                                      $complexReviews = \App\Models\Review::where(
                                          'reviewable_type',
                                          'App\Models\Complex',
                                      )
                                          ->whereIn('reviewable_id', $developer->complexes()->pluck('id'))
-                                         ->where('is_approved', true)
+                                         ->whereIn('is_approved', [0, 2])
+                                         ->where('is_hidden', false)
                                          ->count();
                                      $totalReviews = $developerReviews + $complexReviews;
                                  }

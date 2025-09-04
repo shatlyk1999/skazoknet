@@ -14,9 +14,9 @@
 
 <body class="size-full">
     <div class="bg-white h-dvh">
-        <div class="pt-8 pl-6 md:block hidden">
+        <a href="{{ route('home') }}" class="pt-8 pl-6 md:block hidden">
             <img src="{{ asset('images/registerlogo.png') }}" class="h-10 w-37.5" alt="" />
-        </div>
+        </a>
         @yield('content')
     </div>
     <script src="{{ asset('js/component.js') }}" defer></script>

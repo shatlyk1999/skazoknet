@@ -119,9 +119,9 @@
                 <img src="{{ asset('images/registerimage.png') }}" class="w-full h-auto md:inline-block hidden"
                     alt="" />
 
-                <div class="pt-8 flex items-center justify-center md:hidden">
+                <a href="{{ route('home') }}" class="pt-8 flex items-center justify-center md:hidden">
                     <img src="{{ asset('images/registerlogo.png') }}" class="h-10 w-37.5" alt="" />
-                </div>
+                </a>
             </div>
         </div>
     </div>

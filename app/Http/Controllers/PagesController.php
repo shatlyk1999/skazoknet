@@ -60,9 +60,9 @@ class PagesController extends Controller
         try {
             // $search = $request->input('search') ?? '';
             if (!$filter) {
-                $developers = $city->developers()->filter($query)->where('status', '1')->orderBy('sort', 'desc')->paginate(10);
+                $developers = $city->developers()->filter($query)->where('status', '1')->orderBy('sort', 'desc')->paginate(2);
             } else {
-                $developers = $city->developers()->filter($query)->where('status', '1')->orderBy('sort', 'desc')->paginate(10);
+                $developers = $city->developers()->filter($query)->where('status', '1')->orderBy('sort', 'desc')->paginate(2);
             }
 
             if ($request->header('HX-Request')) {
@@ -110,7 +110,7 @@ class PagesController extends Controller
 
         // Get approved reviews for this complex
         $reviews = $complex->reviews()
-            ->where('is_approved', true)
+            ->whereIn('is_approved', [0, 2])
             ->where('is_hidden', false)
             ->with(['user', 'images'])
             ->orderBy('created_at', 'desc')
@@ -121,7 +121,7 @@ class PagesController extends Controller
         $averageRating = $complex->average_rating;
 
         $totalReviews = $complex->reviews()
-            ->where('is_approved', true)
+            ->whereIn('is_approved', [0, 2])
             ->count();
 
         // SEO 
@@ -167,7 +167,7 @@ class PagesController extends Controller
 
         // Get approved reviews for this developer
         $reviews = $developer->reviews()
-            ->where('is_approved', true)
+            ->whereIn('is_approved', [0, 2])
             ->where('is_hidden', false)
             ->with(['user', 'images'])
             ->orderBy('created_at', 'desc')
@@ -178,7 +178,7 @@ class PagesController extends Controller
         $averageRating = $developer->average_rating;
 
         $totalReviews = $developer->reviews()
-            ->where('is_approved', true)
+            ->whereIn('is_approved', [0, 2])
             ->count();
 
         // SEO
