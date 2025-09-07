@@ -163,7 +163,7 @@
         </section>
     </div>
 
-    {{-- add vpn modal --}}
+    {{-- add developer modal --}}
     @include('admin.inc.modal_developer_create')
 
 @endsection

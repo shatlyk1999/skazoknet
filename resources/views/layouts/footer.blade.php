@@ -34,7 +34,7 @@
                     <div class="flex flex-col gap-y-4 xl:gap-y-6 pl-2">
                         <a href="{{ route('gainingaccess') }}" class="text-sm">Получение доступа</a>
                         <a href="#" class="text-sm">Реклама на сайте</a>
-                        <a href="#" class="text-sm">Обратная связь</a>
+                        <a href="{{ route('contact.index') }}" class="text-sm">Обратная связь</a>
                     </div>
                 </div>
             </div>

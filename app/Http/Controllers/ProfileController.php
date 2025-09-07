@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
+// use App\Facades\SEO;
 use App\Models\User;
-use App\Models\Developer;
 use App\Models\Complex;
-use App\Models\City;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
@@ -25,6 +24,12 @@ class ProfileController extends Controller
 
     public function userProfile($id)
     {
+        // SEO
+        // SEO::setTitle('Личный кабинет - Сказокнет')
+        //     ->setDescription('Управляйте своим профилем, просматривайте свои отзывы и настройки аккаунта.')
+        //     ->setKeywords('личный кабинет, профиль пользователя, мои отзывы')
+        //     ->setCanonicalUrl(request()->url());
+
         return view('cabinet.user');
     }
 
@@ -122,6 +127,12 @@ class ProfileController extends Controller
                 'message' => 'Профиль компании не найден'
             ]);
         }
+
+        // SEO
+        // SEO::setTitle('О компании ' . $developer->name . ' - Сказокнет')
+        //     ->setDescription('Информация о застройщике ' . $developer->name . '. Управление профилем компании.')
+        //     ->setKeywords('о компании, ' . $developer->name . ', застройщик, профиль компании')
+        //     ->setCanonicalUrl(request()->url());
 
         return view('cabinet.company', compact('developer'));
     }
@@ -297,6 +308,12 @@ class ProfileController extends Controller
         $complexes = $query->orderBy('sort', 'desc')
             ->orderBy('created_at', 'desc')
             ->paginate(10);
+
+        // SEO
+        // SEO::setTitle('Мои комплексы - ' . $developer->name . ' - Сказокнет')
+        //     ->setDescription('Управление жилыми комплексами застройщика ' . $developer->name . '. Добавление и редактирование ЖК.')
+        //     ->setKeywords('мои комплексы, ' . $developer->name . ', управление ЖК, застройщик')
+        //     ->setCanonicalUrl(request()->url());
 
         return view('cabinet.complexes', compact('complexes'));
     }
@@ -797,6 +814,12 @@ class ProfileController extends Controller
                 'nextPage' => $reviews->currentPage() + 1
             ]);
         }
+
+        // // SEO
+        // SEO::setTitle('Мои отзывы - ' . $user->name . ' - Сказокнет')
+        //     ->setDescription('Просмотр всех отзывов пользователя ' . $user->name . ' о застройщиках и жилых комплексах.')
+        //     ->setKeywords('мои отзывы, ' . $user->name . ', отзывы пользователя, недвижимость')
+        //     ->setCanonicalUrl(request()->url());
 
         return view('cabinet.my-reviews', compact('user', 'reviews', 'positiveReviews', 'negativeReviews', 'totalReviews'));
     }

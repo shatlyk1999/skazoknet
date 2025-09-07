@@ -13,6 +13,18 @@ Disallow: /500
 Disallow: /*.json$
 Disallow: /api/
 Allow: /
+Allow: /about-us
+Allow: /contact
+Allow: /complexes/
+Allow: /developers/
+Allow: /complex/
+Allow: /developer/
+Allow: /complexes/by/
+Allow: /review/
+Allow: /all-reviews-weekly
+Allow: /all-reviews-by-developer/
+Allow: /all-reviews-by-complex/
+Allow: /gaining-access
 
 # Crawl-delay for all bots
 Crawl-delay: 1

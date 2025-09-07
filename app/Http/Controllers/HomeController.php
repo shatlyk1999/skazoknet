@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Facades\SEO;
 use App\Models\AboutUs;
 use App\Models\City;
 use App\Models\Complex;
@@ -81,6 +82,13 @@ class HomeController extends Controller
             ->orderByRaw('(likes + user_likes_count) DESC, views DESC')
             ->limit(6)
             ->get();
+
+        // SEO
+        SEO::setTitle('Сказокнет - отзывы без иллюзий о застройщиках и ЖК в ' . $city->name)
+            ->setDescription('Честные отзывы о застройщиках и жилых комплексах в городе ' . $city->name . '. Читайте реальные мнения покупателей недвижимости.')
+            ->setKeywords('отзывы застройщики, жилые комплексы, недвижимость ' . $city->name . ', отзывы покупателей')
+            ->setCanonicalUrl(request()->url());
+
         return view('home', compact(
             'index_page',
             'city',
@@ -97,6 +105,13 @@ class HomeController extends Controller
     public function about_us()
     {
         $data = AboutUs::first() ?? null;
+
+        // SEO
+        SEO::setTitle('О проекте Сказокнет - честные отзывы о недвижимости')
+            ->setDescription('Узнайте больше о проекте Сказокнет - платформе для честных отзывов о застройщиках и жилых комплексах.')
+            ->setKeywords('о проекте, сказокнет, отзывы недвижимость, о нас')
+            ->setCanonicalUrl(request()->url());
+
         return view('common.about_us', compact('data'));
     }
 

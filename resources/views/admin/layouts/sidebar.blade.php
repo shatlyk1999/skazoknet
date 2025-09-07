@@ -3,6 +3,7 @@ $user_count = \App\Models\User::where('role', '!=', 'superadmin')->count() ?? 0;
 $city_count = \App\Models\City::get()->count() ?? 0;
 $developer_count = \App\Models\Developer::get()->count() ?? 0;
 $complex_count = \App\Models\Complex::get()->count() ?? 0;
+$contact_count = \App\Models\Contact::get()->count() ?? 0;
 ?>
 <div id="sidebar">
     <div class="sidebar-wrapper active">
@@ -179,6 +180,17 @@ $complex_count = \App\Models\Complex::get()->count() ?? 0;
                             </a>
                         </li>
                     </ul>
+                </li>
+
+                <li class="sidebar-item @if (Request::segment('3') == 'contact') active @endif">
+                    <a href="{{ route('admin.contact.index') }}"
+                        class="sidebar-link d-flex justify-content-between align-items-center">
+                        <span class="m-0">
+                            <i class="bi bi-chat-left-dots"></i>
+                            <span>Контакты</span>
+                        </span>
+                        <span class="badge bg-secondary" style="margin-left: 0;">{{ $contact_count }}</span>
+                    </a>
                 </li>
 
                 <li class="sidebar-item has-sub @if (Request::segment('3') == 'settings') active @endif">

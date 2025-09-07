@@ -41,6 +41,13 @@ class PagesController extends Controller
                 return view('inc.complex_search_result', compact('complexes', 'type', 'query'));
             }
 
+            // SEO
+            $typeText = $type === 'residential' ? 'Жилые комплексы' : 'Гостиничные комплексы';
+            SEO::setTitle($typeText . ' в ' . $city->name . ' - отзывы и рейтинги')
+                ->setDescription($typeText . ' в городе ' . $city->name . ' с отзывами покупателей и подробной информацией. Выберите лучший ЖК.')
+                ->setKeywords($typeText . ' ' . $city->name . ', ЖК отзывы, жилые комплексы, недвижимость')
+                ->setCanonicalUrl(request()->url());
+
             return view('pages.complexes', compact('complexes', 'type', 'query'));
         } catch (\Exception $e) {
             return redirect('500');
@@ -60,14 +67,20 @@ class PagesController extends Controller
         try {
             // $search = $request->input('search') ?? '';
             if (!$filter) {
-                $developers = $city->developers()->filter($query)->where('status', '1')->orderBy('sort', 'desc')->paginate(2);
+                $developers = $city->developers()->filter($query)->where('status', '1')->orderBy('sort', 'desc')->paginate(10);
             } else {
-                $developers = $city->developers()->filter($query)->where('status', '1')->orderBy('sort', 'desc')->paginate(2);
+                $developers = $city->developers()->filter($query)->where('status', '1')->orderBy('sort', 'desc')->paginate(10);
             }
 
             if ($request->header('HX-Request')) {
                 return view('inc.developer_search_result', compact('developers', 'query'));
             }
+
+            // SEO
+            SEO::setTitle('Застройщики в ' . $city->name . ' - отзывы и рейтинги')
+                ->setDescription('Полный список застройщиков в городе ' . $city->name . ' с отзывами покупателей и рейтингами. Выберите надежного застройщика.')
+                ->setKeywords('застройщики ' . $city->name . ', рейтинг застройщиков, отзывы застройщики, недвижимость')
+                ->setCanonicalUrl(request()->url());
 
             return view('pages.developers', compact('developers', 'query'));
         } catch (\Exception $e) {

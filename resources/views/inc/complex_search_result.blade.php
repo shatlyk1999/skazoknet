@@ -4,9 +4,10 @@
             class="w-full lg:w-[calc(100%/2-1rem)] rounded-2xl p-8 border border-input-border-color hidden sm:flex items-center sm:items-start gap-4 sm:flex-row flex-col xl:gap-8 hover:border-primary">
             @if ($complex->image != null)
                 <div class="flex items-center justify-center h-full w-[40%]">
-                    <img src="{{ asset('complex-small/' . $complex->image) }}"
+                    <img src="{{ asset('complex/' . $complex->image) }}"
                         class="h-auto h-full border border-input-border-color rounded-md"
-                        style="max-width: -webkit-fill-available" alt="{{ $complex->image }}" />
+                        style="max-width: -webkit-fill-available; width:146px;object-fit:cover;"
+                        alt="{{ $complex->image }}" />
                 </div>
             @else
                 <div class="flex items-center justify-center h-full border border-input-border-color rounded-md w-[40%]">

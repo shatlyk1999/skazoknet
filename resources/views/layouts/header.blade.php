@@ -11,6 +11,7 @@
 
     {{-- Fallback title if SEO not set --}}
     @if (!app('seo')->getTitle())
+        {{-- <title>Сказокнет - честные отзывы о недвижимости</title> --}}
         <title>@yield('title', 'Skazoknet - Проекты недвижимости')</title>
     @endif
 

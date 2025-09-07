@@ -101,4 +101,9 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(ReviewComment::class);
     }
+
+    public function contacts()
+    {
+        return $this->hasMany(Contact::class, 'user_id');
+    }
 }

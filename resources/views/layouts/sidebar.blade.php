@@ -67,7 +67,7 @@
                 <a href="#"
                     class="text-sm font-medium hover:bg-white/10 p-2 rounded-lg transition-colors duration-200">Реклама
                     на сайте</a>
-                <a href="#"
+                <a href="{{ route('contact.index') }}"
                     class="text-sm font-medium hover:bg-white/10 p-2 rounded-lg transition-colors duration-200">Обратная
                     связь</a>
             </div>

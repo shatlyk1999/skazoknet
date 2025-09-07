@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\DeveloperController;
 use App\Http\Controllers\Admin\ReviewCommentController;
 use App\Http\Controllers\Admin\SettingsControlller;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PagesController;
@@ -65,6 +66,9 @@ Route::group(['middleware' => CityMiddleware::class], function () {
         return view('mail.register_mail');
     });
     Route::get('about-us', [HomeController::class, 'about_us'])->name('about_us');
+    Route::get('contact', [ContactController::class, 'index'])->name('contact.index');
+    // Route::get('contact-completed', [ContactController::class, 'index'])->name('contact.completed');
+    Route::post('contact', [ContactController::class, 'store'])->name('contact.store');
     Route::get('index-cities', [HomeController::class, 'cities']);
     Route::post('update-city', [HomeController::class, 'update_city']);
     Route::get('complexes/{type}', [PagesController::class, 'complexes'])->name('complexes');
@@ -192,4 +196,6 @@ Route::group([
     Route::post('review/additions/{addition}/reject', [\App\Http\Controllers\Admin\AdditionController::class, 'rejectAddition'])->name('admin.review.additions.reject');
     Route::get('review-comments', [ReviewCommentController::class, 'index'])->name('admin.review_comments.index');
     Route::get('review-comments/{id}', [ReviewCommentController::class, 'show'])->name('admin.review_comments.show');
+
+    Route::get('contact', [\App\Http\Controllers\Admin\ContactController::class, 'index'])->name('admin.contact.index');
 });

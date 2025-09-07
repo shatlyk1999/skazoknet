@@ -4,9 +4,10 @@
             class="w-full lg:w-[calc(100%/2-1rem)] rounded-2xl p-8 border border-input-border-color hidden sm:flex items-center sm:items-start gap-4 sm:flex-row flex-col xl:gap-8 hover:border-primary">
             @if ($developer->image != null)
                 <div class="flex items-center justify-center h-full w-[40%]">
-                    <img src="{{ asset('developer-small/' . $developer->image) }}"
+                    <img src="{{ asset('developer/' . $developer->image) }}"
                         class="h-auto h-full border border-input-border-color rounded-md"
-                        style="max-width: -webkit-fill-available" alt="{{ $developer->name }}" />
+                        style="max-width: -webkit-fill-available; width:146px;object-fit:cover;"
+                        alt="{{ $developer->name }}" />
                 </div>
             @else
                 <div class="flex items-center justify-center h-full border border-input-border-color rounded-md w-[40%]">

@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
-@section('title', $complex->name . ' | Сказокнет')
+@section('title', isset($complex->name) ? $complex->name . ' | Сказокнет' : 'Сказокнет')
+{{-- @section('title', 'salam') --}}
 
 @section('content')
     <?php

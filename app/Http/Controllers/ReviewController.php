@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Facades\SEO;
 use App\Models\City;
 use App\Models\Review;
 use App\Models\ReviewImage;
@@ -11,6 +12,7 @@ use App\Models\OfficialResponse;
 use App\Models\ReviewComment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 use Intervention\Image\Drivers\Gd\Driver;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Encoders\WebpEncoder;
@@ -58,6 +60,13 @@ class ReviewController extends Controller
                 'message' => 'Вы достигли дневного лимита отзывов (2 отзыва в день). Попробуйте завтра.'
             ]);
         }
+
+        // SEO
+        $objectType = $type === 'developer' ? 'застройщике' : 'ЖК';
+        SEO::setTitle('Оставить отзыв о ' . $objectType . ' ' . $reviewable->name)
+            ->setDescription('Поделитесь своим опытом о ' . $objectType . ' ' . $reviewable->name . '. Ваш отзыв поможет другим покупателям.')
+            ->setKeywords('оставить отзыв, ' . $reviewable->name . ', ' . ($type === 'developer' ? 'застройщик' : 'жилой комплекс'))
+            ->setCanonicalUrl(request()->url());
 
         return view('leavefeedback', compact('reviewable', 'type'));
     }
@@ -183,6 +192,13 @@ class ReviewController extends Controller
 
         $review->incrementViews();
         $review->load(['user', 'reviewable', 'images']);
+
+        // SEO
+        $reviewableType = $review->reviewable_type === 'App\\Models\\Developer' ? 'застройщике' : 'ЖК';
+        SEO::setTitle($review->title . ' - отзыв о ' . $reviewableType . ' ' . $review->reviewable->name)
+            ->setDescription('Отзыв: ' . Str::limit(strip_tags($review->text), 150) . ' Рейтинг: ' . $review->rating . '/5')
+            ->setKeywords('отзыв, ' . $review->reviewable->name . ', ' . ($review->reviewable_type === 'App\\Models\\Developer' ? 'застройщик' : 'жилой комплекс'))
+            ->setCanonicalUrl(request()->url());
 
         return view('review.show', compact('review'));
     }
@@ -396,6 +412,12 @@ class ReviewController extends Controller
             ->orderByRaw('(likes + user_likes_count) DESC, views DESC')
             ->paginate(12);
 
+        // SEO
+        SEO::setTitle('Лучшие отзывы недели о застройщиках и ЖК в ' . $city->name)
+            ->setDescription('Самые популярные и полезные отзывы недели о застройщиках и жилых комплексах в городе ' . $city->name)
+            ->setKeywords('лучшие отзывы, отзывы недели, застройщики ' . $city->name . ', жилые комплексы')
+            ->setCanonicalUrl(request()->url());
+
         return view('pages.all_reviews-weekly', compact('reviews'));
     }
 
@@ -409,6 +431,13 @@ class ReviewController extends Controller
             ->orderByDesc('created_at')
             ->paginate(12);
         $type = 'Developer';
+
+        // SEO
+        SEO::setTitle('Все отзывы о застройщике ' . $developer->name)
+            ->setDescription('Читайте все отзывы покупателей о застройщике ' . $developer->name . '. Честные мнения и опыт сотрудничества.')
+            ->setKeywords('отзывы ' . $developer->name . ', застройщик, отзывы покупателей, недвижимость')
+            ->setCanonicalUrl(request()->url());
+
         return view('pages.all_reviews-by-developer', compact('type', 'developer', 'reviews'));
     }
 
@@ -422,6 +451,13 @@ class ReviewController extends Controller
             ->orderByDesc('created_at')
             ->paginate(12);
         $type = 'Complex';
+
+        // SEO
+        SEO::setTitle('Все отзывы о ЖК ' . $complex->name)
+            ->setDescription('Читайте все отзывы покупателей о жилом комплексе ' . $complex->name . '. Честные мнения и опыт покупки недвижимости.')
+            ->setKeywords('отзывы ' . $complex->name . ', ЖК, отзывы покупателей, недвижимость')
+            ->setCanonicalUrl(request()->url());
+
         return view('pages.all_reviews-by-developer', compact('type', 'complex', 'reviews'));
     }
 }
