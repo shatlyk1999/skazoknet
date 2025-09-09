@@ -11,11 +11,11 @@
         <div class="flex items-center gap-x-4 text-sm tracking-wide">
             <span class="text-text">{{ $review->created_at->format('Y/m/d') }}</span>
             <div class="flex items-center gap-x-1">
-                <img src="{{ asset('images/like.png') }}" alt="" class="size-5" />
+                <img src="{{ asset('images/like.svg') }}" alt="" class="size-5" />
                 <span>{{ $addition->likes }}</span>
             </div>
             <div class="flex items-center gap-x-1">
-                <img src="{{ asset('images/dislike.png') }}" alt="" class="h-5 w-6" />
+                <img src="{{ asset('images/dislike.svg') }}" alt="" class="h-5 w-6" />
                 <span>{{ $addition->dislikes }}</span>
             </div>
         </div>

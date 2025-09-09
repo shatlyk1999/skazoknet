@@ -73,9 +73,9 @@
             class="relative rounded-xl basis-full group hover:shadow-md sm:hidden block">
             <div class="border border-custom-gray rounded-tl-xl rounded-tr-xl">
                 @if ($developer->image != null)
-                    <img src="{{ asset('developer-small/' . $developer->image) }}"
+                    <img src="{{ asset('developer/' . $developer->image) }}"
                         class="w-full h-auto rounded-tl-xl rounded-tr-xl max-h-[10.625rem] min-h-[10.625rem]"
-                        alt="{{ $developer->name }}" />
+                        alt="{{ $developer->name }}" style="object-fit: cover;" />
                 @else
                     <img src="{{ asset('images/zaglushka.svg') }}"
                         class="rounded-tl-xl rounded-tr-xl w-[50%] mx-auto max-h-[10.625rem] min-h-[10.625rem] object-contain"

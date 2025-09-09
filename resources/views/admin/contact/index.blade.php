@@ -91,8 +91,8 @@
                                         <tr>
                                             <th>№</th>
                                             <th>Пользователь</th>
+                                            <th>Имя</th>
                                             <th>Электронная почта</th>
-                                            <th>Телефонный номер</th>
                                             <th>Заметка</th>
                                             <th>Действия</th>
                                         </tr>
@@ -107,10 +107,10 @@
                                                     {{ $contact->user->name ?? '-' }}
                                                 </td>
                                                 <td>
-                                                    {{ $contact->email }}
+                                                    {{ $contact->name }}
                                                 </td>
                                                 <td>
-                                                    {{ $contact->tel_number }}
+                                                    {{ $contact->email }}
                                                 </td>
                                                 <td>
                                                     {{ $contact->note }}

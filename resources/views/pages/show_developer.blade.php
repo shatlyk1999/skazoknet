@@ -220,15 +220,15 @@
                         </div>
                         <div class="flex items-center justify-between gap-x-2">
                             <div class="flex items-center gap-x-1">
-                                <img src="{{ asset('images/like.png') }}" alt="" class="size-5" />
+                                <img src="{{ asset('images/like.svg') }}" alt="" class="size-5" />
                                 <span>1</span>
                             </div>
                             <div class="flex items-center gap-x-1">
-                                <img src="{{ asset('images/dislike.png') }}" alt="" class="h-5 w-6" />
+                                <img src="{{ asset('images/dislike.svg') }}" alt="" class="h-5 w-6" />
                                 <span>1</span>
                             </div>
                             <div class="flex items-center gap-x-1">
-                                <img src="{{ asset('images/comment.png') }}" alt="" class="size-5" />
+                                <img src="{{ asset('images/comment.svg') }}" alt="" class="size-5" />
                                 <span>1</span>
                             </div>
                             <a href="" class="md:inline-block hidden text-sm">
@@ -266,7 +266,8 @@
     </section>
 
     <!-- Review Exists Modal -->
-    <@include('inc.reviewExistsModal') <script>
+    @include('inc.reviewExistsModal')
+    <script>
         function showReviewExistsModal() {
             const modal = document.getElementById('reviewExistsModal');
             const modalContent = document.getElementById('reviewExistsModalContent');

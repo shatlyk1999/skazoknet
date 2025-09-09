@@ -83,12 +83,12 @@ class ComplexController extends Controller
                 if (!is_dir(storage_path('app/complex'))) {
                     mkdir(storage_path('app/complex'), 0777, true);
                 }
-                if (!is_dir(storage_path('app/complex-small'))) {
-                    mkdir(storage_path('app/complex-small'), 0777, true);
-                }
+                // if (!is_dir(storage_path('app/complex-small'))) {
+                //     mkdir(storage_path('app/complex-small'), 0777, true);
+                // }
 
                 $destinationPath = storage_path('app/complex');
-                $destinationPath2 = storage_path('app/complex-small');
+                // $destinationPath2 = storage_path('app/complex-small');
                 $manager = new ImageManager(new Driver());
                 $img = $manager->read($image);
 
@@ -108,14 +108,14 @@ class ComplexController extends Controller
                     (string) $img->encode(new WebpEncoder(quality: 100))
                 );
 
-                $img->resize(146, 134, function ($constraint) {
-                    $constraint->aspectRatio();
-                    $constraint->upsize();
-                });
+                // $img->resize(146, 134, function ($constraint) {
+                //     $constraint->aspectRatio();
+                //     $constraint->upsize();
+                // });
 
-                file_put_contents(($destinationPath2 . '/' . $input['imageName']),
-                    (string) $img->encode(new WebpEncoder(quality: 100))
-                );
+                // file_put_contents(($destinationPath2 . '/' . $input['imageName']),
+                //     (string) $img->encode(new WebpEncoder(quality: 100))
+                // );
 
                 $complex->image = $input['imageName'];
                 $complex->save();
@@ -204,14 +204,14 @@ class ComplexController extends Controller
 
             if ($request->has('image')) {
                 $filePath = storage_path('app/complex/' . $complex->image);
-                $filePath2 = storage_path('app/complex-small/' . $complex->image);
+                // $filePath2 = storage_path('app/complex-small/' . $complex->image);
 
                 if (($complex->image != null) && file_exists($filePath)) {
                     unlink($filePath);
                 }
-                if (($complex->image != null) && file_exists($filePath2)) {
-                    unlink($filePath2);
-                }
+                // if (($complex->image != null) && file_exists($filePath2)) {
+                //     unlink($filePath2);
+                // }
                 $image = $request->file('image');
                 $input['imageName'] = time() . '.webp';
 
@@ -219,12 +219,12 @@ class ComplexController extends Controller
                     mkdir(storage_path('app/complex'), 0777, true);
                 }
 
-                if (!is_dir(storage_path('app/complex-small'))) {
-                    mkdir(storage_path('app/complex-small'), 0777, true);
-                }
+                // if (!is_dir(storage_path('app/complex-small'))) {
+                //     mkdir(storage_path('app/complex-small'), 0777, true);
+                // }
 
                 $destinationPath = storage_path('app/complex');
-                $destinationPath2 = storage_path('app/complex-small');
+                // $destinationPath2 = storage_path('app/complex-small');
 
                 $manager = new ImageManager(new Driver());
                 $img = $manager->read($image);
@@ -245,14 +245,14 @@ class ComplexController extends Controller
                     (string) $img->encode(new WebpEncoder(quality: 100))
                 );
 
-                $img->resize(146, 134, function ($constraint) {
-                    $constraint->aspectRatio();
-                    $constraint->upsize();
-                });
+                // $img->resize(146, 134, function ($constraint) {
+                //     $constraint->aspectRatio();
+                //     $constraint->upsize();
+                // });
 
-                file_put_contents(($destinationPath2 . '/' . $input['imageName']),
-                    (string) $img->encode(new WebpEncoder(quality: 100))
-                );
+                // file_put_contents(($destinationPath2 . '/' . $input['imageName']),
+                //     (string) $img->encode(new WebpEncoder(quality: 100))
+                // );
 
                 $complex->image = $input['imageName'];
                 $complex->save();

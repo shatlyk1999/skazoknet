@@ -19,12 +19,12 @@
                                 <p>{{ $contact->user->name ?? '' }}</p>
                             </div>
                             <div>
-                                <b>Электронная почта</b>
-                                <p>{{ $contact->email }}</p>
+                                <b>Имя</b>
+                                <p>{{ $contact->name }}</p>
                             </div>
                             <div>
-                                <b>Телефонный номер</b>
-                                <p>{{ $contact->tel_number }}</p>
+                                <b>Электронная почта</b>
+                                <p>{{ $contact->email }}</p>
                             </div>
                             <div>
                                 <b>Заметка</b>

@@ -201,7 +201,7 @@
                         <button type="button" onclick="handleLike({{ $review->id }}, 'like')"
                             class="like-btn flex items-center gap-x-1 {{ $userLikeStatus === 'like' ? 'text-green-600' : 'text-gray-600' }} hover:text-green-600 transition-colors"
                             style="background: none; border: none; padding: 0;" data-status="{{ $userLikeStatus }}">
-                            <img src="{{ asset('images/like.png') }}" alt=""
+                            <img src="{{ asset('images/like.svg') }}" alt=""
                                 class="cursor-pointer like-icon size-5 {{ $userLikeStatus === 'like' ? 'brightness-0 saturate-100' : '' }}"
                                 style="{{ $userLikeStatus === 'like' ? 'filter: invert(48%) sepia(79%) saturate(2476%) hue-rotate(86deg) brightness(118%) contrast(119%);' : '' }}" />
                             <span class="like-count">{{ $review->total_likes }}</span>
@@ -211,14 +211,14 @@
                         <button type="button" onclick="handleLike({{ $review->id }}, 'dislike')"
                             class="dislike-btn flex items-center gap-x-1 {{ $userLikeStatus === 'dislike' ? 'text-red-600' : 'text-gray-600' }} hover:text-red-600 transition-colors"
                             style="background: none; border: none; padding: 0;" data-status="{{ $userLikeStatus }}">
-                            <img src="{{ asset('images/dislike.png') }}" alt=""
+                            <img src="{{ asset('images/dislike.svg') }}" alt=""
                                 class="cursor-pointer dislike-icon h-5 w-6 {{ $userLikeStatus === 'dislike' ? 'brightness-0 saturate-100' : '' }}"
                                 style="{{ $userLikeStatus === 'dislike' ? 'filter: invert(17%) sepia(90%) saturate(7471%) hue-rotate(3deg) brightness(90%) contrast(135%);' : '' }}" />
                             <span class="dislike-count">{{ $review->total_dislikes }}</span>
                         </button>
                     </div>
                     <div class="hidden lg:flex items-center gap-x-1">
-                        <img src="{{ asset('images/comment.png') }}" alt="" class="size-5" />
+                        <img src="{{ asset('images/comment.svg') }}" alt="" class="size-5" />
                         <span>{{ $review->comments()->count() ?? 0 }}</span>
                     </div>
                     {{-- @if ($review->images->count() > 0)
@@ -264,7 +264,7 @@
                     <button type="button" onclick="handleLike({{ $review->id }}, 'like')"
                         class="like-btn flex items-center gap-x-1 {{ $userLikeStatus === 'like' ? 'text-green-600' : 'text-gray-600' }} hover:text-green-600 transition-colors"
                         style="background: none; border: none; padding: 0;" data-status="{{ $userLikeStatus }}">
-                        <img src="{{ asset('images/like.png') }}" alt=""
+                        <img src="{{ asset('images/like.svg') }}" alt=""
                             class="cursor-pointer like-icon size-5 {{ $userLikeStatus === 'like' ? 'brightness-0 saturate-100' : '' }}"
                             style="{{ $userLikeStatus === 'like' ? 'filter: invert(48%) sepia(79%) saturate(2476%) hue-rotate(86deg) brightness(118%) contrast(119%);' : '' }}" />
                         <span class="like-count">{{ $review->total_likes }}</span>
@@ -274,14 +274,14 @@
                     <button type="button" onclick="handleLike({{ $review->id }}, 'dislike')"
                         class="dislike-btn flex items-center gap-x-1 {{ $userLikeStatus === 'dislike' ? 'text-red-600' : 'text-gray-600' }} hover:text-red-600 transition-colors"
                         style="background: none; border: none; padding: 0;" data-status="{{ $userLikeStatus }}">
-                        <img src="{{ asset('images/dislike.png') }}" alt=""
+                        <img src="{{ asset('images/dislike.svg') }}" alt=""
                             class="cursor-pointer dislike-icon h-5 w-6 {{ $userLikeStatus === 'dislike' ? 'brightness-0 saturate-100' : '' }}"
                             style="{{ $userLikeStatus === 'dislike' ? 'filter: invert(17%) sepia(90%) saturate(7471%) hue-rotate(3deg) brightness(90%) contrast(135%);' : '' }}" />
                         <span class="dislike-count">{{ $review->total_dislikes }}</span>
                     </button>
                 </div>
                 <div class="flex lg:hidden items-center gap-x-1">
-                    <img src="{{ asset('images/comment.png') }}" alt="" class="size-5" />
+                    <img src="{{ asset('images/comment.svg') }}" alt="" class="size-5" />
                     <span>{{ $review->comments()->count() ?? 0 }}</span>
                 </div>
                 {{-- @if ($review->images->count() > 0)
@@ -381,8 +381,8 @@
                 <div class="flex items-center justify-between sm:flex-row flex-col gap-4">
                     <div class="flex items-center gap-x-4">
                         <div class="w-15 h-9 border border-custom-gray flex items-center justify-center">
-                            <img src="{{ isset($official_response->user->developer->image) ? asset('developer-small/' . $official_response->user->developer->image) : asset('images/tocnomini.png') }}"
-                                class="w-[70%] mx-auto h-auto" alt="" />
+                            <img src="{{ isset($official_response->user->developer->image) ? asset('developer/' . $official_response->user->developer->image) : asset('images/tocnomini.png') }}"
+                                class="w-[90%] mx-auto h-auto" alt="" />
                         </div>
                         <div
                             class="text-xs font-medium tracking-wider text-text2 sm:inline-block sm:flex-row flex flex-col">
@@ -397,11 +397,11 @@
                         <span
                             class="text-text">{{ $official_response->user->developer->created_at->format('Y/m/d') }}</span>
                         <div class="flex items-center gap-x-1">
-                            <img src="{{ asset('images/like.png') }}" alt="" class="size-5" />
+                            <img src="{{ asset('images/like.svg') }}" alt="" class="size-5" />
                             <span>{{ $official_response->likes }}</span>
                         </div>
                         <div class="flex items-center gap-x-1">
-                            <img src="{{ asset('images/dislike.png') }}" alt="" class="h-5 w-6" />
+                            <img src="{{ asset('images/dislike.svg') }}" alt="" class="h-5 w-6" />
                             <span>{{ $official_response->dislikes }}</span>
                         </div>
                     </div>

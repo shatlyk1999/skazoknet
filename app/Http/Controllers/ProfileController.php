@@ -175,14 +175,14 @@ class ProfileController extends Controller
             if ($request->hasFile('image')) {
                 // Delete old images if exist
                 $filePath = storage_path('app/developer/' . $developer->image);
-                $filePath2 = storage_path('app/developer-small/' . $developer->image);
+                // $filePath2 = storage_path('app/developer-small/' . $developer->image);
 
                 if (($developer->image != null) && file_exists($filePath)) {
                     unlink($filePath);
                 }
-                if (($developer->image != null) && file_exists($filePath2)) {
-                    unlink($filePath2);
-                }
+                // if (($developer->image != null) && file_exists($filePath2)) {
+                //     unlink($filePath2);
+                // }
 
                 $image = $request->file('image');
                 $input['imageName'] = time() . '.webp';
@@ -190,12 +190,12 @@ class ProfileController extends Controller
                 if (!is_dir(storage_path('app/developer'))) {
                     mkdir(storage_path('app/developer'), 0777, true);
                 }
-                if (!is_dir(storage_path('app/developer-small'))) {
-                    mkdir(storage_path('app/developer-small'), 0777, true);
-                }
+                // if (!is_dir(storage_path('app/developer-small'))) {
+                //     mkdir(storage_path('app/developer-small'), 0777, true);
+                // }
 
                 $destinationPath = storage_path('app/developer');
-                $destinationPath2 = storage_path('app/developer-small');
+                // $destinationPath2 = storage_path('app/developer-small');
                 $manager = new ImageManager(new Driver());
                 $img = $manager->read($image);
 
@@ -217,14 +217,14 @@ class ProfileController extends Controller
                 );
 
                 // Create small image (146x134)
-                $img->resize(146, 134, function ($constraint) {
-                    $constraint->aspectRatio();
-                    $constraint->upsize();
-                });
+                // $img->resize(146, 134, function ($constraint) {
+                //     $constraint->aspectRatio();
+                //     $constraint->upsize();
+                // });
 
-                file_put_contents(($destinationPath2 . '/' . $input['imageName']),
-                    (string) $img->encode(new WebpEncoder(quality: 100))
-                );
+                // file_put_contents(($destinationPath2 . '/' . $input['imageName']),
+                //     (string) $img->encode(new WebpEncoder(quality: 100))
+                // );
 
                 $developer->image = $input['imageName'];
             }
@@ -593,14 +593,14 @@ class ProfileController extends Controller
             if ($request->hasFile('image')) {
                 // Delete old images if exist
                 $filePath = storage_path('app/complex/' . $complex->image);
-                $filePath2 = storage_path('app/complex-small/' . $complex->image);
+                // $filePath2 = storage_path('app/complex-small/' . $complex->image);
 
                 if (($complex->image != null) && file_exists($filePath)) {
                     unlink($filePath);
                 }
-                if (($complex->image != null) && file_exists($filePath2)) {
-                    unlink($filePath2);
-                }
+                // if (($complex->image != null) && file_exists($filePath2)) {
+                //     unlink($filePath2);
+                // }
 
                 $image = $request->file('image');
                 $input['imageName'] = time() . '.webp';
@@ -608,12 +608,12 @@ class ProfileController extends Controller
                 if (!is_dir(storage_path('app/complex'))) {
                     mkdir(storage_path('app/complex'), 0777, true);
                 }
-                if (!is_dir(storage_path('app/complex-small'))) {
-                    mkdir(storage_path('app/complex-small'), 0777, true);
-                }
+                // if (!is_dir(storage_path('app/complex-small'))) {
+                //     mkdir(storage_path('app/complex-small'), 0777, true);
+                // }
 
                 $destinationPath = storage_path('app/complex');
-                $destinationPath2 = storage_path('app/complex-small');
+                // $destinationPath2 = storage_path('app/complex-small');
                 $manager = new ImageManager(new Driver());
                 $img = $manager->read($image);
 
@@ -635,14 +635,14 @@ class ProfileController extends Controller
                 );
 
                 // Create small image (146x134)
-                $img->resize(146, 134, function ($constraint) {
-                    $constraint->aspectRatio();
-                    $constraint->upsize();
-                });
+                // $img->resize(146, 134, function ($constraint) {
+                //     $constraint->aspectRatio();
+                //     $constraint->upsize();
+                // });
 
-                file_put_contents(($destinationPath2 . '/' . $input['imageName']),
-                    (string) $img->encode(new WebpEncoder(quality: 100))
-                );
+                // file_put_contents(($destinationPath2 . '/' . $input['imageName']),
+                //     (string) $img->encode(new WebpEncoder(quality: 100))
+                // );
 
                 $complex->image = $input['imageName'];
             }
@@ -735,14 +735,14 @@ class ProfileController extends Controller
 
             // Delete files
             $filePath = storage_path('app/complex/' . $complexImage->image);
-            $filePath2 = storage_path('app/complex-small/' . $complexImage->image);
+            // $filePath2 = storage_path('app/complex-small/' . $complexImage->image);
 
             if (file_exists($filePath)) {
                 unlink($filePath);
             }
-            if (file_exists($filePath2)) {
-                unlink($filePath2);
-            }
+            // if (file_exists($filePath2)) {
+            //     unlink($filePath2);
+            // }
 
             // Delete from database
             $complexImage->delete();

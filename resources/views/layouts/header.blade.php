@@ -48,7 +48,8 @@
                         </a>
                     </div>
                     <div class="hidden items-center gap-x-8 lg:flex">
-                        <a href="#" class="text-white text-lg leading-10 pt-4">Оставить отзыв</a>
+                        <a href="{{ route('contact.index') }}" class="text-white text-lg leading-10 pt-4">Обратная
+                            связь</a>
                         {{-- <a href="#" class="text-white text-lg leading-10 pt-4">Пользователям</a> --}}
                     </div>
                 </div>

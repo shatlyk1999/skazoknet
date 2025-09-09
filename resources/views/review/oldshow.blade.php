@@ -150,7 +150,7 @@
                         @csrf
                         <button type="submit" class="flex items-center gap-x-1"
                             style="background: none; border: none; padding: 0;">
-                            <img src="{{ asset('like.png') }}" alt="" class="size-5" />
+                            <img src="{{ asset('like.svg') }}" alt="" class="size-5" />
                             <span>{{ $review->total_likes }}</span>
                         </button>
                     </form>
@@ -159,12 +159,12 @@
                         @csrf
                         <button type="submit" class="flex items-center gap-x-1"
                             style="background: none; border: none; padding: 0;">
-                            <img src="{{ asset('dislike.png') }}" alt="" class="h-5 w-6" />
+                            <img src="{{ asset('dislike.svg') }}" alt="" class="h-5 w-6" />
                             <span>{{ $review->total_dislikes }}</span>
                         </button>
                     </form>
                     <div class="flex lg:hidden items-center gap-x-1">
-                        <img src="{{ asset('comment.png') }}" alt="" class="size-5" />
+                        <img src="{{ asset('comment.svg') }}" alt="" class="size-5" />
                         <span>{{ $review->comments ?? 0 }}</span>
                     </div>
                     @if ($review->images->count() > 0)
@@ -300,7 +300,7 @@
                         <button type="button" onclick="handleLike({{ $review->id }}, 'like')"
                             class="like-btn flex items-center gap-x-1 {{ $userLikeStatus === 'like' ? 'text-green-600' : 'text-gray-600' }} hover:text-green-600 transition-colors"
                             style="background: none; border: none; padding: 0;" data-status="{{ $userLikeStatus }}">
-                            <img src="{{ asset('images/like.png') }}" alt=""
+                            <img src="{{ asset('images/like.svg') }}" alt=""
                                 class="cursor-pointer like-icon size-5 {{ $userLikeStatus === 'like' ? 'brightness-0 saturate-100' : '' }}"
                                 style="{{ $userLikeStatus === 'like' ? 'filter: invert(48%) sepia(79%) saturate(2476%) hue-rotate(86deg) brightness(118%) contrast(119%);' : '' }}" />
                             <span class="like-count">{{ $review->total_likes }}</span>
@@ -310,14 +310,14 @@
                         <button type="button" onclick="handleLike({{ $review->id }}, 'dislike')"
                             class="dislike-btn flex items-center gap-x-1 {{ $userLikeStatus === 'dislike' ? 'text-red-600' : 'text-gray-600' }} hover:text-red-600 transition-colors"
                             style="background: none; border: none; padding: 0;" data-status="{{ $userLikeStatus }}">
-                            <img src="{{ asset('images/dislike.png') }}" alt=""
+                            <img src="{{ asset('images/dislike.svg') }}" alt=""
                                 class="cursor-pointer dislike-icon h-5 w-6 {{ $userLikeStatus === 'dislike' ? 'brightness-0 saturate-100' : '' }}"
                                 style="{{ $userLikeStatus === 'dislike' ? 'filter: invert(17%) sepia(90%) saturate(7471%) hue-rotate(3deg) brightness(90%) contrast(135%);' : '' }}" />
                             <span class="dislike-count">{{ $review->total_dislikes }}</span>
                         </button>
                     </div>
                     <div class="hidden lg:flex items-center gap-x-1">
-                        <img src="{{ asset('images/comment.png') }}" alt="" class="size-5" />
+                        <img src="{{ asset('images/comment.svg') }}" alt="" class="size-5" />
                         <span>{{ $review->comments ?? 0 }}</span>
                     </div>
                     @if ($review->images->count() > 0)
@@ -364,7 +364,7 @@
                     <button type="button" onclick="handleLike({{ $review->id }}, 'like')"
                         class="like-btn flex items-center gap-x-1 {{ $userLikeStatus === 'like' ? 'text-green-600' : 'text-gray-600' }} hover:text-green-600 transition-colors"
                         style="background: none; border: none; padding: 0;" data-status="{{ $userLikeStatus }}">
-                        <img src="{{ asset('images/like.png') }}" alt=""
+                        <img src="{{ asset('images/like.svg') }}" alt=""
                             class="cursor-pointer like-icon size-5 {{ $userLikeStatus === 'like' ? 'brightness-0 saturate-100' : '' }}"
                             style="{{ $userLikeStatus === 'like' ? 'filter: invert(48%) sepia(79%) saturate(2476%) hue-rotate(86deg) brightness(118%) contrast(119%);' : '' }}" />
                         <span class="like-count">{{ $review->total_likes }}</span>
@@ -374,14 +374,14 @@
                     <button type="button" onclick="handleLike({{ $review->id }}, 'dislike')"
                         class="dislike-btn flex items-center gap-x-1 {{ $userLikeStatus === 'dislike' ? 'text-red-600' : 'text-gray-600' }} hover:text-red-600 transition-colors"
                         style="background: none; border: none; padding: 0;" data-status="{{ $userLikeStatus }}">
-                        <img src="{{ asset('images/dislike.png') }}" alt=""
+                        <img src="{{ asset('images/dislike.svg') }}" alt=""
                             class="cursor-pointer dislike-icon h-5 w-6 {{ $userLikeStatus === 'dislike' ? 'brightness-0 saturate-100' : '' }}"
                             style="{{ $userLikeStatus === 'dislike' ? 'filter: invert(17%) sepia(90%) saturate(7471%) hue-rotate(3deg) brightness(90%) contrast(135%);' : '' }}" />
                         <span class="dislike-count">{{ $review->total_dislikes }}</span>
                     </button>
                 </div>
                 <div class="flex lg:hidden items-center gap-x-1">
-                    <img src="{{ asset('comment.png') }}" alt="" class="size-5" />
+                    <img src="{{ asset('comment.svg') }}" alt="" class="size-5" />
                     <span>{{ $review->comments ?? 0 }}</span>
                 </div>
                 @if ($review->images->count() > 0)

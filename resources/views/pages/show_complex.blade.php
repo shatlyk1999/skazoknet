@@ -234,8 +234,8 @@
             </div>
             <div class="swiper-pagination bg-white !w-auto !left-[40%] md:!left-[45%] rounded-lg px-2 !bottom-12"></div>
             <div class="absolute right-4 top-4 z-10">
-                <img src="{{ asset('complex-small/' . $complex->image) }}" alt=""
-                    style="width: 100px;border-radius:10px;" />
+                <img src="{{ asset('complex/' . $complex->image) }}" alt=""
+                    style="width: 100px;border-radius:10px;object-fit:cover;" />
             </div>
         </div>
         <div class="bg-white rounded-tl-3xl rounded-tr-3xl -mt-8 relative z-10">
@@ -246,7 +246,7 @@
                     @endif
                     @if ($complex->type == 'hotel')
                         Гостиничные комплекс
-                    @endif «{{ $complex->name }}», {{ $city->text ?? '' }}
+                    @endif «{{ $complex->name }}», в {{ $city->text ?? '' }}
                 </h1>
                 <h4 class="text-sm font-medium mt-3 text-text3">
                     {{ $complex->address }}
@@ -330,7 +330,7 @@
                 @endif
                 @if ($complex->type == 'hotel')
                     ГК
-                @endif «{{ $complex->name }}» {{ $city->text ?? '' }}
+                @endif «{{ $complex->name }}» в {{ $city->text ?? '' }}
             </h1>
             <div class="hidden items-center gap-x-2 md:flex">
                 <span class="bg-primary text-white p-1 px-2 rounded-lg text-sm">

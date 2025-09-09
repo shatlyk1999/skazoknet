@@ -81,12 +81,12 @@ class DeveloperController extends Controller
                 if (!is_dir(storage_path('app/developer'))) {
                     mkdir(storage_path('app/developer'), 0777, true);
                 }
-                if (!is_dir(storage_path('app/developer-small'))) {
-                    mkdir(storage_path('app/developer-small'), 0777, true);
-                }
+                // if (!is_dir(storage_path('app/developer-small'))) {
+                //     mkdir(storage_path('app/developer-small'), 0777, true);
+                // }
 
                 $destinationPath = storage_path('app/developer');
-                $destinationPath2 = storage_path('app/developer-small');
+                // $destinationPath2 = storage_path('app/developer-small');
 
                 $manager = new ImageManager(new Driver());
                 $img = $manager->read($image);
@@ -125,14 +125,14 @@ class DeveloperController extends Controller
                     (string) $img->encode(new WebpEncoder(quality: 100))
                 );
 
-                $img->resize(146, 134, function ($constraint) {
-                    $constraint->aspectRatio();
-                    $constraint->upsize();
-                });
+                // $img->resize(146, 134, function ($constraint) {
+                //     $constraint->aspectRatio();
+                //     $constraint->upsize();
+                // });
 
-                file_put_contents(($destinationPath2 . '/' . $input['imageName']),
-                    (string) $img->encode(new WebpEncoder(quality: 100))
-                );
+                // file_put_contents(($destinationPath2 . '/' . $input['imageName']),
+                //     (string) $img->encode(new WebpEncoder(quality: 100))
+                // );
 
                 $developer->image = $input['imageName'];
                 $developer->save();
@@ -191,26 +191,26 @@ class DeveloperController extends Controller
 
             if ($request->has('image')) {
                 $filePath = storage_path('app/developer/' . $developer->image);
-                $filePath2 = storage_path('app/developer-small/' . $developer->image);
+                // $filePath2 = storage_path('app/developer-small/' . $developer->image);
 
                 if (($developer->image != null) && file_exists($filePath)) {
                     unlink($filePath);
                 }
-                if (($developer->image != null) && file_exists($filePath2)) {
-                    unlink($filePath);
-                }
+                // if (($developer->image != null) && file_exists($filePath2)) {
+                //     unlink($filePath);
+                // }
                 $image = $request->file('image');
                 $input['imageName'] = time() . '.webp';
 
                 if (!is_dir(storage_path('app/developer'))) {
                     mkdir(storage_path('app/developer'), 0777, true);
                 }
-                if (!is_dir(storage_path('app/developer-small'))) {
-                    mkdir(storage_path('app/developer-small'), 0777, true);
-                }
+                // if (!is_dir(storage_path('app/developer-small'))) {
+                //     mkdir(storage_path('app/developer-small'), 0777, true);
+                // }
 
                 $destinationPath = storage_path('app/developer');
-                $destinationPath2 = storage_path('app/developer-small');
+                // $destinationPath2 = storage_path('app/developer-small');
                 $manager = new ImageManager(new Driver());
                 $img = $manager->read($image);
 
@@ -230,14 +230,14 @@ class DeveloperController extends Controller
                     (string) $img->encode(new WebpEncoder(quality: 100))
                 );
 
-                $img->resize(146, 134, function ($constraint) {
-                    $constraint->aspectRatio();
-                    $constraint->upsize();
-                });
+                // $img->resize(146, 134, function ($constraint) {
+                //     $constraint->aspectRatio();
+                //     $constraint->upsize();
+                // });
 
-                file_put_contents(($destinationPath2 . '/' . $input['imageName']),
-                    (string) $img->encode(new WebpEncoder(quality: 100))
-                );
+                // file_put_contents(($destinationPath2 . '/' . $input['imageName']),
+                //     (string) $img->encode(new WebpEncoder(quality: 100))
+                // );
 
                 $developer->image = $input['imageName'];
                 $developer->save();

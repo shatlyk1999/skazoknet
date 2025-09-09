@@ -63,15 +63,15 @@
                     </div>
                     <div class="flex items-center justify-between gap-x-2">
                         <div class="flex items-center gap-x-1">
-                            <img src="{{ asset('images/like.png') }}" alt="" class="size-5" />
+                            <img src="{{ asset('images/like.svg') }}" alt="" class="size-5" />
                             <span>{{ $review->likes ?? 0 }}</span>
                         </div>
                         <div class="flex items-center gap-x-1">
-                            <img src="{{ asset('images/dislike.png') }}" alt="" class="h-5 w-6" />
+                            <img src="{{ asset('images/dislike.svg') }}" alt="" class="h-5 w-6" />
                             <span>{{ $review->dislikes ?? 0 }}</span>
                         </div>
                         <div class="flex items-center gap-x-1">
-                            <img src="{{ asset('images/comment.png') }}" alt="" class="size-5" />
+                            <img src="{{ asset('images/comment.svg') }}" alt="" class="size-5" />
                             <span>{{ $review->comments()->count() ?? 0 }}</span>
                         </div>
                         <span class="md:inline-block hidden text-xs text-green-600">
@@ -156,15 +156,15 @@
                                 </div>
                                 <div class="flex items-center justify-between gap-x-2">
                                     <div class="flex items-center gap-x-1">
-                                        <img src="{{ asset('images/like.png') }}" alt="" class="size-5" />
+                                        <img src="{{ asset('images/like.svg') }}" alt="" class="size-5" />
                                         <span>{{ $review->likes ?? 0 }}</span>
                                     </div>
                                     <div class="flex items-center gap-x-1">
-                                        <img src="{{ asset('images/dislike.png') }}" alt="" class="h-5 w-6" />
+                                        <img src="{{ asset('images/dislike.svg') }}" alt="" class="h-5 w-6" />
                                         <span>{{ $review->dislikes ?? 0 }}</span>
                                     </div>
                                     <div class="flex items-center gap-x-1">
-                                        <img src="{{ asset('images/comment.png') }}" alt="" class="size-5" />
+                                        <img src="{{ asset('images/comment.svg') }}" alt="" class="size-5" />
                                         <span>{{ $review->comments()->count ?? 0 }}</span>
                                     </div>
                                 </div>

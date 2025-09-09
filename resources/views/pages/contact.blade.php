@@ -20,6 +20,16 @@
                     <form class="flex flex-wrap gap-6 form" action="{{ route('contact.store') }}" method="post">
                         @csrf
                         <div class="form-item w-full lg:w-[calc(50%-1.5rem)]">
+                            <label for="name" class="text-input-divider text-xs font-medium tracking-wide pl-2">Введите
+                                имя::</label>
+                            <div
+                                class="rounded-3xl border-auth-input-border-color border px-4 h-12.5 flex items-center mt-1">
+                                <input type="text" name="name" required
+                                    class="h-12.5 text-input-divider text-xs font-normal tracking-wide w-full outline-none border-none"
+                                    placeholder="Введите имя" />
+                            </div>
+                        </div>
+                        <div class="form-item w-full lg:w-[calc(50%-1.5rem)]">
                             <input type="hidden" name="user_id" value="{{ Auth::user()->id ?? null }}">
                             <label for="company_name"
                                 class="text-input-divider text-xs font-medium tracking-wide pl-2">Введите
@@ -29,16 +39,6 @@
                                 <input type="email" required
                                     class="h-12.5 text-input-divider text-xs font-normal tracking-wide w-full outline-none border-none"
                                     placeholder="Введите вашу почту" id="email" name="email" />
-                            </div>
-                        </div>
-                        <div class="form-item w-full lg:w-[calc(50%-1.5rem)]">
-                            <label for="tel_number"
-                                class="text-input-divider text-xs font-medium tracking-wide pl-2">Телефонный номер::</label>
-                            <div
-                                class="rounded-3xl border-auth-input-border-color border px-4 h-12.5 flex items-center mt-1">
-                                <input type="number" name="tel_number" required
-                                    class="h-12.5 text-input-divider text-xs font-normal tracking-wide w-full outline-none border-none"
-                                    placeholder="Введите Телефонный номер" />
                             </div>
                         </div>
 

@@ -22,7 +22,7 @@
                     <a href="{{ route('complexes', 'residential') }}"
                         class="bg-white w-full p-4 rounded-lg flex flex-row md:flex-col gap-4">
                         <img class="w-[5.625rem] md:w-[5rem] xl:w-[6rem] h-[4.375rem] md:h-[3rem] xl:h-[3.75rem]"
-                            src="{{ asset('images/1.png') }}" alt="" />
+                            src="{{ asset('images/1.svg') }}" alt="" />
                         <h2 class="text-base md:block hidden h-12 xl:h-auto xl:text-lg font-bold">
                             Жилые комплексы
                         </h2>
@@ -41,7 +41,7 @@
                     <a href="{{ route('developers') }}"
                         class="bg-white w-full p-4 rounded-lg flex flex-row md:flex-col gap-4">
                         <img class="w-[5.625rem] md:w-[5rem] xl:w-[6rem] h-[4.375rem] md:h-[3rem] xl:h-[3.75rem]"
-                            src="{{ asset('images/2.png') }}" alt="" />
+                            src="{{ asset('images/2.svg') }}" alt="" />
 
                         <h2 class="text-base md:block hidden h-12 xl:h-auto xl:text-lg font-bold">
                             Застройщики
@@ -61,7 +61,7 @@
                     <a href="{{ route('complexes', 'hotel') }}"
                         class="bg-white w-full p-4 rounded-lg flex flex-row md:flex-col gap-4">
                         <img class="w-[5.625rem] md:w-[5rem] xl:w-[6rem] h-[4.375rem] md:h-[3rem] xl:h-[3.75rem]"
-                            src="{{ asset('images/1.png') }}" alt="" />
+                            src="{{ asset('images/3.svg') }}" alt="" />
                         <h2 class="text-base md:block hidden h-12 xl:h-auto xl:text-lg font-bold whitespace-nowrap">
                             Гостиничные комплексы
                         </h2>
