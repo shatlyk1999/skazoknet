@@ -20,7 +20,7 @@
             <div class="w-full sm:w-[80%] md:mx-0 mx-auto md:w-[45%] xl:w-[40%] my-auto">
                 <img src="{{ asset('images/registerimage.png') }}" class="w-full h-auto" alt="Изображение регистрации" />
                 <a href="{{ route('home') }}" class="pt-8 flex items-center justify-center md:hidden">
-                    <img src="{{ asset('images/registerlogo.png') }}" class="h-10 w-37.5" alt="Логотип" />
+                    <img src="{{ asset('images/registerLogo.svg') }}" class="h-10 w-37.5" alt="Логотип" />
                 </a>
             </div>
         </div>

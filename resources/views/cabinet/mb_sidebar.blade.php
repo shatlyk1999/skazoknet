@@ -13,7 +13,7 @@
          </button>
          <a href="{{ route('home') }}"
              class="absolute top-0 left-1/2 -translate-x-1/2 h-full w-full flex items-center justify-center">
-             <img src="{{ asset('images/logo.png') }}" alt="" />
+             <img src="{{ asset('images/logo.svg') }}" alt="" />
          </a>
      </div>
      <div class="relative px-4 h-[calc(100%-5.5rem)] pt-[12rem] flex flex-col justify-between overflow-auto">

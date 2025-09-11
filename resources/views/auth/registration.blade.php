@@ -23,7 +23,7 @@
                 <img src="{{ asset('images/registerimage.png') }}" class="w-full h-auto" alt="" />
 
                 <a href="{{ route('home') }}" class="pt-8 flex items-center justify-center md:hidden">
-                    <img src="{{ asset('images/registerlogo.png') }}" class="h-10 w-37.5" alt="" />
+                    <img src="{{ asset('images/registerLogo.svg') }}" class="h-10 w-37.5" alt="" />
                 </a>
             </div>
         </div>

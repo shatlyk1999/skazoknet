@@ -1,6 +1,6 @@
  <div class="max-w-[15.625rem] xl:max-w-[21.875rem] w-full bg-primary fixed top-0 left-0 h-dvh md:block hidden">
      <a href="{{ route('home') }}" class="mt-12 flex items-center justify-center">
-         <img src="{{ asset('images/logo.png') }}" class="h-10" alt="" />
+         <img src="{{ asset('images/logo.svg') }}" class="h-10" alt="" />
      </a>
      <div class="relative h-[calc(100%-5.5rem)] flex flex-col justify-between overflow-auto" style="padding-top: 50px">
          <div>

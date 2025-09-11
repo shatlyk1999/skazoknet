@@ -26,7 +26,7 @@
                 <div id="auth-left" class="d-flex flex-column justify-content-center h-100">
                     <div class="auth-logo">
                         <a href="#" style="font-size:2rem;">
-                            <img src="{{ asset('images/registerlogo.png') }}" class="h-10 w-37.5" alt="" />
+                            <img src="{{ asset('images/registerLogo.svg') }}" class="h-10 w-37.5" alt="" />
                         </a>
                     </div>
                     <h1 class="auth-title">Log in for admin.</h1>

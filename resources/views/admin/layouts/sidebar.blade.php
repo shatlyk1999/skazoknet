@@ -11,7 +11,7 @@ $contact_count = \App\Models\Contact::get()->count() ?? 0;
             <div class="d-flex justify-content-between align-items-end">
                 <div class="logo">
                     <a href="{{ route('dashboard') }}">
-                        <img src="{{ asset('images/registerlogo.png') }}" style="height: 35px; width: 135px;"
+                        <img src="{{ asset('images/registerLogo.svg') }}" style="height: 35px; width: 135px;"
                             alt="" />
                     </a>
                 </div>

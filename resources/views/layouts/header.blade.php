@@ -44,7 +44,7 @@
                             </div>
                         </div>
                         <a href="{{ route('home') }}">
-                            <img class="w-[8.125rem]" src="{{ asset('images/logo.png') }}" alt="skazoknet.com" />
+                            <img class="w-[8.125rem]" src="{{ asset('images/logo.svg') }}" alt="skazoknet.com" />
                         </a>
                     </div>
                     <div class="hidden items-center gap-x-8 lg:flex">
